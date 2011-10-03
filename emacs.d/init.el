@@ -289,43 +289,46 @@
 (color-theme-initialize)
 
 ;; make tabbar colors fit in with current theme
-(if (eq selected-color-theme 'wombat)
-    (progn 
-      (color-theme-wombat)
-      (setq tabbar-background-color wombat-bg-1)
-      (set-face-attribute  'tabbar-default nil
-			   :background wombat-bg-1
-			   :foreground wombat-fg
-			   :box nil)
-      (set-face-attribute  'tabbar-unselected nil
-			   :background wombat-bg-1
-			   :foreground wombat-fg
-			   :box nil)
-      (set-face-attribute  'tabbar-selected nil
-			   :background wombat-bg
-			   :foreground wombat-orange+2
-			   :box nil)
-    )
+(cond
+ ((eq selected-color-theme 'wombat)
+  (color-theme-wombat)
+  (defvar tabbar-fg wombat-fg)
+  (defvar tabbar-bg wombat-bg-1)
+  (defvar tabbar-selected-fg wombat-orange+1)
+  (defvar tabbar-selected-bg wombat-bg)
+ )
+ ((eq selected-color-theme 'zenburn)
+  (color-theme-zenburn)
+  (defvar tabbar-fg zenburn-fg)
+  (defvar tabbar-bg zenburn-bg-1)
+  (defvar tabbar-selected-fg zenburn-orange)
+  (defvar tabbar-selected-bg zenburn-bg)
+ )
+ (t
+  (display-warning "color-theme"  "unknown color theme selected")
+  (funcall
+   (symbol-function (intern
+		    (concat "color-theme-" (symbol-name selected-color-theme)))))
+  (defvar tabbar-fg "#c0c0c0")
+  (defvar tabbar-bg "#101010")
+  (defvar tabbar-selected-fg "#f3cd00")
+  (defvar tabbar-selected-bg "#303030")
+ )
 )
 
-(if (eq selected-color-theme 'zenburn)
-    (progn 
-      (color-theme-zenburn)
-      (setq tabbar-background-color zenburn-bg-1)
-      (set-face-attribute  'tabbar-default nil
-			   :background zenburn-bg-1
-			   :foreground zenburn-fg
-			   :box nil)
-      (set-face-attribute  'tabbar-unselected nil
-			   :background zenburn-bg-1
-			   :foreground zenburn-fg
-			   :box nil)
-      (set-face-attribute  'tabbar-selected nil
-			   :background zenburn-bg
-			   :foreground zenburn-orange
-			   :box nil)
-    )
-)
+(setq tabbar-background-color tabbar-bg)
+(set-face-attribute  'tabbar-default nil
+		     :background tabbar-bg
+		     :foreground tabbar-fg
+		     :box nil)
+(set-face-attribute  'tabbar-unselected nil
+		     :background tabbar-bg
+		     :foreground tabbar-fg
+		     :box nil)
+(set-face-attribute  'tabbar-selected nil
+		     :background tabbar-selected-bg
+		     :foreground tabbar-selected-fg
+		     :box nil)
 
 (set-face-attribute  'tabbar-button nil
 		     :box nil)
