@@ -15,7 +15,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; choose color theme here for maximum workfulness
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(defvar selected-color-theme 'wombat)
+; tab colors work with ('zenburn 'wombat 'hihat)
+(defvar selected-color-theme 'hihat)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; keybindings
@@ -303,6 +304,13 @@
   (defvar tabbar-bg zenburn-bg-1)
   (defvar tabbar-selected-fg zenburn-orange)
   (defvar tabbar-selected-bg zenburn-bg)
+ )
+ ((eq selected-color-theme 'hihat)
+  (color-theme-hihat)
+  (defvar tabbar-fg "#888a85")
+  (defvar tabbar-bg "#010408")
+  (defvar tabbar-selected-fg "##f9971a")
+  (defvar tabbar-selected-bg "#111418")
  )
  (t
   (display-warning "color-theme"  "unknown color theme selected")
