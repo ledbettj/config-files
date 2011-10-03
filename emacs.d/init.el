@@ -12,6 +12,10 @@
 (require 'rvm)
 (require 'yaml-mode)
 (require 'sass-mode)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; choose color theme here for maximum workfulness
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defvar selected-color-theme 'wombat)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; keybindings
@@ -95,15 +99,18 @@
             "@" (system-name)
             ": %b %+" ))
 (setq truncate-partial-width-windows nil) ; no line truncating in split windows
-(color-theme-initialize)
-(color-theme-zenburn)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; save backup files in a non-annoying place
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(if (eq system-type 'darwin)
+    (defvar backup-directory-location "/Users/jledbetter/.cache/emacs")
+    ; else
+    (defvar backup-directory-location "/home/john/.cache/emacs")
+)
 (setq backup-directory-alist
-      `((".*" . ,"/home/john/.cache/emacs/")))
+      `((".*" . ,backup-directory-location)))
 (setq auto-save-file-name-transforms
-      `((".*" ,"/home/john/.cache/emacs/" t)))
+      `((".*" ,backup-directory-location t)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; color theme
@@ -276,23 +283,53 @@
 
 (setq tabbar-buffer-groups-function 'tabbar-buffer-groups)
 
-;; make tabbar colors fit in with zenburn theme
-(setq tabbar-background-color "#2e3330")
-(set-face-attribute  'tabbar-default nil
-                     :foreground zenburn-fg
-                     :background "#2e3330"
-                     :box nil)
-(set-face-attribute  'tabbar-unselected nil
-                     :background "#2e3330"
-                     :foreground zenburn-fg
-                     :box nil)
-(set-face-attribute  'tabbar-selected nil
-                     :background zenburn-bg
-                     :foreground zenburn-red+1
-                     :box nil)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; color theme stuff
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(color-theme-initialize)
+
+;; make tabbar colors fit in with current theme
+(if (eq selected-color-theme 'wombat)
+    (progn 
+      (color-theme-wombat)
+      (setq tabbar-background-color wombat-bg-1)
+      (set-face-attribute  'tabbar-default nil
+			   :background wombat-bg-1
+			   :foreground wombat-fg
+			   :box nil)
+      (set-face-attribute  'tabbar-unselected nil
+			   :background wombat-bg-1
+			   :foreground wombat-fg
+			   :box nil)
+      (set-face-attribute  'tabbar-selected nil
+			   :background wombat-bg
+			   :foreground wombat-orange+2
+			   :box nil)
+    )
+)
+
+(if (eq selected-color-theme 'zenburn)
+    (progn 
+      (color-theme-zenburn)
+      (setq tabbar-background-color zenburn-bg-1)
+      (set-face-attribute  'tabbar-default nil
+			   :background zenburn-bg-1
+			   :foreground zenburn-fg
+			   :box nil)
+      (set-face-attribute  'tabbar-unselected nil
+			   :background zenburn-bg-1
+			   :foreground zenburn-fg
+			   :box nil)
+      (set-face-attribute  'tabbar-selected nil
+			   :background zenburn-bg
+			   :foreground zenburn-orange
+			   :box nil)
+    )
+)
+
 (set-face-attribute  'tabbar-button nil
-                     :box nil)
+		     :box nil)
 (set-face-attribute  'tabbar-separator nil
-                     :height 1.7
-                     :box nil)
+		     :height 1.7
+		     :box nil)
 (set-face-bold-p    'tabbar-selected t)
