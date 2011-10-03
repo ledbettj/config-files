@@ -12,10 +12,7 @@ double
 else
 enum
 extern
-fclose
 float
-fprintf
-fopen
 for
 goto
 if
@@ -23,7 +20,6 @@ _Imaginary
 inline
 int
 long
-printf
 register
 restrict
 return
