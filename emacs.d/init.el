@@ -10,6 +10,8 @@
 (require 'lua-mode)
 (require 'markdown-mode)
 (require 'rvm)
+(require 'yaml-mode)
+(require 'sass-mode)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; keybindings
@@ -22,6 +24,10 @@
 (global-set-key
     (kbd "C-c C-c")         'comment-region)
 (global-set-key "\M-\r"     'toggle-fullscreen)
+
+(if (eq system-type 'darwin)
+    (global-set-key (kbd "<kp-delete>") 'delete-char)
+)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; behavior
@@ -43,6 +49,7 @@
 (ac-config-default)
 (put 'downcase-region 'disabled nil) ; don't disble these commands,
 (put 'upcase-region   'disabled nil) ; I think they're useful
+(show-paren-mode)
 (rvm-use-default)                    ; set up ruby / gems using RVM default
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -52,16 +59,31 @@
 (setq auto-mode-alist (cons '("\\.md$" . markdown-mode) auto-mode-alist))
 (setq auto-mode-alist (cons '("\\.cnote-theme$" . js-mode) auto-mode-alist))
 (setq auto-mode-alist (cons '("\\.json$" . js-mode) auto-mode-alist))
+(setq auto-mode-alist (cons '("\\Gemfile$" . ruby-mode) auto-mode-alist))
+(setq auto-mode-alist (cons '("\\Rakefile$" . ruby-mode) auto-mode-alist))
+(setq auto-mode-alist (cons '("\\.gemspec$" . ruby-mode) auto-mode-alist))
+(setq auto-mode-alist (cons '("\\.rake$" . ruby-mode) auto-mode-alist))
+(setq auto-mode-alist (cons '("\\.yml$" . yaml-mode) auto-mode-alist))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; appearance
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(set-face-attribute 'default nil :height 100 :family "Bitstream Vera Sans Mono")
+(if (eq system-type 'darwin)
+    (set-face-attribute 'default nil :height 140 :family "Droid Sans Mono")
+    ; else
+    (set-face-attribute 'default nil :height 100 :family "Bitstream Vera Sans Mono")
+)
+
 (global-font-lock-mode   t)   ; turn on decorations in all modes
 (tabbar-mode             1)   ; show tabbar and menu bar
 (menu-bar-mode           1) 
 (tool-bar-mode           0)   ; hide toolbar and scroll bar
 (scroll-bar-mode         0)
-(setq visible-bell       t)   ; use flashing buffer instead of audible beep
+(if (eq system-type 'darwin)
+    (setq visible-bell nil)
+    ;else use flashing buffer instead of audible beep
+    (setq visible-bell       t)   
+)
 (setq line-number-mode   t)   ; show line and column in mode line
 (setq column-number-mode t)
 (display-time-mode       nil) ; hide time in mode line
@@ -221,6 +243,13 @@
 	     (if (and (not (null buffer-file-name)) (file-writable-p buffer-file-name))
 		 (flymake-mode))
 	     ))
+
+; no ispell on OS X; use aspell for flyspell mode
+(if (eq system-type 'darwin)
+    (custom-set-variables
+     '(ispell-program-name "/usr/local/bin/aspell")
+     '(safe-local-variable-values (quote ((encoding . utf-8)))))
+)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; tabbar
