@@ -15,8 +15,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; choose color theme here for maximum workfulness
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-; tab colors work with ('zenburn 'wombat 'hihat)
-(defvar selected-color-theme 'hihat)
+(color-theme-initialize)
+(color-theme-zenburn)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; keybindings
@@ -103,11 +103,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; save backup files in a non-annoying place
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(if (eq system-type 'darwin)
-    (defvar backup-directory-location "/Users/jledbetter/.cache/emacs")
-    ; else
-    (defvar backup-directory-location "/home/john/.cache/emacs")
-)
+(defvar backup-directory-location "~/.cache/emacs")
 (setq backup-directory-alist
       `((".*" . ,backup-directory-location)))
 (setq auto-save-file-name-transforms
@@ -285,44 +281,12 @@
 (setq tabbar-buffer-groups-function 'tabbar-buffer-groups)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; color theme stuff
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(color-theme-initialize)
-
 ;; make tabbar colors fit in with current theme
-(cond
- ((eq selected-color-theme 'wombat)
-  (color-theme-wombat)
-  (defvar tabbar-fg wombat-fg)
-  (defvar tabbar-bg wombat-bg-1)
-  (defvar tabbar-selected-fg wombat-orange+1)
-  (defvar tabbar-selected-bg wombat-bg)
- )
- ((eq selected-color-theme 'zenburn)
-  (color-theme-zenburn)
-  (defvar tabbar-fg zenburn-fg)
-  (defvar tabbar-bg zenburn-bg-1)
-  (defvar tabbar-selected-fg zenburn-orange)
-  (defvar tabbar-selected-bg zenburn-bg)
- )
- ((eq selected-color-theme 'hihat)
-  (color-theme-hihat)
-  (defvar tabbar-fg "#888a85")
-  (defvar tabbar-bg "#010408")
-  (defvar tabbar-selected-fg "##f9971a")
-  (defvar tabbar-selected-bg "#111418")
- )
- (t
-  (display-warning "color-theme"  "unknown color theme selected")
-  (funcall
-   (symbol-function (intern
-		    (concat "color-theme-" (symbol-name selected-color-theme)))))
-  (defvar tabbar-fg "#c0c0c0")
-  (defvar tabbar-bg "#101010")
-  (defvar tabbar-selected-fg "#f3cd00")
-  (defvar tabbar-selected-bg "#303030")
- )
-)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defvar tabbar-fg (face-attribute 'default :foreground))
+(defvar tabbar-bg "#101010")
+(defvar tabbar-selected-fg (face-attribute 'font-lock-string-face :foreground))
+(defvar tabbar-selected-bg (face-attribute 'default :background))
 
 (setq tabbar-background-color tabbar-bg)
 (set-face-attribute  'tabbar-default nil
