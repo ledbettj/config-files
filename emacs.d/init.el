@@ -12,11 +12,13 @@
 (require 'rvm)
 (require 'yaml-mode)
 (require 'sass-mode)
+(require 'js2-mode)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; choose color theme here for maximum workfulness
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (color-theme-initialize)
-(color-theme-zenburn)
+(color-theme-hihat)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; keybindings
@@ -31,7 +33,10 @@
 (global-set-key "\M-\r"     'toggle-fullscreen)
 
 (if (eq system-type 'darwin)
-    (global-set-key (kbd "<kp-delete>") 'delete-char)
+    (progn 
+      (global-set-key (kbd "<kp-delete>") 'delete-char)
+      (global-set-key (kbd "C-<kp-delete>") 'kill-word)
+    )
 )
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -62,14 +67,14 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (setq auto-mode-alist (cons '("\\.lua$" . lua-mode) auto-mode-alist))
 (setq auto-mode-alist (cons '("\\.md$" . markdown-mode) auto-mode-alist))
-(setq auto-mode-alist (cons '("\\.cnote-theme$" . js-mode) auto-mode-alist))
-(setq auto-mode-alist (cons '("\\.json$" . js-mode) auto-mode-alist))
+(setq auto-mode-alist (cons '("\\.cnote-theme$" . js2-mode) auto-mode-alist))
+(setq auto-mode-alist (cons '("\\.json$" . js2-mode) auto-mode-alist))
 (setq auto-mode-alist (cons '("\\Gemfile$" . ruby-mode) auto-mode-alist))
 (setq auto-mode-alist (cons '("\\Rakefile$" . ruby-mode) auto-mode-alist))
 (setq auto-mode-alist (cons '("\\.gemspec$" . ruby-mode) auto-mode-alist))
 (setq auto-mode-alist (cons '("\\.rake$" . ruby-mode) auto-mode-alist))
 (setq auto-mode-alist (cons '("\\.yml$" . yaml-mode) auto-mode-alist))
-
+(setq auto-mode-alist (cons '("\\.js$" . js2-mode) auto-mode-alist))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; appearance
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -178,6 +183,13 @@
   (flymake-mode t) ; turn on flymake
 )
 
+(defun javascript-hook ()
+  "javascript blows, I hate it."
+  (setq indent-tabs-mode nil)
+  (setq tab-width 4)
+  (hexcolour-add-to-font-lock)
+)
+
 (defun on-text-mode ()
   "turn on flyspell"
   (flyspell-mode t)
@@ -189,11 +201,10 @@
 (add-hook 'css-mode-hook  'hexcolour-add-to-font-lock)
 (add-hook 'nxml-mode-hook 'hexcolour-add-to-font-lock)
 (add-hook 'emacs-lisp-mode-hook 'hexcolour-add-to-font-lock)
-
 (add-hook 'c-mode-hook    'cish-lang-hook)
 (add-hook 'c++-mode-hook  'cish-lang-hook)
 (add-hook 'text-mode-hook 'on-text-mode)
-
+(add-hook 'js2-mode-hook 'javascript-hook)
 (add-hook 'window-setup-hook 'delete-other-windows) ; only one window on startup
 
 
@@ -308,3 +319,10 @@
 		     :height 1.7
 		     :box nil)
 (set-face-bold-p    'tabbar-selected t)
+
+(set-face-attribute 'js2-error-face nil
+		    :foreground "white"
+		    :background "red")
+(set-face-attribute 'js2-warning-face nil
+		    :foreground "white"
+		    :background "orange")
