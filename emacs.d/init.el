@@ -18,7 +18,10 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; choose color theme here for maximum workfulness
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(color-theme-initialize)
+; oh sweet jesus this is faster than waiting around for color-theme to decide
+; to show the fuck up.
+;(color-theme-initialize)
+(load-file "~/.emacs.d/site-lisp/themes/color-theme-wombat.el")
 (color-theme-wombat)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -302,7 +305,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (defvar tabbar-fg (face-attribute 'default :foreground))
 (defvar tabbar-bg "#101010")
-(defvar tabbar-selected-fg (face-attribute 'font-lock-string-face :foreground))
+(defvar tabbar-selected-fg (face-attribute 'font-lock-variable-name-face
+					   :foreground))
 (defvar tabbar-selected-bg (face-attribute 'default :background))
 
 (setq tabbar-background-color tabbar-bg)
