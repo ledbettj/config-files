@@ -13,12 +13,13 @@
 (require 'yaml-mode)
 (require 'sass-mode)
 (require 'js2-mode)
+(require 'uniquify)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; choose color theme here for maximum workfulness
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (color-theme-initialize)
-(color-theme-hihat)
+(color-theme-wombat)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; keybindings
@@ -42,9 +43,10 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; behavior
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(iswitchb-mode               t)   ; better C-x b buffer switching
 (setq kill-whole-line        t)   ; C-k removes newline as well
 (setq next-line-add-newlines nil) ; don't add newlines when past end of buffer
-(setq require-final-newline  t)   ; require \n at end of buffer
+(setq require-final-newline  nil) ; don't require \n at end of buffer
 (delete-selection-mode       t)   ; delete selection when delete is pressed
 (setq transient-mark-mode    t)   ; handle selections sanely
 (setq fill-column            80)  ; when filling text, fill 80 characters/line
@@ -61,6 +63,10 @@
 (put 'upcase-region   'disabled nil) ; I think they're useful
 (show-paren-mode)
 (rvm-use-default)                    ; set up ruby / gems using RVM default
+(setq uniquify-buffer-name-style 'forward) ; better unique buffer naming
+(setq uniquify-after-kill-buffer-p t) ; remove uniquify name after killing 
+                                      ; a competing buffer.
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; custom modes
@@ -321,8 +327,26 @@
 (set-face-bold-p    'tabbar-selected t)
 
 (set-face-attribute 'js2-error-face nil
-		    :foreground "white"
-		    :background "red")
+		    :foreground "#c0c0c0"
+		    :background "#4c0303")
 (set-face-attribute 'js2-warning-face nil
-		    :foreground "white"
-		    :background "orange")
+		    :foreground "#c0c0c0"
+		    :background "#6c3303")
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; make uniquify place nice with iswitchb
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defadvice iswitchb-kill-buffer (after rescan-after-kill activate)
+  "*Regenerate the list of matching buffer names after a kill.
+    Necessary if using `uniquify' with `uniquify-after-kill-buffer-p'
+    set to non-nil."
+  (setq iswitchb-buflist iswitchb-matches)
+  (iswitchb-rescan)
+)
+
+(defun iswitchb-rescan ()
+  "*Regenerate the list of matching buffer names."
+  (interactive)
+  (iswitchb-make-buflist iswitchb-default)
+  (setq iswitchb-rescan t)
+)
