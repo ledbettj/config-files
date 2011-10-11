@@ -14,6 +14,7 @@
 (require 'sass-mode)
 (require 'js2-mode)
 (require 'uniquify)
+(load-file "~/.emacs.d/site-lisp/nxhtml/autostart.el")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; choose color theme here for maximum workfulness
@@ -69,7 +70,7 @@
 (setq uniquify-buffer-name-style 'forward) ; better unique buffer naming
 (setq uniquify-after-kill-buffer-p t) ; remove uniquify name after killing 
                                       ; a competing buffer.
-
+(setq mumamo-chunk-coloring 2)        ; god this is ugly turn it off turn it off
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; custom modes
