@@ -301,6 +301,9 @@
     ((string-equal "*" (substring (buffer-name) 0 1))
      "Emacs Buffer"
      )
+    ((string-equal "TAGS" (buffer-name))
+     "Emacs Buffer"
+     )
     ((eq major-mode 'dired-mode)
      "Dired"
      )
