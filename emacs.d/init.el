@@ -1,4 +1,5 @@
 (add-to-list 'load-path "~/.emacs.d/site-lisp")
+(add-to-list 'load-path "~/.emacs.d/site-lisp/rinari")
 
 (require 'tabbar)
 (require 'color-theme)
@@ -14,6 +15,7 @@
 (require 'sass-mode)
 (require 'js2-mode)
 (require 'uniquify)
+(require 'rinari)
 (load-file "~/.emacs.d/site-lisp/nxhtml/autostart.el")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -35,6 +37,8 @@
 (global-set-key [backtab]   'toggle-tab-width)
 (global-set-key
     (kbd "C-c C-c")         'comment-region)
+(global-set-key
+    (kbd "C-c C-u")         'uncomment-region)
 (global-set-key "\M-\r"     'toggle-fullscreen)
 
 (if (eq system-type 'darwin)
@@ -85,6 +89,9 @@
 (setq auto-mode-alist (cons '("\\.rake$" . ruby-mode) auto-mode-alist))
 (setq auto-mode-alist (cons '("\\.yml$" . yaml-mode) auto-mode-alist))
 (setq auto-mode-alist (cons '("\\.js$" . js2-mode) auto-mode-alist))
+(add-to-list 'auto-mode-alist '("\\.rhtml\\'" . eruby-nxhtml-mumamo-mode))
+(add-to-list 'auto-mode-alist '("\\.html\\.erb\\'" . eruby-nxhtml-mumamo-mode))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; appearance
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -288,6 +295,9 @@
  Emacs buffer are those starting with “*”."
   (list
    (cond
+    ((not (eq (string-match ".*-template-indent-buffer" (buffer-name)) nil))
+     "Emacs Buffer"
+     )
     ((string-equal "*" (substring (buffer-name) 0 1))
      "Emacs Buffer"
      )
@@ -355,3 +365,16 @@
   (iswitchb-make-buflist iswitchb-default)
   (setq iswitchb-rescan t)
 )
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; get rid of annoying 'deprecated function' warnings from mumamo
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(when (and (equal emacs-major-version 23)
+           (equal emacs-minor-version 3))
+  (eval-after-load "bytecomp"
+    '(add-to-list 'byte-compile-not-obsolete-vars
+                  'font-lock-beginning-of-syntax-function))
+  ;; tramp-compat.el clobbers this variable!
+  (eval-after-load "tramp-compat"
+    '(add-to-list 'byte-compile-not-obsolete-vars
+                  'font-lock-beginning-of-syntax-function)))
