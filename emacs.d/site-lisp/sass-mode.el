@@ -4,11 +4,11 @@
 
 ;; Author: Nathan Weizenbaum
 ;; URL: http://github.com/nex3/haml/tree/master
-;; Version: 2.2.7
+;; Version: 3.0.15
 ;; Created: 2007-03-15
 ;; By: Nathan Weizenbaum
 ;; Keywords: markup, language, css
-;; Package-Requires: ((haml-mode "2.2.7"))
+;; Package-Requires: ((haml-mode "3.0.15"))
 
 ;;; Commentary:
 
@@ -20,6 +20,8 @@
 ;; your .emacs file:
 ;;
 ;; (require 'sass-mode)
+
+;; sass-mode requires haml-mode, which can be found at http://github.com/nex3/haml-mode.
 
 ;;; Code:
 
@@ -43,11 +45,12 @@
   :group 'sass)
 
 (defvar sass-non-block-openers
-  '("^ *:[^ \t]+[ \t]+[^ \t]"
-    "^ *[^ \t:]+[ \t]*[=:][ \t]*[^ \t]")
-  "A list of regexps that match lines of Sass that don't open blocks.
-That is, a Sass line that can't have text nested beneath it
-should be matched by a regexp in this list.")
+  '("^.*,$" ;; Continued selectors
+    "^ *@\\(extend\\|debug\\|warn\\|include\\|import\\)" ;; Single-line mixins
+    "^ *[$!]" ;; Variables
+    )
+  "A list of regexps that match lines of Sass that couldn't have
+text nested beneath them.")
 
 ;; Font lock
 
@@ -184,8 +187,8 @@ LIMIT is the limit of the search."
   (set-syntax-table sass-syntax-table)
   (setq font-lock-extend-region-functions
         '(font-lock-extend-region-wholelines font-lock-extend-region-multiline))
-  (setq font-lock-multiline nil)
-  (setq comment-start "/*")
+  (set (make-local-variable 'font-lock-multiline) nil)
+  (set (make-local-variable 'comment-start) "/*")
   (set (make-local-variable 'haml-indent-function) 'sass-indent-p)
   (set (make-local-variable 'haml-indent-offset) sass-indent-offset)
   (setq font-lock-defaults '(sass-font-lock-keywords t t)))
@@ -195,8 +198,8 @@ LIMIT is the limit of the search."
 (defun sass-indent-p ()
   "Return non-nil if the current line can have lines nested beneath it."
   (loop for opener in sass-non-block-openers
-        unless (looking-at opener) return t
-        return nil))
+        if (looking-at opener) return nil
+        finally return t))
 
 ;;;###autoload
 (add-to-list 'auto-mode-alist '("\\.sass$" . sass-mode))

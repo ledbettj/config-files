@@ -16,6 +16,9 @@
 (require 'js2-mode)
 (require 'uniquify)
 (require 'rinari)
+(require 'haml-mode)
+(require 'vc)
+(require 'coffee-mode)
 (load-file "~/.emacs.d/site-lisp/nxhtml/autostart.el")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -83,14 +86,18 @@
 (setq auto-mode-alist (cons '("\\.md$" . markdown-mode) auto-mode-alist))
 (setq auto-mode-alist (cons '("\\.cnote-theme$" . js2-mode) auto-mode-alist))
 (setq auto-mode-alist (cons '("\\.json$" . js2-mode) auto-mode-alist))
-(setq auto-mode-alist (cons '("\\Gemfile$" . ruby-mode) auto-mode-alist))
-(setq auto-mode-alist (cons '("\\Rakefile$" . ruby-mode) auto-mode-alist))
+(setq auto-mode-alist (cons '("Gemfile$" . ruby-mode) auto-mode-alist))
+(setq auto-mode-alist (cons '("Rakefile$" . ruby-mode) auto-mode-alist))
 (setq auto-mode-alist (cons '("\\.gemspec$" . ruby-mode) auto-mode-alist))
 (setq auto-mode-alist (cons '("\\.rake$" . ruby-mode) auto-mode-alist))
 (setq auto-mode-alist (cons '("\\.yml$" . yaml-mode) auto-mode-alist))
 (setq auto-mode-alist (cons '("\\.js$" . js2-mode) auto-mode-alist))
-(add-to-list 'auto-mode-alist '("\\.rhtml\\'" . eruby-nxhtml-mumamo-mode))
-(add-to-list 'auto-mode-alist '("\\.html\\.erb\\'" . eruby-nxhtml-mumamo-mode))
+(setq auto-mode-alist (cons '("\\.haml$" . haml-mode) auto-mode-alist))
+(setq auto-mode-alist (cons '("\\.scss$" . sass-mode) auto-mode-alist))
+
+(add-to-list 'auto-mode-alist '("\\.html\\.erb$" . eruby-nxhtml-mumamo-mode))
+(add-to-list 'auto-mode-alist '("\\.coffee$" . coffee-mode))
+(add-to-list 'auto-mode-alist '("Cakefile$" . coffee-mode))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; appearance
@@ -217,6 +224,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (add-hook 'css-mode-hook  'hexcolour-add-to-font-lock)
 (add-hook 'nxml-mode-hook 'hexcolour-add-to-font-lock)
+(add-hook 'sass-mode-hook 'hexcolour-add-to-font-lock)
 (add-hook 'emacs-lisp-mode-hook 'hexcolour-add-to-font-lock)
 (add-hook 'c-mode-hook    'cish-lang-hook)
 (add-hook 'c++-mode-hook  'cish-lang-hook)
