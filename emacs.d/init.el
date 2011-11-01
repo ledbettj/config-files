@@ -1,7 +1,8 @@
 (add-to-list 'load-path "~/.emacs.d/site-lisp")
-(add-to-list 'load-path "~/.emacs.d/site-lisp/rinari")
+(add-to-list 'load-path "~/.emacs.d/packages/yasnippet")
+(add-to-list 'load-path "~/.emacs.d/packages/nxhtml")
+(add-to-list 'load-path "~/.emacs.d/packages/color-theme")
 
-(require 'tabbar)
 (require 'color-theme)
 (require 'zenburn)
 (require 'flymake)
@@ -15,11 +16,15 @@
 (require 'sass-mode)
 (require 'js2-mode)
 (require 'uniquify)
-(require 'rinari)
 (require 'haml-mode)
 (require 'vc)
 (require 'coffee-mode)
-(load-file "~/.emacs.d/site-lisp/nxhtml/autostart.el")
+(require 'yasnippet)
+(load-file "~/.emacs.d/packages/nxhtml/autostart.el")
+
+(yas/initialize)
+(setq yas/trigger-key (kbd "C-c <kpd-multiply>")) ; never going to use this.
+(yas/load-directory "~/.emacs.d/packages/yasnippet/snippets")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; choose color theme here for maximum workfulness
@@ -27,22 +32,26 @@
 ; oh sweet jesus this is faster than waiting around for color-theme to decide
 ; to show the fuck up.
 ;(color-theme-initialize)
-(load-file "~/.emacs.d/site-lisp/themes/color-theme-wombat.el")
+(load-file "~/.emacs.d/packages/color-theme/themes/color-theme-wombat.el")
 (color-theme-wombat)
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; keybindings
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (global-set-key "\M-g"      'goto-line)
-(global-set-key [C-prior]   'tabbar-backward)
-(global-set-key [C-next]    'tabbar-forward)
+(global-set-key [C-prior]   'previous-buffer)
+(global-set-key [C-next]    'next-buffer)
 (global-set-key [C-tab]     'toggle-tabs-mode)
 (global-set-key [backtab]   'toggle-tab-width)
 (global-set-key
     (kbd "C-c C-c")         'comment-region)
 (global-set-key
     (kbd "C-c C-u")         'uncomment-region)
-(global-set-key "\M-\r"     'toggle-fullscreen)
+
+(if (eq system-type 'darwin)
+    (global-set-key "\M-\r" 'ns-toggle-fullscreen)
+    ; else
+    (global-set-key "\M-\r"     'toggle-fullscreen)
+)
 
 (if (eq system-type 'darwin)
     (progn 
@@ -61,7 +70,7 @@
 (delete-selection-mode       t)   ; delete selection when delete is pressed
 (setq transient-mark-mode    t)   ; handle selections sanely
 (setq fill-column            80)  ; when filling text, fill 80 characters/line
-(setq indent-tabs-mode       nil) ; use spaces for indentation
+(setq-default indent-tabs-mode       nil) ; use spaces for indentation
 (fset 'yes-or-no-p     'y-or-n-p) ; ask y/n instead of yes/no
 (setq scroll-conservatively  1)   ; better scrolling behavrio
 (setq inhibit-startup-message t)  ; don't show emacs screen at startup
@@ -78,6 +87,9 @@
 (setq uniquify-after-kill-buffer-p t) ; remove uniquify name after killing 
                                       ; a competing buffer.
 (setq mumamo-chunk-coloring 2)        ; god this is ugly turn it off turn it off
+(setq-default show-trailing-whitespace t) ; highlight trailing whitespace
+(setq-default js2-bounce-indent-p nil) ; don't use frustrating tab indent
+(setq-default js2-basic-offset 2)      ; basic indent is 2 spaces
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; custom modes
@@ -91,13 +103,13 @@
 (setq auto-mode-alist (cons '("\\.gemspec$" . ruby-mode) auto-mode-alist))
 (setq auto-mode-alist (cons '("\\.rake$" . ruby-mode) auto-mode-alist))
 (setq auto-mode-alist (cons '("\\.yml$" . yaml-mode) auto-mode-alist))
+(setq auto-mode-alist (cons '("\\.yaml$" . yaml-mode) auto-mode-alist))
 (setq auto-mode-alist (cons '("\\.js$" . js2-mode) auto-mode-alist))
 (setq auto-mode-alist (cons '("\\.haml$" . haml-mode) auto-mode-alist))
 (setq auto-mode-alist (cons '("\\.scss$" . sass-mode) auto-mode-alist))
-
-(add-to-list 'auto-mode-alist '("\\.html\\.erb$" . eruby-nxhtml-mumamo-mode))
-(add-to-list 'auto-mode-alist '("\\.coffee$" . coffee-mode))
-(add-to-list 'auto-mode-alist '("Cakefile$" . coffee-mode))
+(setq auto-mode-alist (cons '("\\.html\\.erb$" . eruby-nxhtml-mumamo-mode) auto-mode-alist))
+(setq auto-mode-alist (cons '("\\.coffee$" . coffee-mode) auto-mode-alist))
+(setq auto-mode-alist (cons '("Cakefile$" . coffee-mode) auto-mode-alist))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; appearance
@@ -109,20 +121,19 @@
 )
 
 (global-font-lock-mode   t)   ; turn on decorations in all modes
-(tabbar-mode             1)   ; show tabbar and menu bar
-(menu-bar-mode           1) 
+(menu-bar-mode           1)
 (tool-bar-mode           0)   ; hide toolbar and scroll bar
 (scroll-bar-mode         0)
 (if (eq system-type 'darwin)
     (setq visible-bell nil)
     ;else use flashing buffer instead of audible beep
-    (setq visible-bell       t)   
+    (setq visible-bell t)
 )
 (setq line-number-mode   t)   ; show line and column in mode line
 (setq column-number-mode t)
 (display-time-mode       nil) ; hide time in mode line
-(setq tab-width          4)   ; default tab width is 4 spaces 
-(setq c-basic-offset     4)   ; yes, still 4 spaces
+(setq-default tab-width  4)   ; default tab width is 4 spaces 
+(setq-default c-basic-offset 4)   ; yes, still 4 spaces
 
 (setq frame-title-format      ; show 'user@host: buffername*' as frame title
       (list (user-login-name)
@@ -291,73 +302,12 @@
      '(safe-local-variable-values (quote ((encoding . utf-8)))))
 )
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; tabbar
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-; list all buffers together except emacs buffers
-(defun tabbar-buffer-groups ()
-  "Return the list of group names the current buffer belongs to.
- This function is a custom function for tabbar-mode's tabbar-buffer-groups.
- This function group all buffers into 3 groups:
- Those Dired, those user buffer, and those emacs buffer.
- Emacs buffer are those starting with “*”."
-  (list
-   (cond
-    ((not (eq (string-match ".*-template-indent-buffer" (buffer-name)) nil))
-     "Emacs Buffer"
-     )
-    ((string-equal "*" (substring (buffer-name) 0 1))
-     "Emacs Buffer"
-     )
-    ((string-equal "TAGS" (buffer-name))
-     "Emacs Buffer"
-     )
-    ((eq major-mode 'dired-mode)
-     "Dired"
-     )
-    (t
-     "User Buffer"
-     )
-    ))) ;; from Xah Lee
-
-(setq tabbar-buffer-groups-function 'tabbar-buffer-groups)
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; make tabbar colors fit in with current theme
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(defvar tabbar-fg (face-attribute 'default :foreground))
-(defvar tabbar-bg "#101010")
-(defvar tabbar-selected-fg (face-attribute 'font-lock-variable-name-face
-					   :foreground))
-(defvar tabbar-selected-bg (face-attribute 'default :background))
-
-(setq tabbar-background-color tabbar-bg)
-(set-face-attribute  'tabbar-default nil
-		     :background tabbar-bg
-		     :foreground tabbar-fg
-		     :box nil)
-(set-face-attribute  'tabbar-unselected nil
-		     :background tabbar-bg
-		     :foreground tabbar-fg
-		     :box nil)
-(set-face-attribute  'tabbar-selected nil
-		     :background tabbar-selected-bg
-		     :foreground tabbar-selected-fg
-		     :box nil)
-
-(set-face-attribute  'tabbar-button nil
-		     :box nil)
-(set-face-attribute  'tabbar-separator nil
-		     :height 1.7
-		     :box nil)
-(set-face-bold-p    'tabbar-selected t)
-
 (set-face-attribute 'js2-error-face nil
-		    :foreground "#c0c0c0"
 		    :background "#4c0303")
 (set-face-attribute 'js2-warning-face nil
-		    :foreground "#c0c0c0"
 		    :background "#6c3303")
+(set-face-attribute 'trailing-whitespace nil
+            :background "#202020")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; make uniquify place nice with iswitchb
@@ -389,3 +339,48 @@
   (eval-after-load "tramp-compat"
     '(add-to-list 'byte-compile-not-obsolete-vars
                   'font-lock-beginning-of-syntax-function)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; nifty 'move line/region up/down' command
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defun move-text-internal (arg)
+  (cond
+   ((and mark-active transient-mark-mode)
+    (if (> (point) (mark))
+        (exchange-point-and-mark))
+    (let ((column (current-column))
+          (text (delete-and-extract-region (point) (mark))))
+      (forward-line arg)
+      (move-to-column column t)
+      (set-mark (point))
+      (insert text)
+      (exchange-point-and-mark)
+      (setq deactivate-mark nil)))
+   (t
+    (let ((column (current-column)))
+      (beginning-of-line)
+      (when (or (> arg 0) (not (bobp)))
+        (forward-line)
+        (when (or (< arg 0) (not (eobp)))
+          (transpose-lines arg))
+        (forward-line -1))
+      (move-to-column column t)))))
+
+(defun move-text-down (arg)
+  "Move region (transient-mark-mode active) or current line
+  arg lines down."
+  (interactive "*p")
+  (move-text-internal arg))
+
+(defun move-text-up (arg)
+  "Move region (transient-mark-mode active) or current line
+  arg lines up."
+  (interactive "*p")
+  (move-text-internal (- arg)))
+
+
+(global-set-key [M-up] 'move-text-up)
+(global-set-key [M-down] 'move-text-down)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
