@@ -20,20 +20,21 @@
 (require 'vc)
 (require 'coffee-mode)
 (require 'yasnippet)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; load packages
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (load-file "~/.emacs.d/packages/nxhtml/autostart.el")
-
-(yas/initialize)
-(setq yas/trigger-key (kbd "C-c <kpd-multiply>")) ; never going to use this.
-(yas/load-directory "~/.emacs.d/packages/yasnippet/snippets")
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; choose color theme here for maximum workfulness
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-; oh sweet jesus this is faster than waiting around for color-theme to decide
-; to show the fuck up.
-;(color-theme-initialize)
 (load-file "~/.emacs.d/packages/color-theme/themes/color-theme-wombat.el")
 (color-theme-wombat)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; initialize yanippet
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(yas/initialize)
+(setq yas/trigger-key (kbd "C-c <kpd-multiply>")) ; ac will handle this for us.
+(yas/load-directory "~/.emacs.d/packages/yasnippet/snippets")
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; keybindings
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -90,26 +91,28 @@
 (setq-default show-trailing-whitespace t) ; highlight trailing whitespace
 (setq-default js2-bounce-indent-p nil) ; don't use frustrating tab indent
 (setq-default js2-basic-offset 2)      ; basic indent is 2 spaces
+(setq-default tab-width  4)   ; default tab width is 4 spaces
+(setq-default c-basic-offset 4)   ; yes, still 4 spaces
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; custom modes
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(setq auto-mode-alist (cons '("\\.lua$" . lua-mode) auto-mode-alist))
-(setq auto-mode-alist (cons '("\\.md$" . markdown-mode) auto-mode-alist))
-(setq auto-mode-alist (cons '("\\.cnote-theme$" . js2-mode) auto-mode-alist))
-(setq auto-mode-alist (cons '("\\.json$" . js2-mode) auto-mode-alist))
-(setq auto-mode-alist (cons '("Gemfile$" . ruby-mode) auto-mode-alist))
-(setq auto-mode-alist (cons '("Rakefile$" . ruby-mode) auto-mode-alist))
-(setq auto-mode-alist (cons '("\\.gemspec$" . ruby-mode) auto-mode-alist))
-(setq auto-mode-alist (cons '("\\.rake$" . ruby-mode) auto-mode-alist))
-(setq auto-mode-alist (cons '("\\.yml$" . yaml-mode) auto-mode-alist))
-(setq auto-mode-alist (cons '("\\.yaml$" . yaml-mode) auto-mode-alist))
-(setq auto-mode-alist (cons '("\\.js$" . js2-mode) auto-mode-alist))
-(setq auto-mode-alist (cons '("\\.haml$" . haml-mode) auto-mode-alist))
-(setq auto-mode-alist (cons '("\\.scss$" . sass-mode) auto-mode-alist))
-(setq auto-mode-alist (cons '("\\.html\\.erb$" . eruby-nxhtml-mumamo-mode) auto-mode-alist))
-(setq auto-mode-alist (cons '("\\.coffee$" . coffee-mode) auto-mode-alist))
-(setq auto-mode-alist (cons '("Cakefile$" . coffee-mode) auto-mode-alist))
+(push '("\\.lua$" . lua-mode) auto-mode-alist)
+(push '("\\.md$" . markdown-mode) auto-mode-alist)
+(push '("\\.cnote-theme$" . js2-mode) auto-mode-alist)
+(push '("\\.json$" . js2-mode) auto-mode-alist)
+(push '("Gemfile$" . ruby-mode) auto-mode-alist)
+(push '("Rakefile$" . ruby-mode) auto-mode-alist)
+(push '("\\.gemspec$" . ruby-mode) auto-mode-alist)
+(push '("\\.rake$" . ruby-mode) auto-mode-alist)
+(push '("\\.yml$" . yaml-mode) auto-mode-alist)
+(push '("\\.yaml$" . yaml-mode) auto-mode-alist)
+(push '("\\.js$" . js2-mode) auto-mode-alist)
+(push '("\\.haml$" . haml-mode) auto-mode-alist)
+(push '("\\.scss$" . sass-mode) auto-mode-alist)
+(push '("\\.html\\.erb$" . eruby-nxhtml-mumamo-mode) auto-mode-alist)
+(push '("\\.coffee$" . coffee-mode) auto-mode-alist)
+(push '("Cakefile$" . coffee-mode) auto-mode-alist)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; appearance
@@ -132,8 +135,6 @@
 (setq line-number-mode   t)   ; show line and column in mode line
 (setq column-number-mode t)
 (display-time-mode       nil) ; hide time in mode line
-(setq-default tab-width  4)   ; default tab width is 4 spaces 
-(setq-default c-basic-offset 4)   ; yes, still 4 spaces
 
 (setq frame-title-format      ; show 'user@host: buffername*' as frame title
       (list (user-login-name)
@@ -148,10 +149,6 @@
       `((".*" . ,backup-directory-location)))
 (setq auto-save-file-name-transforms
       `((".*" ,backup-directory-location t)))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; color theme
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; utility functions
