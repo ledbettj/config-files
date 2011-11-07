@@ -47,10 +47,9 @@
 (global-set-key [C-next]    'next-buffer)
 (global-set-key [C-tab]     'toggle-tabs-mode)
 (global-set-key [backtab]   'toggle-tab-width)
-(global-set-key
-    (kbd "C-c C-c")         'comment-region)
-(global-set-key
-    (kbd "C-c C-u")         'uncomment-region)
+(global-set-key (kbd "C-c C-c") 'comment-region)
+(global-set-key (kbd "C-c C-u") 'uncomment-region)
+(global-set-key (kbd "C-c C-r") 'align-repeat)
 
 (if (eq system-type 'darwin)
     (global-set-key "\M-\r" 'ns-toggle-fullscreen)
@@ -102,7 +101,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; custom modes
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(nconc auto-mode-alist
+(setq auto-mode-alist
+      (append
        (list
         '("\\.lua$"          .  lua-mode)
         '("\\.md$"           .  markdown-mode)
@@ -119,7 +119,8 @@
         '("\\.scss$"         .  css-mode)
         '("\\.html\\.erb$"   .  eruby-nxhtml-mumamo-mode)
         '("\\.coffee$"       .  coffee-mode)
-        '("Cakefile$"        .  coffee-mode)))
+        '("Cakefile$"        .  coffee-mode))
+       auto-mode-alist))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; appearance
