@@ -56,10 +56,10 @@
 
 (defvar zenburn-fg "#dcdccc")
 
-(defvar zenburn-bg-1 "#2b2b2b")
-(defvar zenburn-bg "#3f3f3f")
-(defvar zenburn-bg+1 "#4f4f4f")
-(defvar zenburn-bg+2 "#5f5f5f")
+(defvar zenburn-bg-1 "#0b0b0b")
+(defvar zenburn-bg "#1b1b1b")
+(defvar zenburn-bg+1 "#2f2f2f")
+(defvar zenburn-bg+2 "#3f3f3f")
 (defvar zenburn-red+1 "#dca3a3")
 (defvar zenburn-red "#cc9393")
 (defvar zenburn-red-1 "#bc8383")
