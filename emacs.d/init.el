@@ -1,7 +1,7 @@
-(add-to-list 'load-path "~/.emacs.d/site-lisp")
-(add-to-list 'load-path "~/.emacs.d/packages/yasnippet")
-(add-to-list 'load-path "~/.emacs.d/packages/nxhtml")
-(add-to-list 'load-path "~/.emacs.d/packages/color-theme")
+(nconc load-path
+       (list "~/.emacs.d/site-lisp"       "~/.emacs.d/packages/yasnippet"
+             "~/.emacs.d/packages/nxhtml" "~/.emacs.d/packages/color-theme"
+             "~/.emacs.d/packages/slime"))
 
 (require 'color-theme)
 (require 'zenburn)
@@ -27,6 +27,10 @@
 (load-file "~/.emacs.d/packages/nxhtml/autostart.el")
 (load-file "~/.emacs.d/packages/color-theme/themes/color-theme-wombat.el")
 (color-theme-wombat)
+
+(setq inferior-lisp-program "/usr/local/bin/clisp")
+(require 'slime)
+(slime-setup '(slime-fancy))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; initialize yanippet
@@ -93,26 +97,29 @@
 (setq-default js2-basic-offset 2)      ; basic indent is 2 spaces
 (setq-default tab-width  4)   ; default tab width is 4 spaces
 (setq-default c-basic-offset 4)   ; yes, still 4 spaces
+(setq-default css-indent-offset 2) ; 2 space indent in css
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; custom modes
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(push '("\\.lua$" . lua-mode) auto-mode-alist)
-(push '("\\.md$" . markdown-mode) auto-mode-alist)
-(push '("\\.cnote-theme$" . js2-mode) auto-mode-alist)
-(push '("\\.json$" . js2-mode) auto-mode-alist)
-(push '("Gemfile$" . ruby-mode) auto-mode-alist)
-(push '("Rakefile$" . ruby-mode) auto-mode-alist)
-(push '("\\.gemspec$" . ruby-mode) auto-mode-alist)
-(push '("\\.rake$" . ruby-mode) auto-mode-alist)
-(push '("\\.yml$" . yaml-mode) auto-mode-alist)
-(push '("\\.yaml$" . yaml-mode) auto-mode-alist)
-(push '("\\.js$" . js2-mode) auto-mode-alist)
-(push '("\\.haml$" . haml-mode) auto-mode-alist)
-(push '("\\.scss$" . sass-mode) auto-mode-alist)
-(push '("\\.html\\.erb$" . eruby-nxhtml-mumamo-mode) auto-mode-alist)
-(push '("\\.coffee$" . coffee-mode) auto-mode-alist)
-(push '("Cakefile$" . coffee-mode) auto-mode-alist)
+(nconc auto-mode-alist
+       (list
+        '("\\.lua$"          .  lua-mode)
+        '("\\.md$"           .  markdown-mode)
+        '("\\.cnote-theme$"  .  js2-mode)
+        '("\\.json$"         .  js2-mode)
+        '("Gemfile$"         .  ruby-mode)
+        '("Rakefile$"        .  ruby-mode)
+        '("\\.gemspec$"      .  ruby-mode)
+        '("\\.rake$"         .  ruby-mode)
+        '("\\.yml$"          .  yaml-mode)
+        '("\\.yaml$"         .  yaml-mode)
+        '("\\.js$"           .  js2-mode)
+        '("\\.haml$"         .  haml-mode)
+        '("\\.scss$"         .  css-mode)
+        '("\\.html\\.erb$"   .  eruby-nxhtml-mumamo-mode)
+        '("\\.coffee$"       .  coffee-mode)
+        '("Cakefile$"        .  coffee-mode)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; appearance
@@ -153,6 +160,11 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; utility functions
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defun align-repeat (start end regexp)
+  "Repeat alignment with respect to the given regular expression"
+  (interactive "r\nsAlign regexp: ")
+  (align-regexp start end
+                (concat "\\(\\s-*\\)" regexp) 1 1 t))
 
 (defun toggle-tabs-mode ()
   "Toggle variable indent-tabs-mode between t and nil."
