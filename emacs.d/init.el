@@ -1,7 +1,7 @@
 (nconc load-path
        (list "~/.emacs.d/site-lisp"       "~/.emacs.d/packages/yasnippet"
              "~/.emacs.d/packages/nxhtml" "~/.emacs.d/packages/color-theme"
-             "~/.emacs.d/packages/slime"))
+             "~/.emacs.d/packages/slime"  "~/.emacs.d/packages/autocomplete"))
 
 (require 'color-theme)
 (require 'zenburn)
