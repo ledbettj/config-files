@@ -25,6 +25,7 @@
 ;; load packages
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (load-file "~/.emacs.d/packages/nxhtml/autostart.el")
+(setq debug-on-error nil)
 (load-file "~/.emacs.d/packages/color-theme/themes/color-theme-wombat.el")
 (color-theme-wombat)
 
