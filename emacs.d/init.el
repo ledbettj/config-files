@@ -205,6 +205,9 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; appearance options
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(setq-default ansi-term-color-vector [unspecified "black" "red4" "lime green"
+                                                  "yellow3" "DeepSkyBlue"
+                                                  "magenta4" "cyan3" "white"])
 (set-frame-font "Droid Sans Mono-14")
 (setq frame-title-format   ;; frame title: user@host: buffer [modified?]
   (list
@@ -253,6 +256,7 @@
 (setq uniquify-buffer-name-style 'forward); better uniquify buffer naming
 (setq uniquify-after-kill-buffer-p t)     ; remove uniquify name after killing
                                           ; a competing buffer
+(setq truncate-partial-width-windows nil) ; don't truncate lines in spit windows
 (defvar backup-directory-location         ; save backup files in a non-annoying
   "~/.cache/emacs")                       ; directory location
 (setq backup-directory-alist `((".*" . ,backup-directory-location)))
@@ -290,5 +294,10 @@
 (defun on-js2-mode ()
   (hexcolour-add-to-font-lock)
   (setq js2-bounce-indent-p nil)
-  (setq js2-basic-offset 2))
-
+  (setq js2-basic-offset 2)
+  (set-face-underline 'js2-warning-face nil)
+  (set-face-foreground 'js2-warning-face "black")
+  (set-face-background 'js2-warning-face "gold")
+  (set-face-foreground 'js2-error-face "white")
+  (set-face-background 'js2-error-face "red4")
+)
