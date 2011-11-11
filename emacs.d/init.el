@@ -45,14 +45,19 @@
                 (setq yas/snippet-dirs
                       (list "~/.emacs.d/el-get/yasnippet/snippets"))
                 (yas/initialize)))
-     )
-)
+     (:name zenburn
+       :type http
+       :url "http://github.com/djcb/elisp/raw/master/themes/zenburn-theme.el"
+       :compile ("zenburn-theme.el")
+     )))
 
 (defvar required-packages
   '(ruby-mode inf-ruby css-mode rvm yaml-mode rhtml haml-mode yasnippet
               auto-complete-yasnippet  auto-complete-css
               auto-complete-emacs-lisp auto-complete js2-mode json lua-mode
-              markdown-mode coffee-mode flymake-ruby flymake-point nxhtml))
+              markdown-mode coffee-mode flymake-ruby flymake-point nxhtml
+              zenburn
+	      ))
 
 (el-get 'sync required-packages)
 
