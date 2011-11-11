@@ -52,7 +52,7 @@
   '(ruby-mode inf-ruby css-mode rvm yaml-mode rhtml haml-mode yasnippet
               auto-complete-yasnippet  auto-complete-css
               auto-complete-emacs-lisp auto-complete js2-mode json lua-mode
-              markdown-mode coffee-mode flymake-ruby nxhtml))
+              markdown-mode coffee-mode flymake-ruby flymake-point nxhtml))
 
 (el-get 'sync required-packages)
 
@@ -61,6 +61,7 @@
 (require 'auto-complete-yasnippet)
 (require 'yasnippet)
 (require 'uniquify)
+(require 'flymake-point)
 
 (yas/load-directory "~/.emacs.d/el-get/yasnippet/snippets")
 (yas/initialize)
@@ -214,6 +215,7 @@
 (tool-bar-mode -1)                     ; no tool bar
 (menu-bar-mode -1)                     ; no menu bar
 (scroll-bar-mode -1)                   ; no scroll bar
+(tooltip-mode -1)                      ; show tooltips in the echo area
 (setq-default mumamo-chunk-coloring 2) ; don't highlight regions with terrible
                                        ; hideous colors
 (load-theme 'wombat)
