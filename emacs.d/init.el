@@ -1,11 +1,9 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; emacs configuration
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(nconc load-path (list "~/.emacs.d/site-lisp"
-                       "~/.emacs.d/el-get/el-get"))
+(nconc load-path (list "~/.emacs.d/el-get/el-get"))
 
 (require 'package)
-;(require 'el-get)
 
 (unless (require 'el-get nil t)
   (with-current-buffer
@@ -53,7 +51,7 @@
   '(ruby-mode inf-ruby css-mode rvm yaml-mode rhtml haml-mode yasnippet
               auto-complete-yasnippet  auto-complete-css
               auto-complete-emacs-lisp auto-complete js2-mode json lua-mode
-              markdown-mode coffee-mode flymake-ruby))
+              markdown-mode coffee-mode flymake-ruby nxhtml))
 
 (el-get 'sync required-packages)
 
@@ -69,13 +67,13 @@
 (setq auto-mode-alist
   (append
     (list
-      '("Gemfile$" . ruby-mode)
-      '("Rakefile$" . ruby-mode)
+      '("Gemfile$"    . ruby-mode)
+      '("Rakefile$"   . ruby-mode)
       '("\\.gemspec$" . ruby-mode)
-      '("\\.ru$" . ruby-mode)
-      '("\\.erb$" . rhtml-mode)
-      '("\\.yaml$" . yaml-mode)
-      '("\\.yml$" . yaml-mode)
+      '("\\.ru$"      . ruby-mode)
+      '("\\.erb$"     . rhtml-mode)
+      '("\\.yaml$"    . yaml-mode)
+      '("\\.yml$"     . yaml-mode)
       )
     auto-mode-alist))
 
@@ -85,46 +83,165 @@
 (global-set-key (kbd "M-g") 'goto-line)
 (global-set-key (kbd "C-c C-c") 'comment-region)
 (global-set-key (kbd "C-c C-u") 'uncomment-region)
+(global-set-key (kbd "C-c C-r") 'align-repeat)
 (global-set-key [C-prior] 'previous-buffer)
 (global-set-key [C-next] 'next-buffer)
+(global-set-key [M-up] 'move-text-up)
+(global-set-key [M-down] 'move-text-down)
+(global-set-key (kbd "M-RET") 'toggle-fullscreen)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; appearance options
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(setq line-number- t)
-(setq column-number-mode t)
-(setq frame-title-format (list (user-login-name) "@" (system-name) ": %b %+" ))
-(show-paren-mode t)
-(set-frame-font "Bitstream Vera Sans Mono-10")
-(setq inhibit-startup-message t)
-(which-function-mode t)
-(global-font-lock-mode t)
-(tool-bar-mode -1)
-(menu-bar-mode -1)
-(scroll-bar-mode -1)
+(set-frame-font "Droid Sans Mono-14")
+(setq frame-title-format   ;; frame title: user@host: buffer [modified?]
+  (list
+    (user-login-name)
+    "@"
+    (system-name)
+    ": %b %+" ))
+
+(setq line-number-mode t)              ; show line number in the mode line
+(setq column-number-mode t)            ; show column number in the mode line
+(which-function-mode t)                ; show current function in the mode line
+(show-paren-mode t)                    ; highlight matching parentheses
+(tool-bar-mode -1)                     ; no tool bar
+(menu-bar-mode -1)                     ; no menu bar
+(scroll-bar-mode -1)                   ; no scroll bar
+(setq-default mumamo-chunk-coloring 2) ; don't highlight regions with terrible
+                                       ; hideous colors
+(set-face-background                   ; make trailing whitespace a little
+  'trailing-whitespace "#1D1D1D")      ; darker than the default background
 (load-theme 'wombat)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; behavior tweaks
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(setq-default kill-whole-line t)
-(setq-default require-final-newline nil)
-(setq-default next-line-add-newlines nil)
-(setq-default show-trailing-whitespace t)
-(setq-default c-basic-offset 4)
-(setq-default tab-width 4)
-(setq-default indent-tabs-mode nil)
-(delete-selection-mode t)
-(setq-default fill-column 80)
-(iswitchb-mode t)
+(setq inhibit-startup-message t)          ; I've used emacs before, thanks
+(setq-default kill-whole-line t)          ; `C-k` also removes trailing \n
+(setq-default require-final-newline nil)  ; don't require files to end with \n
+(setq-default next-line-add-newlines nil) ; don't add newlines when scrolling
+                                          ; past end of buffer
+(setq-default show-trailing-whitespace t) ; highlight trailing whitespace
+(setq-default tab-width 4)                ; default tab width is 4 spaces
+(setq-default indent-tabs-mode nil)       ; use spaces instead of tabs to indent
+(delete-selection-mode t)                 ; inserting text with a selection
+                                          ; deletes the selection
+(setq-default fill-column 80)             ; wrap text at 80 characters
+(setq-default scroll-conservatively 1)    ; scroll one line at a time when the
+                                          ; focus moves past end of buffer
+(iswitchb-mode t)                         ; use better `C-x b` buffer switching
+(put 'downcase-region 'disabled nil)      ; these are useful commands
+(put 'upcase-region   'disabled nil)      ; why are they disabled
+
+(defvar backup-directory-location         ; save backup files in a non-annoying
+  "~/.cache/emacs")                       ; directory location
+(setq backup-directory-alist `((".*" . ,backup-directory-location)))
+(setq auto-save-file-name-transforms `((".*" ,backup-directory-location t)))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; mode hooks
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (add-hook 'text-mode-hook 'on-text-mode)
 (add-hook 'c-mode-hook 'on-c-like-mode)
+(add-hook 'lisp-mode-hook 'on-lisp-mode)
+(add-hook 'js2-mode-hook 'on-js2-mode)
+(add-hook 'emacs-lisp-mode-hook 'hexcolour-add-to-font-lock)
+(add-hook 'css-mode-hook 'hexcolour-add-to-font-lock)
+(add-hook 'nxml-mode-hook 'hexcolour-add-to-font-lock)
 
 (defun on-text-mode ()
   (flyspell-mode t))
 
 (defun on-c-like-mode ()
-  (flyspell-prog-mode))
+  (c-set-style "k&r")
+  (c-set-offset 'substatement-open 0)
+  (c-toggle-auto-hungry-state 1)
+  (flyspell-prog-mode)
+  (flymake-mode t)
+  (local-set-key (kbd "RET") 'newline-and-indent)
+  (setq tab-width 4)
+  (setq c-basic-offset 4))
+
+(defun on-lisp-mode ()
+  (flyspell-prog-mode)
+  (setq lisp-indent-offset 2)
+  (hexcolour-add-to-font-lock))
+
+(defun on-js2-mode ()
+  (hexcolour-add-to-font-lock)
+  (setq js2-bounce-indent-p nil)
+  (setq js2-basic-offset 2))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; utility functions
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defun hexcolour-luminance (colour)
+  "Calculate the luminance of a color string"
+  (let* ((values (x-color-values colour))
+          (r (car values))
+          (g (cadr values))
+          (b (caddr values)))
+    (floor (+ (* .3 r) (* .59 g) (* .11 b)) 256)))
+
+(defun hexcolour-add-to-font-lock ()
+  "Colorize HTML RGB colors (e.g. '#000030', 'DarkBlue') in font-lock-mode."
+  (interactive)
+  (font-lock-add-keywords nil
+    `((,(concat "#[0-9a-fA-F]\\{6\\}\\|"
+          (regexp-opt (x-defined-colors) 'words))
+        (0 (let ((colour (match-string-no-properties 0)))
+             (put-text-property
+               (match-beginning 0) (match-end 0)
+               'face `((:foreground, (if (> 128.0 (hexcolour-luminance colour))
+                                       "white" "black"))
+                        (:background ,colour)))))))))
+
+(defun move-text-internal (arg)
+  (cond
+   ((and mark-active transient-mark-mode)
+    (if (> (point) (mark))
+        (exchange-point-and-mark))
+    (let ((column (current-column))
+          (text (delete-and-extract-region (point) (mark))))
+      (forward-line arg)
+      (move-to-column column t)
+      (set-mark (point))
+      (insert text)
+      (exchange-point-and-mark)
+      (setq deactivate-mark nil)))
+   (t
+    (let ((column (current-column)))
+      (beginning-of-line)
+      (when (or (> arg 0) (not (bobp)))
+        (forward-line)
+        (when (or (< arg 0) (not (eobp)))
+          (transpose-lines arg))
+        (forward-line -1))
+      (move-to-column column t)))))
+
+(defun move-text-down (arg)
+  "Move region (transient-mark-mode active) or current line arg lines down."
+  (interactive "*p")
+  (move-text-internal arg))
+
+(defun move-text-up (arg)
+  "Move region (transient-mark-mode active) or current line arg lines up."
+  (interactive "*p")
+  (move-text-internal (- arg)))
+
+(defun align-repeat (start end regexp)
+  "Repeat alignment with respect to the given regular expression."
+  (interactive "\r\nsAlign regexp: ")
+  (align-regexp start end (concat "\\(\\s-*\\)" regexp) 1 1 t))
+
+(defun toggle-fullscreen ()
+  "Switch between fullscreen and windowed mode"
+  (interactive)
+  (if (eq system-type 'darwin)
+      (ns-toggle-fullscreen)
+    (set-frame-parameter nil 'fullscreen (if (frame-parameter nil 'fullscreen)
+                                             nil
+                                           'fullboth))))
