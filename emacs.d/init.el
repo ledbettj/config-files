@@ -60,6 +60,7 @@
 (require 'auto-complete-config)
 (require 'auto-complete-yasnippet)
 (require 'yasnippet)
+(require 'uniquify)
 
 (yas/load-directory "~/.emacs.d/el-get/yasnippet/snippets")
 (yas/initialize)
@@ -164,8 +165,20 @@
 		(* (/ r 65280.0) 256)
 		(* (/ g 65280.0) 256)
 		(* (/ b 65280.0) 256)))
-    colour)
-)
+    colour))
+
+(defadvice iswitchb-kill-buffer (after rescan-after-kill activate)
+  "*Regenerate the list of matching buffer names after a kill.
+    Necessary if using `uniquifiy' with `uniquify-after-kill-buffer-p'
+    set to non-nil."
+  (setq iswitchb-buflist iswitchb-matches)
+  (iswitchb-rescan))
+
+(defun iswitchb-rescan ()
+  "*Regenerate the list of matching buffer names."
+  (interactive)
+  (iswitchb-makealist iswitchb-default)
+  (setq iswitchb-rescan t))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; key bindings
@@ -230,6 +243,9 @@
 (put 'downcase-region 'disabled nil)      ; these are useful commands
 (put 'upcase-region   'disabled nil)      ; why are they disabled
 
+(setq uniquify-buffer-name-style 'forward); better uniquify buffer naming
+(setq uniquify-after-kill-buffer-p t)     ; remove uniquify name after killing
+                                          ; a competing buffer
 (defvar backup-directory-location         ; save backup files in a non-annoying
   "~/.cache/emacs")                       ; directory location
 (setq backup-directory-alist `((".*" . ,backup-directory-location)))
