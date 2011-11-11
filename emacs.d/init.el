@@ -42,8 +42,9 @@
        :url "http://github.com/capitaomorte/yasnippet.git"
        :features yasnippet
        :after (lambda()
-		(yas/load-directory "~/.emacs.d/el-get/yasnippet/snippets")
-		(yas/initialize)))
+                (setq yas/snippet-dirs
+                      (list "~/.emacs.d/el-get/yasnippet/snippets"))
+                (yas/initialize)))
      )
 )
 
@@ -76,6 +77,90 @@
       '("\\.yml$"     . yaml-mode)
       )
     auto-mode-alist))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; utility functions
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defun hexcolour-luminance (colour)
+  "Calculate the luminance of a color string"
+  (let* ((values (color-values colour))
+          (r (car values))
+          (g (cadr values))
+          (b (caddr values)))
+    (floor (+ (* .3 r) (* .59 g) (* .11 b)) 256)))
+
+(defun hexcolour-add-to-font-lock ()
+  "Colorize HTML RGB colors (e.g. '#000030', 'DarkBlue') in font-lock-mode."
+  (interactive)
+  (font-lock-add-keywords nil
+    `((,(concat "#[0-9a-fA-F]\\{6\\}\\|"
+          (regexp-opt (defined-colors) 'words))
+        (0 (let ((colour (match-string-no-properties 0)))
+             (put-text-property
+               (match-beginning 0) (match-end 0)
+               'face `((:foreground, (if (> 128.0 (hexcolour-luminance colour))
+                                       "white" "black"))
+                        (:background ,colour)))))))))
+
+(defun move-text-internal (arg)
+  (cond
+   ((and mark-active transient-mark-mode)
+    (if (> (point) (mark))
+        (exchange-point-and-mark))
+    (let ((column (current-column))
+          (text (delete-and-extract-region (point) (mark))))
+      (forward-line arg)
+      (move-to-column column t)
+      (set-mark (point))
+      (insert text)
+      (exchange-point-and-mark)
+      (setq deactivate-mark nil)))
+   (t
+    (let ((column (current-column)))
+      (beginning-of-line)
+      (when (or (> arg 0) (not (bobp)))
+        (forward-line)
+        (when (or (< arg 0) (not (eobp)))
+          (transpose-lines arg))
+        (forward-line -1))
+      (move-to-column column t)))))
+
+(defun move-text-down (arg)
+  "Move region (transient-mark-mode active) or current line arg lines down."
+  (interactive "*p")
+  (move-text-internal arg))
+
+(defun move-text-up (arg)
+  "Move region (transient-mark-mode active) or current line arg lines up."
+  (interactive "*p")
+  (move-text-internal (- arg)))
+
+(defun align-repeat (start end regexp)
+  "Repeat alignment with respect to the given regular expression."
+  (interactive "\r\nsAlign regexp: ")
+  (align-regexp start end (concat "\\(\\s-*\\)" regexp) 1 1 t))
+
+(defun toggle-fullscreen ()
+  "Switch between fullscreen and windowed mode"
+  (interactive)
+  (if (eq system-type 'darwin)
+      (ns-toggle-fullscreen)
+    (set-frame-parameter nil 'fullscreen (if (frame-parameter nil 'fullscreen)
+                                             nil
+                                           'fullboth))))
+
+(defun scale-colour (colour factor)
+  "Scale the given hex colour (#112233) by the given factor."
+  (let* ((values (color-values colour))
+        (r (floor (* factor (car values))))
+        (g (floor (* factor (cadr values))))
+        (b (floor (* factor (caddr values)))))
+    (format "#%02x%02x%02x"
+            (* (/ r 65280.0) 256)
+            (* (/ g 65280.0) 256)
+            (* (/ b 65280.0) 256)))
+)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; key bindings
@@ -111,7 +196,9 @@
 (setq-default mumamo-chunk-coloring 2) ; don't highlight regions with terrible
                                        ; hideous colors
 (set-face-background                   ; make trailing whitespace a little
-  'trailing-whitespace "#1D1D1D")      ; darker than the default background
+ 'trailing-whitespace                  ; darker than the default background
+ (scale-colour
+  (face-background 'default) 0.83))
 (load-theme 'wombat)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -173,75 +260,3 @@
   (setq js2-bounce-indent-p nil)
   (setq js2-basic-offset 2))
 
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; utility functions
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(defun hexcolour-luminance (colour)
-  "Calculate the luminance of a color string"
-  (let* ((values (x-color-values colour))
-          (r (car values))
-          (g (cadr values))
-          (b (caddr values)))
-    (floor (+ (* .3 r) (* .59 g) (* .11 b)) 256)))
-
-(defun hexcolour-add-to-font-lock ()
-  "Colorize HTML RGB colors (e.g. '#000030', 'DarkBlue') in font-lock-mode."
-  (interactive)
-  (font-lock-add-keywords nil
-    `((,(concat "#[0-9a-fA-F]\\{6\\}\\|"
-          (regexp-opt (x-defined-colors) 'words))
-        (0 (let ((colour (match-string-no-properties 0)))
-             (put-text-property
-               (match-beginning 0) (match-end 0)
-               'face `((:foreground, (if (> 128.0 (hexcolour-luminance colour))
-                                       "white" "black"))
-                        (:background ,colour)))))))))
-
-(defun move-text-internal (arg)
-  (cond
-   ((and mark-active transient-mark-mode)
-    (if (> (point) (mark))
-        (exchange-point-and-mark))
-    (let ((column (current-column))
-          (text (delete-and-extract-region (point) (mark))))
-      (forward-line arg)
-      (move-to-column column t)
-      (set-mark (point))
-      (insert text)
-      (exchange-point-and-mark)
-      (setq deactivate-mark nil)))
-   (t
-    (let ((column (current-column)))
-      (beginning-of-line)
-      (when (or (> arg 0) (not (bobp)))
-        (forward-line)
-        (when (or (< arg 0) (not (eobp)))
-          (transpose-lines arg))
-        (forward-line -1))
-      (move-to-column column t)))))
-
-(defun move-text-down (arg)
-  "Move region (transient-mark-mode active) or current line arg lines down."
-  (interactive "*p")
-  (move-text-internal arg))
-
-(defun move-text-up (arg)
-  "Move region (transient-mark-mode active) or current line arg lines up."
-  (interactive "*p")
-  (move-text-internal (- arg)))
-
-(defun align-repeat (start end regexp)
-  "Repeat alignment with respect to the given regular expression."
-  (interactive "\r\nsAlign regexp: ")
-  (align-regexp start end (concat "\\(\\s-*\\)" regexp) 1 1 t))
-
-(defun toggle-fullscreen ()
-  "Switch between fullscreen and windowed mode"
-  (interactive)
-  (if (eq system-type 'darwin)
-      (ns-toggle-fullscreen)
-    (set-frame-parameter nil 'fullscreen (if (frame-parameter nil 'fullscreen)
-                                             nil
-                                           'fullboth))))
