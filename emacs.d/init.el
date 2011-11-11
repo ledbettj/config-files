@@ -155,14 +155,16 @@
 
 (defun scale-colour (colour factor)
   "Scale the given hex colour (#112233) by the given factor."
-  (let* ((values (color-values colour))
-        (r (floor (* factor (car values))))
-        (g (floor (* factor (cadr values))))
-        (b (floor (* factor (caddr values)))))
-    (format "#%02x%02x%02x"
-            (* (/ r 65280.0) 256)
-            (* (/ g 65280.0) 256)
-            (* (/ b 65280.0) 256)))
+  (if window-system
+      (let* ((values (color-values colour))
+	     (r (floor (* factor (car values))))
+	     (g (floor (* factor (cadr values))))
+	     (b (floor (* factor (caddr values)))))
+	(format "#%02x%02x%02x"
+		(* (/ r 65280.0) 256)
+		(* (/ g 65280.0) 256)
+		(* (/ b 65280.0) 256)))
+    colour)
 )
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
