@@ -75,6 +75,8 @@
       '("\\.erb$"     . rhtml-mode)
       '("\\.yaml$"    . yaml-mode)
       '("\\.yml$"     . yaml-mode)
+      '("\\.coffee$"  . coffee-mode)
+      '("Cakefile$"   . coffee-mode)
       )
     auto-mode-alist))
 
@@ -138,8 +140,9 @@
 
 (defun align-repeat (start end regexp)
   "Repeat alignment with respect to the given regular expression."
-  (interactive "\r\nsAlign regexp: ")
-  (align-regexp start end (concat "\\(\\s-*\\)" regexp) 1 1 t))
+  (interactive "r\nsAlign regexp: ")
+  (align-regexp start end
+                (concat "\\(\\s-*\\)" regexp) 1 1 t))
 
 (defun toggle-fullscreen ()
   "Switch between fullscreen and windowed mode"
@@ -175,6 +178,9 @@
 (global-set-key [M-down] 'move-text-down)
 (global-set-key (kbd "M-RET") 'toggle-fullscreen)
 
+(if (eq system-type 'darwin)
+    (global-set-key (kbd "C-<kp-delete>") 'kill-word))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; appearance options
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -195,15 +201,16 @@
 (scroll-bar-mode -1)                   ; no scroll bar
 (setq-default mumamo-chunk-coloring 2) ; don't highlight regions with terrible
                                        ; hideous colors
+(load-theme 'wombat)
 (set-face-background                   ; make trailing whitespace a little
  'trailing-whitespace                  ; darker than the default background
  (scale-colour
   (face-background 'default) 0.83))
-(load-theme 'wombat)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; behavior tweaks
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(fset 'yes-or-no-p 'y-or-n-p)             ; ask y/n instead of yes/no
 (setq inhibit-startup-message t)          ; I've used emacs before, thanks
 (setq-default kill-whole-line t)          ; `C-k` also removes trailing \n
 (setq-default require-final-newline nil)  ; don't require files to end with \n
