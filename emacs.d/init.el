@@ -45,6 +45,14 @@
                 (setq yas/snippet-dirs
                       (list "~/.emacs.d/el-get/yasnippet/snippets"))
                 (yas/initialize)))
+     (:name js2-mode
+        :type git
+        :url "https://github.com/mooz/js2-mode.git"
+        :after (lambda()
+                 (setq-default js2-consistent-level-indent-inner-bracket-p t)
+                 (setq-default js2-pretty-multiline-decl-indentation-p t))
+	:compile "js2-mode.el"
+        :features js2-mode)
      (:name zenburn
        :type http
        :url "http://github.com/djcb/elisp/raw/master/themes/zenburn-theme.el"
