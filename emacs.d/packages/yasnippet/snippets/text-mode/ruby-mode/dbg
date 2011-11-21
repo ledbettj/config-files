@@ -1,4 +1,0 @@
-#name : debug "..."
-#group : general
-# --
-Rails.logger.debug "$0"
