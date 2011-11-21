@@ -92,6 +92,7 @@
       '("\\.yml$"     . yaml-mode)
       '("\\.coffee$"  . coffee-mode)
       '("Cakefile$"   . coffee-mode)
+      '("\\.scss$"    . css-mode)
       )
     auto-mode-alist))
 
