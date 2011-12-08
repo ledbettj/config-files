@@ -1,7 +1,14 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; emacs configuration
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; these features require external tools
+(defvar use-jshint-mode nil) ;; 'npm install jshint-mode' and set to t
+
 (nconc load-path (list "~/.emacs.d/el-get/el-get"))
+
+(if (eq use-jshint-mode t)
+  (nconc load-path (list "/usr/local/lib/node_modules/jshint-mode")))
 
 (require 'package)
 
@@ -76,6 +83,8 @@
 (require 'yasnippet)
 (require 'uniquify)
 (require 'flymake-point)
+(if (eq use-jshint-mode t)
+    (require 'flymake-jshint))
 
 (yas/load-directory "~/.emacs.d/el-get/yasnippet/snippets")
 (yas/initialize)
@@ -328,9 +337,13 @@
   (set-face-background 'js2-warning-face "gold")
   (set-face-foreground 'js2-error-face "white")
   (set-face-background 'js2-error-face "red4")
+  (if (eq use-jshint-mode t)
+      (flymake-mode t))
 )
 
 (defun on-js-mode ()
   (hexcolour-add-to-font-lock)
   (setq js-indent-level 2)
+  (if (eq use-jshint-mode t)
+      (flymake-mode t))
 )
