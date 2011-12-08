@@ -270,9 +270,22 @@
  'trailing-whitespace                  ; darker than the default background
  (scale-colour
   (face-background 'default) 0.83))
+
+; color tweaks for auto-complete box
+(set-face-attribute 'ac-candidate-face nil
+  :background (face-foreground 'default)
+  :foreground (face-background 'default)
+  :box nil)
+(set-face-attribute 'ac-selection-face nil
+  :background (face-foreground 'font-lock-keyword-face)
+  :foreground "#000000"
+  :bold t
+  :box nil)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; behavior tweaks
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(setq ac-auto-start 0)                    ; start autocomplete immediately
 (setq-default ring-bell-function 'ignore) ; quiet down now
 (fset 'yes-or-no-p 'y-or-n-p)             ; ask y/n instead of yes/no
 (setq inhibit-startup-message t)          ; I've used emacs before, thanks
