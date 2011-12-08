@@ -4,11 +4,17 @@
 
 ;; these features require external tools
 (defvar use-jshint-mode nil) ;; 'npm install jshint-mode' and set to t
+(defvar use-rsense      nil) ;; install from git://github.com/m2ym/rsense.git
 
 (nconc load-path (list "~/.emacs.d/el-get/el-get"))
 
 (if (eq use-jshint-mode t)
-  (nconc load-path (list "/usr/local/lib/node_modules/jshint-mode")))
+  (add-to-list 'load-path "/usr/local/lib/node_modules/jshint-mode"))
+
+(if (eq use-rsense t)
+  (progn
+    (setq rsense-home (expand-file-name "~/Projects/rsense"))
+    (add-to-list 'load-path (concat rsense-home "/etc"))))
 
 (require 'package)
 
@@ -85,6 +91,8 @@
 (require 'flymake-point)
 (if (eq use-jshint-mode t)
     (require 'flymake-jshint))
+(if (eq use-rsense t)
+    (require 'rsense))
 
 (yas/load-directory "~/.emacs.d/el-get/yasnippet/snippets")
 (yas/initialize)
@@ -305,6 +313,13 @@
 (add-hook 'emacs-lisp-mode-hook 'hexcolour-add-to-font-lock)
 (add-hook 'css-mode-hook 'on-css-mode)
 (add-hook 'nxml-mode-hook 'hexcolour-add-to-font-lock)
+
+(if (eq use-rsense t)
+  (add-hook 'ruby-mode-hook
+    (lambda ()
+      (add-to-list 'ac-sources 'ac-source-rsense-method)
+      (add-to-list 'ac-sources 'ac-source-rsense-constant))))
+
 
 (defun on-text-mode ()
   (flyspell-mode t))
