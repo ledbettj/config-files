@@ -78,7 +78,7 @@
               auto-complete-emacs-lisp auto-complete js2-mode
               json lua-mode buffer-move
               markdown-mode coffee-mode flymake-ruby flymake-point nxhtml
-              zenburn
+              zenburn rinari ruby-electric
 	      ))
 
 (el-get 'sync required-packages)
@@ -89,6 +89,8 @@
 (require 'yasnippet)
 (require 'uniquify)
 (require 'flymake-point)
+(require 'rinari)
+(require 'ruby-electric)
 (if (eq use-jshint-mode t)
     (require 'flymake-jshint))
 (if (eq use-rsense t)
