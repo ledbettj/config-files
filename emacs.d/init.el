@@ -43,7 +43,7 @@
        :features yasnippet
        :after (lambda()
                 (setq yas/snippet-dirs
-                      (list "~/.emacs.d/el-get/yasnippet/snippets"))
+                  (list "~/.emacs.d/el-get/yasnippet/snippets"))
                 (yas/initialize)))
      (:name js2-mode
         :type git
@@ -51,7 +51,7 @@
         :after (lambda()
                  (setq-default js2-consistent-level-indent-inner-bracket-p t)
                  (setq-default js2-pretty-multiline-decl-indentation-p t))
-	:compile "js2-mode.el"
+        :compile "js2-mode.el"
         :features js2-mode)
      (:name zenburn
        :type http
@@ -62,7 +62,8 @@
 (defvar required-packages
   '(ruby-mode inf-ruby css-mode rvm yaml-mode rhtml haml-mode yasnippet
               auto-complete-yasnippet  auto-complete-css
-              auto-complete-emacs-lisp auto-complete js2-mode json lua-mode
+              auto-complete-emacs-lisp auto-complete js2-mode
+              json lua-mode buffer-move
               markdown-mode coffee-mode flymake-ruby flymake-point nxhtml
               zenburn
 	      ))
@@ -198,19 +199,26 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; key bindings
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(global-set-key (kbd "M-g") 'goto-line)
-(global-set-key (kbd "C-c C-c") 'comment-region)
-(global-set-key (kbd "C-c C-u") 'uncomment-region)
-(global-set-key (kbd "C-c C-r") 'align-repeat)
+(global-set-key (kbd "M-g")      'goto-line)
+(global-set-key (kbd "C-c C-c")  'comment-region)
+(global-set-key (kbd "C-c C-u")  'uncomment-region)
+(global-set-key (kbd "C-c C-r")  'align-repeat)
+
 (global-set-key [C-prior] 'previous-buffer)
-(global-set-key [C-next] 'next-buffer)
-(global-set-key [M-up] 'move-text-up)
-(global-set-key [M-down] 'move-text-down)
+(global-set-key [C-next]  'next-buffer)
+
+(global-set-key [M-up]    'move-text-up)
+(global-set-key [M-down]  'move-text-down)
+
 (global-set-key (kbd "M-RET") 'toggle-fullscreen)
+
+(global-set-key (kbd "<C-S-up>")     'buf-move-up)
+(global-set-key (kbd "<C-S-down>")   'buf-move-down)
+(global-set-key (kbd "<C-S-left>")   'buf-move-left)
+(global-set-key (kbd "<C-S-right>")  'buf-move-right)
 
 (if (eq system-type 'darwin)
     (global-set-key (kbd "C-<kp-delete>") 'kill-word))
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; appearance options
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -243,10 +251,10 @@
  'trailing-whitespace                  ; darker than the default background
  (scale-colour
   (face-background 'default) 0.83))
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; behavior tweaks
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(setq-default ring-bell-function 'ignore) ; quiet down now
 (fset 'yes-or-no-p 'y-or-n-p)             ; ask y/n instead of yes/no
 (setq inhibit-startup-message t)          ; I've used emacs before, thanks
 (setq-default kill-whole-line t)          ; `C-k` also removes trailing \n
@@ -274,6 +282,9 @@
 (setq backup-directory-alist `((".*" . ,backup-directory-location)))
 (setq auto-save-file-name-transforms `((".*" ,backup-directory-location t)))
 
+(if (eq system-type 'darwin) ; don't open files in seperate frames on OS X
+    (setq ns-popup-frames 'nil))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; mode hooks
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -281,12 +292,17 @@
 (add-hook 'c-mode-hook 'on-c-like-mode)
 (add-hook 'lisp-mode-hook 'on-lisp-mode)
 (add-hook 'js2-mode-hook 'on-js2-mode)
+(add-hook 'js-mode-hook 'on-js-mode)
 (add-hook 'emacs-lisp-mode-hook 'hexcolour-add-to-font-lock)
-(add-hook 'css-mode-hook 'hexcolour-add-to-font-lock)
+(add-hook 'css-mode-hook 'on-css-mode)
 (add-hook 'nxml-mode-hook 'hexcolour-add-to-font-lock)
 
 (defun on-text-mode ()
   (flyspell-mode t))
+
+(defun on-css-mode ()
+  (hexcolour-add-to-font-lock)
+  (setq css-indent-level 2))
 
 (defun on-c-like-mode ()
   (c-set-style "k&r")
@@ -312,4 +328,9 @@
   (set-face-background 'js2-warning-face "gold")
   (set-face-foreground 'js2-error-face "white")
   (set-face-background 'js2-error-face "red4")
+)
+
+(defun on-js-mode ()
+  (hexcolour-add-to-font-lock)
+  (setq js-indent-level 2)
 )
