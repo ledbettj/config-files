@@ -50,14 +50,6 @@
        :type git
        :url "http://github.com/eschulte/rhtml.git"
        :features rhtml-mode)
-     (:name yasnippet
-       :type git
-       :url "http://github.com/capitaomorte/yasnippet.git"
-       :features yasnippet
-       :after (lambda()
-                (setq yas/snippet-dirs
-                  (list "~/.emacs.d/el-get/yasnippet/snippets"))
-                (yas/initialize)))
      (:name js2-mode
         :type git
         :url "https://github.com/mooz/js2-mode.git"
@@ -73,20 +65,15 @@
      )))
 
 (defvar required-packages
-  '(ruby-mode inf-ruby css-mode rvm yaml-mode rhtml haml-mode yasnippet
-              auto-complete-yasnippet  auto-complete-css
-              auto-complete-emacs-lisp auto-complete js2-mode
-              json lua-mode buffer-move
-              markdown-mode coffee-mode flymake-ruby flymake-point nxhtml
-              zenburn rinari ruby-electric
-	      ))
+  '(ruby-mode inf-ruby css-mode rvm yaml-mode rhtml haml-mode auto-complete-css
+     auto-complete-emacs-lisp auto-complete js2-mode json lua-mode buffer-move
+     markdown-mode coffee-mode flymake-ruby flymake-point nxhtml zenburn rinari
+     ruby-electric))
 
 (el-get 'sync required-packages)
 
 (require 'auto-complete)
 (require 'auto-complete-config)
-(require 'auto-complete-yasnippet)
-(require 'yasnippet)
 (require 'uniquify)
 (require 'flymake-point)
 (require 'rinari)
@@ -96,8 +83,6 @@
 (if (eq use-rsense t)
     (require 'rsense))
 
-(yas/load-directory "~/.emacs.d/el-get/yasnippet/snippets")
-(yas/initialize)
 (ac-config-default)
 
 (setq auto-mode-alist
@@ -285,7 +270,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; behavior tweaks
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(setq ac-auto-start 0)                    ; start autocomplete immediately
+(setq ac-auto-start 2)                    ; start autocomplete immediately
 (setq-default ring-bell-function 'ignore) ; quiet down now
 (fset 'yes-or-no-p 'y-or-n-p)             ; ask y/n instead of yes/no
 (setq inhibit-startup-message t)          ; I've used emacs before, thanks
@@ -296,6 +281,7 @@
 (setq-default show-trailing-whitespace t) ; highlight trailing whitespace
 (setq-default tab-width 4)                ; default tab width is 4 spaces
 (setq-default indent-tabs-mode nil)       ; use spaces instead of tabs to indent
+(setq-default lisp-indent-offset 2)       ; 2 spaces for indent
 (delete-selection-mode t)                 ; inserting text with a selection
                                           ; deletes the selection
 (setq-default fill-column 80)             ; wrap text at 80 characters
