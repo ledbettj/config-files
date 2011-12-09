@@ -50,14 +50,6 @@
        :type git
        :url "http://github.com/eschulte/rhtml.git"
        :features rhtml-mode)
-     (:name js2-mode
-        :type git
-        :url "https://github.com/mooz/js2-mode.git"
-        :after (lambda()
-                 (setq-default js2-consistent-level-indent-inner-bracket-p t)
-                 (setq-default js2-pretty-multiline-decl-indentation-p t))
-        :compile "js2-mode.el"
-        :features js2-mode)
      (:name zenburn
        :type http
        :url "http://github.com/djcb/elisp/raw/master/themes/zenburn-theme.el"
@@ -66,7 +58,7 @@
 
 (defvar required-packages
   '(ruby-mode inf-ruby css-mode rvm yaml-mode rhtml haml-mode auto-complete-css
-     auto-complete-emacs-lisp auto-complete js2-mode json lua-mode buffer-move
+     auto-complete-emacs-lisp auto-complete json lua-mode buffer-move
      markdown-mode coffee-mode flymake-ruby flymake-point nxhtml zenburn rinari
      ruby-electric))
 
@@ -309,7 +301,6 @@
 (add-hook 'text-mode-hook 'on-text-mode)
 (add-hook 'c-mode-hook 'on-c-like-mode)
 (add-hook 'lisp-mode-hook 'on-lisp-mode)
-(add-hook 'js2-mode-hook 'on-js2-mode)
 (add-hook 'js-mode-hook 'on-js-mode)
 (add-hook 'emacs-lisp-mode-hook 'hexcolour-add-to-font-lock)
 (add-hook 'css-mode-hook 'on-css-mode)
@@ -343,19 +334,6 @@
   (flyspell-prog-mode)
   (setq lisp-indent-offset 2)
   (hexcolour-add-to-font-lock))
-
-(defun on-js2-mode ()
-  (hexcolour-add-to-font-lock)
-  (setq js2-bounce-indent-p nil)
-  (setq js2-basic-offset 2)
-  (set-face-underline 'js2-warning-face nil)
-  (set-face-foreground 'js2-warning-face "black")
-  (set-face-background 'js2-warning-face "gold")
-  (set-face-foreground 'js2-error-face "white")
-  (set-face-background 'js2-error-face "red4")
-  (if (eq use-jshint-mode t)
-      (flymake-mode t))
-)
 
 (defun on-js-mode ()
   (hexcolour-add-to-font-lock)
