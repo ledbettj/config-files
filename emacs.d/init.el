@@ -25,7 +25,11 @@
     (end-of-buffer)
     (eval-print-last-sexp)))
 
-(nconc package-archives (list '("tromey" . "http://tromey.com/elpa/")))
+(nconc package-archives
+  (list
+    '("tromey" . "http://tromey.com/elpa/")
+    '("marmalade" . "http://marmalade-repo.org/packages/")))
+
 (package-initialize)
 
 (setq el-get-sources
