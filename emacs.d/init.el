@@ -233,8 +233,8 @@
                                                   "yellow3" "DeepSkyBlue"
                                                   "magenta4" "cyan3" "white"])
 (if (eq system-type 'darwin)
-    (set-frame-font "Droid Sans Mono-14")
-  (set-frame-font "Droid Sans Mono-12"))
+    (setq default-frame-alist '((font . "Droid Sans Mono-14")))
+  (setq default-frame-alist '(("Droid Sans Mono-12"))))
 
 (setq frame-title-format   ;; frame title: user@host: buffer [modified?]
   (list
