@@ -100,6 +100,13 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; utility functions
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defun backward-delete-char-hungry (arg &optional killp)
+  "*Delete characters backward in \"hungry\" mode.
+    See the documentation of `backward-delete-char-untabify' and
+    `backward-delete-char-untabify-method' for details."
+  (interactive "*p\nP")
+  (let ((backward-delete-char-untabify-method 'hungry))
+    (backward-delete-char-untabify arg killp)))
 
 (defun hexcolour-luminance (colour)
   "Calculate the luminance of a color string"
@@ -309,6 +316,7 @@
 (add-hook 'emacs-lisp-mode-hook 'hexcolour-add-to-font-lock)
 (add-hook 'css-mode-hook 'on-css-mode)
 (add-hook 'nxml-mode-hook 'hexcolour-add-to-font-lock)
+(add-hook 'ruby-mode 'on-ruby-mode)
 
 (if (eq use-rsense t)
   (add-hook 'ruby-mode-hook
@@ -316,6 +324,8 @@
       (add-to-list 'ac-sources 'ac-source-rsense-method)
       (add-to-list 'ac-sources 'ac-source-rsense-constant))))
 
+(defun on-ruby-mode ()
+  (local-set-key (kbd "DEL") 'backward-delete-char-hungry))
 
 (defun on-text-mode ()
   (flyspell-mode t))
