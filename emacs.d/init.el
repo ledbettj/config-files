@@ -203,6 +203,12 @@
   (iswitchb-makealist iswitchb-default)
   (setq iswitchb-rescan t))
 
+(defun c-return ()
+  "indent automatically on return"
+  (interactive)
+  (c-indent-line-or-region)
+  (newline-and-indent))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; key bindings
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -340,7 +346,7 @@
   (c-toggle-auto-hungry-state 1)
   (flyspell-prog-mode)
   (flymake-mode t)
-  (local-set-key (kbd "RET") 'newline-and-indent)
+  (local-set-key (kbd "RET") 'c-return)
   (setq tab-width 4)
   (setq c-basic-offset 4))
 
