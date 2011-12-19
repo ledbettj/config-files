@@ -94,6 +94,7 @@
       '("\\.coffee$"  . coffee-mode)
       '("Cakefile$"   . coffee-mode)
       '("\\.scss$"    . css-mode)
+      '("\\.haml$"    . haml-mode)
       )
     auto-mode-alist))
 
@@ -322,7 +323,8 @@
 (add-hook 'emacs-lisp-mode-hook 'hexcolour-add-to-font-lock)
 (add-hook 'css-mode-hook 'on-css-mode)
 (add-hook 'nxml-mode-hook 'hexcolour-add-to-font-lock)
-(add-hook 'ruby-mode 'on-ruby-mode)
+(add-hook 'ruby-mode-hook 'on-ruby-mode)
+(add-hook 'haml-mode-hook 'hexcolour-add-to-font-lock)
 
 (if (eq use-rsense t)
   (add-hook 'ruby-mode-hook
