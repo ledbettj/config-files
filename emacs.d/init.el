@@ -58,13 +58,18 @@
        :type http
        :url "http://github.com/djcb/elisp/raw/master/themes/zenburn-theme.el"
        :compile ("zenburn-theme.el")
+     )
+     (:name nasm-mode
+       :type http
+       :url "http://perso.epitech.eu/~hauglu_m/blogger/nasm-mode.el"
+       :compile ("nasm-mode.el")
      )))
 
 (defvar required-packages
   '(ruby-mode inf-ruby css-mode rvm yaml-mode rhtml haml-mode auto-complete-css
      auto-complete-emacs-lisp auto-complete json lua-mode buffer-move
      markdown-mode coffee-mode flymake-ruby flymake-point nxhtml zenburn rinari
-     ruby-electric))
+     ruby-electric nasm-mode))
 
 (el-get 'sync required-packages)
 
