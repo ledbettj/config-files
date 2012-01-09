@@ -1,3 +1,4 @@
 set show-all-if-ambiguous on   # single tab to start completion help
 set completion-ignore-case on  # completion is case-insensitive
 
+$include /etc/inputrc
