@@ -50,6 +50,12 @@
        :type git
        :url "http://github.com/yoshiki/yaml-mode.git"
        :features yaml-mode)
+     (:name rainbow-mode
+       :type elpa)
+     (:name scss-mode
+       :type git
+       :url "http://github.com/antonj/scss-mode.git"
+       :features scss-mode)
      (:name rhtml
        :type git
        :url "http://github.com/eschulte/rhtml.git"
@@ -62,14 +68,14 @@
      (:name nasm-mode
        :type http
        :url "http://perso.epitech.eu/~hauglu_m/blogger/nasm-mode.el"
-       :compile ("nasm-mode.el")
-     )))
+       :compile ("nasm-mode.el"))))
 
+;; packages to install by default
 (defvar required-packages
-  '(ruby-mode inf-ruby css-mode rvm yaml-mode rhtml haml-mode auto-complete-css
-     auto-complete-emacs-lisp auto-complete json lua-mode buffer-move
-     markdown-mode coffee-mode flymake-ruby flymake-point nxhtml zenburn rinari
-     ruby-electric nasm-mode))
+  '(auto-complete auto-complete-css auto-complete-emacs-lisp buffer-move
+     coffee-mode css-mode flymake-point flymake-ruby haml-mode inf-ruby lua-mode
+     markdown-mode nasm-mode nxhtml rainbow-mode rhtml rinari ruby-electric
+     ruby-mode rvm scss-mode yaml-mode))
 
 (el-get 'sync required-packages)
 
@@ -79,6 +85,8 @@
 (require 'flymake-point)
 (require 'rinari)
 (require 'ruby-electric)
+(require 'rainbow-mode)
+
 (if (eq use-jshint-mode t)
     (require 'flymake-jshint))
 (if (eq use-rsense t)
@@ -98,7 +106,7 @@
       '("\\.yml$"     . yaml-mode)
       '("\\.coffee$"  . coffee-mode)
       '("Cakefile$"   . coffee-mode)
-      '("\\.scss$"    . css-mode)
+      '("\\.scss$"    . scss-mode)
       '("\\.haml$"    . haml-mode)
       )
     auto-mode-alist))
@@ -113,27 +121,6 @@
   (interactive "*p\nP")
   (let ((backward-delete-char-untabify-method 'hungry))
     (backward-delete-char-untabify arg killp)))
-
-(defun hexcolour-luminance (colour)
-  "Calculate the luminance of a color string"
-  (let* ((values (color-values colour))
-          (r (car values))
-          (g (cadr values))
-          (b (caddr values)))
-    (floor (+ (* .3 r) (* .59 g) (* .11 b)) 256)))
-
-(defun hexcolour-add-to-font-lock ()
-  "Colorize HTML RGB colors (e.g. '#000030', 'DarkBlue') in font-lock-mode."
-  (interactive)
-  (font-lock-add-keywords nil
-    `((,(concat "#[0-9a-fA-F]\\{6\\}\\|"
-          (regexp-opt (defined-colors) 'words))
-        (0 (let ((colour (match-string-no-properties 0)))
-             (put-text-property
-               (match-beginning 0) (match-end 0)
-               'face `((:foreground, (if (> 128.0 (hexcolour-luminance colour))
-                                       "white" "black"))
-                        (:background ,colour)))))))))
 
 (defun move-text-internal (arg)
   (cond
@@ -245,8 +232,8 @@
                                                   "yellow3" "DeepSkyBlue"
                                                   "magenta4" "cyan3" "white"])
 (if (eq system-type 'darwin)
-    (setq default-frame-alist '((font . "Droid Sans Mono-14")))
-  (setq default-frame-alist '((font . "Droid Sans Mono-12"))))
+    (setq default-frame-alist '((font . "Consolas-16")))
+  (setq default-frame-alist '((font . "Ubuntu Mono-12"))))
 
 (setq frame-title-format   ;; frame title: user@host: buffer [modified?]
   (list
@@ -281,6 +268,8 @@
   :foreground "#000000"
   :bold t
   :box nil)
+
+(add-to-list 'rainbow-html-colors-major-mode-list 'scss-mode)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; behavior tweaks
@@ -325,11 +314,8 @@
 (add-hook 'c-mode-hook 'on-c-like-mode)
 (add-hook 'lisp-mode-hook 'on-lisp-mode)
 (add-hook 'js-mode-hook 'on-js-mode)
-(add-hook 'emacs-lisp-mode-hook 'hexcolour-add-to-font-lock)
-(add-hook 'css-mode-hook 'on-css-mode)
-(add-hook 'nxml-mode-hook 'hexcolour-add-to-font-lock)
+(add-hook 'scss-mode-hook 'on-scss-mode)
 (add-hook 'ruby-mode-hook 'on-ruby-mode)
-(add-hook 'haml-mode-hook 'hexcolour-add-to-font-lock)
 
 (if (eq use-rsense t)
   (add-hook 'ruby-mode-hook
@@ -343,9 +329,10 @@
 (defun on-text-mode ()
   (flyspell-mode t))
 
-(defun on-css-mode ()
-  (hexcolour-add-to-font-lock)
-  (setq css-indent-level 2))
+(defun on-scss-mode ()
+  (rainbow-mode t)
+  (setq css-indent-level 2)
+  (auto-complete-mode t))
 
 (defun on-c-like-mode ()
   (c-set-style "k&r")
@@ -360,11 +347,10 @@
 (defun on-lisp-mode ()
   (flyspell-prog-mode)
   (setq lisp-indent-offset 2)
-  (hexcolour-add-to-font-lock))
+  (rainbow-mode t))
 
 (defun on-js-mode ()
-  (hexcolour-add-to-font-lock)
+  (rainbow-mode t)
   (setq js-indent-level 2)
   (if (eq use-jshint-mode t)
-      (flymake-mode t))
-)
+      (flymake-mode t)))
