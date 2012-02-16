@@ -36,6 +36,9 @@
   '((:name ruby-mode
       :type elpa
       :load "ruby-mode.el")
+     (:name less-css-mode
+       :type elpa
+       :load "less-css-mode.el")
      (:name inf-ruby
        :type elpa)
      (:name css-mode
@@ -74,6 +77,7 @@
 (defvar required-packages
   '(auto-complete auto-complete-css auto-complete-emacs-lisp buffer-move
      coffee-mode css-mode flymake-point flymake-ruby haml-mode inf-ruby lua-mode
+     less-css-mode
      markdown-mode nasm-mode nxhtml rainbow-mode rhtml rinari ruby-electric
      ruby-mode rvm scss-mode yaml-mode))
 
@@ -316,6 +320,7 @@
 (add-hook 'js-mode-hook 'on-js-mode)
 (add-hook 'scss-mode-hook 'on-scss-mode)
 (add-hook 'ruby-mode-hook 'on-ruby-mode)
+(add-hook 'less-css-mode-hook 'on-scss-mode)
 
 (if (eq use-rsense t)
   (add-hook 'ruby-mode-hook
