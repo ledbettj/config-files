@@ -295,6 +295,8 @@
 (setq-default fill-column 80)             ; wrap text at 80 characters
 (setq-default scroll-conservatively 1)    ; scroll one line at a time when the
                                           ; focus moves past end of buffer
+(setq iswitchb-buffer-ignore              ; ignore special *buffers*
+  '("^ " "^\\*"))
 (iswitchb-mode t)                         ; use better `C-x b` buffer switching
 (put 'downcase-region 'disabled nil)      ; these are useful commands
 (put 'upcase-region   'disabled nil)      ; why are they disabled
