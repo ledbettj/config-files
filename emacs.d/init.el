@@ -274,6 +274,8 @@
   :box nil)
 
 (add-to-list 'rainbow-html-colors-major-mode-list 'scss-mode)
+(add-to-list 'rainbow-html-colors-major-mode-list 'css-mode)
+(add-to-list 'rainbow-html-colors-major-mode-list 'less-css-mode)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; behavior tweaks
