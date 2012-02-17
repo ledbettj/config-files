@@ -63,11 +63,10 @@
        :type git
        :url "http://github.com/eschulte/rhtml.git"
        :features rhtml-mode)
-     (:name zenburn
-       :type http
-       :url "http://github.com/djcb/elisp/raw/master/themes/zenburn-theme.el"
-       :compile ("zenburn-theme.el")
-     )
+     (:name zenburn-theme
+       :type elpa)
+     (:name solarized-theme
+       :type elpa)
      (:name nasm-mode
        :type http
        :url "http://perso.epitech.eu/~hauglu_m/blogger/nasm-mode.el"
@@ -79,7 +78,7 @@
      coffee-mode css-mode flymake-point flymake-ruby haml-mode inf-ruby lua-mode
      less-css-mode
      markdown-mode nasm-mode nxhtml rainbow-mode rhtml rinari ruby-electric
-     ruby-mode rvm scss-mode yaml-mode))
+     ruby-mode rvm scss-mode solarized-theme yaml-mode zenburn-theme))
 
 (el-get 'sync required-packages)
 
