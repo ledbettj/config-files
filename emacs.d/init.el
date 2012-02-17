@@ -250,10 +250,13 @@
 (setq column-number-mode t)            ; show column number in the mode line
 (which-function-mode t)                ; show current function in the mode line
 (show-paren-mode t)                    ; highlight matching parentheses
-(tool-bar-mode -1)                     ; no tool bar
-(menu-bar-mode -1)                     ; no menu bar
-(scroll-bar-mode -1)                   ; no scroll bar
-(tooltip-mode -1)                      ; show tooltips in the echo area
+(if (window-system)
+  (progn
+    (tool-bar-mode -1)                     ; no tool bar
+    (menu-bar-mode -1)                     ; no menu bar
+    (scroll-bar-mode -1)                   ; no scroll bar
+    (tooltip-mode -1)))                    ; show tooltips in the echo area
+
 (setq-default mumamo-chunk-coloring 2) ; don't highlight regions with terrible
                                        ; hideous colors
 (load-theme 'wombat)
