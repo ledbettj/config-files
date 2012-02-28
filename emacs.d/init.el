@@ -34,7 +34,8 @@
 
 (setq el-get-sources
   '((:name ruby-mode
-      :type elpa
+      :type http
+      :url "https://raw.github.com/ruby/ruby/trunk/misc/ruby-mode.el"
       :load "ruby-mode.el")
      (:name less-css-mode
        :type elpa
