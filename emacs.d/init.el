@@ -33,11 +33,7 @@
 (package-initialize)
 
 (setq el-get-sources
-  '((:name ruby-mode
-      :type http
-      :url "https://raw.github.com/ruby/ruby/trunk/misc/ruby-mode.el"
-      :load "ruby-mode.el")
-     (:name less-css-mode
+  '((:name less-css-mode
        :type elpa
        :load "less-css-mode.el")
      (:name inf-ruby
@@ -77,9 +73,7 @@
 (defvar required-packages
   '(auto-complete auto-complete-css auto-complete-emacs-lisp buffer-move
      coffee-mode css-mode flymake-point flymake-ruby haml-mode inf-ruby lua-mode
-     less-css-mode
-     markdown-mode nasm-mode nxhtml rainbow-mode rhtml rinari ruby-electric
-     ruby-mode rvm scss-mode solarized-theme yaml-mode zenburn-theme))
+     less-css-mode markdown-mode nasm-mode nxhtml rainbow-mode rhtml rinari ruby-electric rvm scss-mode solarized-theme yaml-mode zenburn-theme))
 
 (el-get 'sync required-packages)
 
