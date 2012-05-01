@@ -7,6 +7,12 @@
 (defvar use-rsense      nil) ;; install from git://github.com/m2ym/rsense.git
 
 (nconc load-path (list "~/.emacs.d/el-get/el-get"))
+(push "/usr/local/bin" exec-path)
+(setq exec-path (cons "~/.rbenv/bin" exec-path))
+(setenv "PATH" (concat "~/.rbenv/bin:" (getenv "PATH")))
+(setq exec-path (cons "~/.rbenv/shims" exec-path))
+(setenv "PATH" (concat "~/.rbenv/shims:" (getenv "PATH")))
+
 
 (if (eq use-jshint-mode t)
   (add-to-list 'load-path "/usr/local/lib/node_modules/jshint-mode"))
@@ -40,12 +46,6 @@
        :type elpa)
      (:name css-mode
        :type elpa)
-     (:name rvm
-       :type git
-       :url "http://github.com/senny/rvm.el.git"
-       :load "rvm.el"
-       :compile ("rvm.el")
-       :after (lambda() (rvm-use-default)))
      (:name yaml-mode
        :type git
        :url "http://github.com/yoshiki/yaml-mode.git"
@@ -73,7 +73,7 @@
 (defvar required-packages
   '(auto-complete auto-complete-css auto-complete-emacs-lisp buffer-move
      coffee-mode css-mode flymake-point flymake-ruby haml-mode inf-ruby lua-mode
-     less-css-mode markdown-mode nasm-mode nxhtml rainbow-mode rhtml rinari ruby-electric rvm scss-mode solarized-theme yaml-mode zenburn-theme))
+     less-css-mode markdown-mode nasm-mode nxhtml rainbow-mode rhtml rinari ruby-electric scss-mode solarized-theme yaml-mode zenburn-theme nav))
 
 (el-get 'sync required-packages)
 
@@ -311,7 +311,7 @@
 
 (if (eq system-type 'darwin) ; don't open files in seperate frames on OS X
     (setq ns-popup-frames 'nil))
-
+(setq-default scss-compile-at-save nil)   ; don't compile scss files on save.
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; fix ruby-mode multi-line parameter indentation
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -366,7 +366,6 @@
   (c-set-style "k&r")
   (c-set-offset 'substatement-open 0)
   (c-toggle-auto-hungry-state 1)
-  (flyspell-prog-mode)
   (flymake-mode t)
   (local-set-key (kbd "RET") 'c-return)
   (setq tab-width 4)
