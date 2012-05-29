@@ -4,7 +4,6 @@
 
 ;; these features require external tools
 (defvar use-jshint-mode nil) ;; 'npm install jshint-mode' and set to t
-(defvar use-rsense      nil) ;; install from git://github.com/m2ym/rsense.git
 
 (nconc load-path (list "~/.emacs.d/el-get/el-get"))
 (push "/usr/local/bin" exec-path)
@@ -16,11 +15,6 @@
 
 (if (eq use-jshint-mode t)
   (add-to-list 'load-path "/usr/local/lib/node_modules/jshint-mode"))
-
-(if (eq use-rsense t)
-  (progn
-    (setq rsense-home (expand-file-name "~/Projects/rsense"))
-    (add-to-list 'load-path (concat rsense-home "/etc"))))
 
 (require 'package)
 
@@ -87,8 +81,6 @@
 
 (if (eq use-jshint-mode t)
     (require 'flymake-jshint))
-(if (eq use-rsense t)
-    (require 'rsense))
 
 (ac-config-default)
 
@@ -344,12 +336,6 @@
 (add-hook 'scss-mode-hook 'on-scss-mode)
 (add-hook 'ruby-mode-hook 'on-ruby-mode)
 (add-hook 'less-css-mode-hook 'on-scss-mode)
-
-(if (eq use-rsense t)
-  (add-hook 'ruby-mode-hook
-    (lambda ()
-      (add-to-list 'ac-sources 'ac-source-rsense-method)
-      (add-to-list 'ac-sources 'ac-source-rsense-constant))))
 
 (defun on-ruby-mode ()
   (local-set-key (kbd "DEL") 'backward-delete-char-hungry))
