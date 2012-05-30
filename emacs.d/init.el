@@ -1,9 +1,6 @@
 ;;; init.el - emacs configuration file
 ;; John Ledbetter <john.ledbetter@gmail.com>
 (require 'package)
-(require 'cl)
-
-(defvar *emacs-load-start* (current-time))
 
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
 
@@ -30,6 +27,8 @@
     auto-complete-emacs-lisp
     flymake-point
     flymake-ruby
+    rainbow-mode
+    ruby-electric
     scss-mode))
 
 (el-get 'sync required-packages)
@@ -49,11 +48,12 @@
 
 ;; load user customization
 (load-user-file "ui.el")          ; UI tweaks (font, colors, etc.)
+(load-user-file "modes.el")
+(load-user-file "behavior.el")
 (load-user-file "move-text.el")   ; M-Up and M-Down move blocks of text around
 
 
-(message "init.el loaded in %ds"
-	 (destructuring-bind (hi lo ms) (current-time)
-	   (-
-	    (+ hi lo)
-	    (+ (first *emacs-load-start*) (second *emacs-load-start*)))))
+;; display startup timing after load
+(fset 'startup-echo-area-message
+      '(lambda ()
+	 (message "emacs loaded in %s" (emacs-init-time))))
