@@ -6,19 +6,24 @@
 
 ;; install el-get if necessary
 (unless (require 'el-get nil t)
-  (with-current-buffer
-      (url-retrieve-synchronously
-       "https://raw.github.com/dimitri/el-get/master/el-get-install.el")
-       (lambda (s)
-	 (let (el-get-master-branch)
-	   (goto-char (point-max))
-	   (eval-print-last-sexp)))))
+  (let ((buf
+	 (url-retrieve-synchronously
+	  "https://raw.github.com/dimitri/el-get/master/el-get-install.el")))
+    (if buf
+	(with-current-buffer buf
+	  (end-of-buffer)
+	  (eval-print-last-sexp)))))
 
 ;; custom packages
 (setq el-get-sources
       '((:name scss-mode
 	       :type git
-	       :url "http://github.com/antonj/scss-mode.git")))
+	       :url "http://github.com/antonj/scss-mode.git")
+	(:name rainbow-mode
+	       :type elpa)
+	(:name ruby-electric
+	       :type git
+	       :url "http://github.com/leoc/ruby-electric.git")))
 
 ;; list of packages to have el-get install
 (defvar required-packages

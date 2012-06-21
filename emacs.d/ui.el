@@ -17,7 +17,7 @@
 
 ;; set default font to Consolas on OS X, or Ubuntu Monospace otherwise.
 (setq default-frame-alist
-      `((font . ,(if (eq system-type 'darwin) "Consolas-16" "Ubuntu Mono-12"))))
+      `((font . ,(if (eq system-type 'darwin) "Consolas-16" "Ubuntu Mono-14"))))
 
 ;; set frame title to user@host: <buffer> [modified?]
 (setq frame-title-format
