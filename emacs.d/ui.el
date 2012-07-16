@@ -45,3 +45,22 @@
   '(lambda ()
      (nconc rainbow-html-colors-major-mode-list
 	    '(scss-mode emacs-lisp-mode javascript-mode))))
+
+(defun scale-colour (colour factor)
+  "Scale the given hex colour (#112233) by the given factor.
+This used specifically to make whitespace appear as a slightly darker color
+than the background of the buffer."
+  (if window-system
+      (let* ((values (color-values colour))
+	     (r (floor (* factor (car values))))
+	     (g (floor (* factor (cadr values))))
+	     (b (floor (* factor (caddr values)))))
+	(format "#%02x%02x%02x"
+		(* (/ r 65280.0) 256)
+		(* (/ g 65280.0) 256)
+		(* (/ b 65280.0) 256)))
+    colour))
+
+(set-face-background 'trailing-whitespace
+  (scale-colour (face-background 'default) 0.83))
+(setq-default show-trailing-whitespace t)
