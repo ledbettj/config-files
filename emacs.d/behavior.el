@@ -5,6 +5,8 @@
 (put 'downcase-region 'disabled nil)
 (put 'upcase-region   'disabled nil)
 
+(setq-default indent-tabs-mode nil)
+
 (defalias 'yes-or-no-p 'y-or-n-p) ; always ask Y/N? instead of yes/no.
 
 ; stop writing annoying autosave files to the current directory.
@@ -19,7 +21,7 @@
   (if (eq system-type 'darwin)
       (ns-toggle-fullscreen) ; OS-X
     (set-frame-parameter nil 'fullscreen
-			 (if (frame-parameter nil 'fullscreen) nil 'fullboth))))
+      (if (frame-parameter nil 'fullscreen) nil 'fullboth))))
 
 ;; bind alt+enter to fullscreen mode
 (global-set-key (kbd "M-RET") 'toggle-fullscreen)

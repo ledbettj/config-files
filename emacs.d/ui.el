@@ -61,6 +61,13 @@ than the background of the buffer."
 		(* (/ b 65280.0) 256)))
     colour))
 
+
+(add-hook 'font-lock-mode-hook
+  (lambda ()
+    (font-lock-add-keywords
+      nil
+      '(("\t" 0 'trailing-whitespace prepend)))))
+
 (set-face-background 'trailing-whitespace
   (scale-colour (face-background 'default) 0.83))
 (setq-default show-trailing-whitespace t)
