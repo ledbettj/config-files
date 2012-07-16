@@ -48,7 +48,7 @@
   (load-file (expand-file-name file user-emacs-directory)))
 
 ;; store emacs auto-customization in its own file.
-(setq custom-file (expand-file-name "emacs-custom.el" user-emacs-directory))
+(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (load custom-file 'noerror)
 
 ;; load user customization
