@@ -3,10 +3,5 @@
 
 (add-hook 'emacs-lisp-mode-hook
 	  '(lambda ()
+	     (setq lisp-indent-offset 2)
 	     (rainbow-mode t)))
-
-(add-hook 'ruby-mode-hook
-	  '(lambda ()
-	     (rainbow-mode t)
-	     (ruby-electric-mode t)
-	     (electric-pair-mode t)))

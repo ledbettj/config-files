@@ -34,7 +34,8 @@
     flymake-ruby
     rainbow-mode
     ruby-electric
-    scss-mode))
+    scss-mode
+    yaml-mode))
 
 (el-get 'sync required-packages)
 
@@ -55,6 +56,7 @@
 (load-user-file "ui.el")          ; UI tweaks (font, colors, etc.)
 (load-user-file "modes.el")
 (load-user-file "ruby.el")
+(load-user-file "js.el")
 (load-user-file "behavior.el")
 (load-user-file "move-text.el")   ; M-Up and M-Down move blocks of text around
 
