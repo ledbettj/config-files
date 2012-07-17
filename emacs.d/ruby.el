@@ -1,9 +1,7 @@
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; fix ruby-mode multi-line parameter indentation
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(setq-default ruby-deep-indent-paren nil)
+(setq-default ruby-deep-indent-paren       nil)
 (setq-default ruby-deep-indent-paren-style nil)
-(setq-default ruby-deep-arglist nil)
+(setq-default ruby-deep-arglist            nil)
 
 (defadvice ruby-indent-line (after unindent-closing-paren activate)
   (let ((column (current-column))
@@ -20,12 +18,7 @@
       (indent-line-to indent)
       (when (> offset 0) (forward-char offset)))))
 
-(add-hook 'ruby-mode-hook
-  '(lambda ()
-     (rainbow-mode t)
-     (ruby-electric-mode t)
-     (electric-pair-mode t)))
-
+;; add additional filenames to ruby-mode
 (nconc auto-mode-alist
   (list
     '("Gemfile$"    . ruby-mode)
@@ -33,3 +26,10 @@
     '("\\.gemspec$" . ruby-mode)
     '("\\.ru"       . ruby-mode)
     '("\\.rake"     . ruby-mode)))
+
+(add-hook 'ruby-mode-hook
+  '(lambda ()
+     (rainbow-mode t)
+     (ruby-electric-mode t)
+     (electric-pair-mode t)))
+
