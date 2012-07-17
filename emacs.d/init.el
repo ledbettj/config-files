@@ -47,7 +47,8 @@
 (defun load-user-file (file)
   (interactive "f")
   "Load a file in the user's current configuration directory."
-  (load-file (expand-file-name file user-emacs-directory)))
+  (load-file (expand-file-name file
+               (expand-file-name "customization" user-emacs-directory))))
 
 ;; store emacs auto-customization in its own file.
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
