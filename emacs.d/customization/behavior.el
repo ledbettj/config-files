@@ -6,6 +6,7 @@
 (put 'upcase-region   'disabled nil)
 
 (setq-default indent-tabs-mode nil)
+(iswitchb-mode t)
 
 (defalias 'yes-or-no-p 'y-or-n-p) ; always ask Y/N? instead of yes/no.
 
@@ -22,3 +23,20 @@
       (ns-toggle-fullscreen) ; OS-X
     (set-frame-parameter nil 'fullscreen
       (if (frame-parameter nil 'fullscreen) nil 'fullboth))))
+
+; iswitchb customization
+(defadvice iswitchb-kill-buffer (after rescan-after-kill activate)
+  "*Regenerate the list of matching buffer names after a kill.
+    Necessary if using `uniquifiy' with `uniquify-after-kill-buffer-p'
+    set to non-nil."
+  (setq iswitchb-buflist iswitchb-matches)
+  (iswitchb-rescan))
+
+(defun iswitchb-rescan ()
+  "*Regenerate the list of matching buffer names."
+  (interactive)
+  (iswitchb-makealist iswitchb-default)
+  (setq iswitchb-rescan t))
+
+(setq iswitchb-buffer-ignore
+  '("^ " "^\\*"))
