@@ -22,6 +22,3 @@
       (ns-toggle-fullscreen) ; OS-X
     (set-frame-parameter nil 'fullscreen
       (if (frame-parameter nil 'fullscreen) nil 'fullboth))))
-
-;; bind alt+enter to fullscreen mode
-(global-set-key (kbd "M-RET") 'toggle-fullscreen)

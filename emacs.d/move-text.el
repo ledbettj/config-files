@@ -33,6 +33,3 @@
   "Move region (transient-mark-mode active) or current line arg lines up."
   (interactive "*p")
   (move-text-internal (- arg)))
-
-(global-set-key [M-up]    'move-text-up)
-(global-set-key [M-down]  'move-text-down)

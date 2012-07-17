@@ -31,20 +31,20 @@
 (eval-after-load "auto-complete"
   '(lambda ()
      (set-face-attribute 'ac-candidate-face nil
-			 :background (face-foreground 'default)
-			 :foreground (face-background 'default)
-			 :box nil)
+       :background (face-foreground 'default)
+       :foreground (face-background 'default)
+       :box nil)
      (set-face-attribute 'ac-selection-face nil
-			 :background (face-foreground 'font-lock-keyword-face)
-			 :foreground "#000000"
-			 :bold t
-			 :box nil)))
+       :background (face-foreground 'font-lock-keyword-face)
+       :foreground "#000000"
+       :bold t
+       :box nil)))
 
 ;; I love rainbow mode so much
 (eval-after-load "rainbow-mode"
   '(lambda ()
      (nconc rainbow-html-colors-major-mode-list
-	    '(scss-mode emacs-lisp-mode javascript-mode))))
+       '(scss-mode emacs-lisp-mode javascript-mode))))
 
 (defun scale-colour (colour factor)
   "Scale the given hex colour (#112233) by the given factor.
@@ -52,13 +52,13 @@ This used specifically to make whitespace appear as a slightly darker color
 than the background of the buffer."
   (if window-system
       (let* ((values (color-values colour))
-	     (r (floor (* factor (car values))))
-	     (g (floor (* factor (cadr values))))
-	     (b (floor (* factor (caddr values)))))
-	(format "#%02x%02x%02x"
-		(* (/ r 65280.0) 256)
-		(* (/ g 65280.0) 256)
-		(* (/ b 65280.0) 256)))
+              (r (floor (* factor (car values))))
+              (g (floor (* factor (cadr values))))
+              (b (floor (* factor (caddr values)))))
+        (format "#%02x%02x%02x"
+          (* (/ r 65280.0) 256)
+          (* (/ g 65280.0) 256)
+          (* (/ b 65280.0) 256)))
     colour))
 
 
