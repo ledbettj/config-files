@@ -2,11 +2,12 @@
 ;; John Ledbetter <john.ledbetter@gmail.com>
 
 (setq kill-whole-line t) ; include EOL when killing lines
+(setq-default indent-tabs-mode nil) ; never use tabs for indenting
+(iswitchb-mode t) ; enhanced buffer switching
+(delete-selection-mode t) ; when region is active, delete kills region
+
 (put 'downcase-region 'disabled nil)
 (put 'upcase-region   'disabled nil)
-
-(setq-default indent-tabs-mode nil)
-(iswitchb-mode t)
 
 (defalias 'yes-or-no-p 'y-or-n-p) ; always ask Y/N? instead of yes/no.
 
