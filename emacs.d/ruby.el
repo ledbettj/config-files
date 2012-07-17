@@ -26,3 +26,10 @@
      (ruby-electric-mode t)
      (electric-pair-mode t)))
 
+(nconc auto-mode-alist
+  (list
+    '("Gemfile$"    . ruby-mode)
+    '("Rakefile$"   . ruby-mode)
+    '("\\.gemspec$" . ruby-mode)
+    '("\\.ru"       . ruby-mode)
+    '("\\.rake"     . ruby-mode)))

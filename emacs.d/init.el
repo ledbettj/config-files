@@ -59,7 +59,7 @@
 (load-user-file "ruby.el")
 (load-user-file "js.el")
 (load-user-file "behavior.el")
-(load-user-file "move-text.el")   ; M-Up and M-Down move blocks of text around
+(load-user-file "move-text.el")
 (load-user-file "keybinds.el")
 
 ;; display startup timing after load
