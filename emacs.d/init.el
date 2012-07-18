@@ -14,6 +14,9 @@
         (end-of-buffer)
         (eval-print-last-sexp)))))
 
+(add-to-list 'package-archives
+  '("melpa" . "http://melpa.milkbox.net/packages/") t)
+
 ;; custom packages
 (setq el-get-sources
   '((:name scss-mode
@@ -39,6 +42,8 @@
      yaml-mode))
 
 (el-get 'sync required-packages)
+
+(push (expand-file-name "themes" user-emacs-directory) custom-theme-load-path)
 
 ;; turn on autocomplete
 (require 'auto-complete-config)
