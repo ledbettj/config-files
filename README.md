@@ -16,3 +16,13 @@ My customizations live in the `customization/` directory:
 * `ruby.el` - tweaks to the behavior of `ruby-mode`.
 * `js.el` - tweaks to the behavior of `js-mode`.
 * `keybinds.el` - my custom keybindings.
+
+Bash Snippets
+=============
+
+Just a few bash functions that I find useful across multiple machines.
+
+InputRC
+=======
+
+Tweaks to readline.
