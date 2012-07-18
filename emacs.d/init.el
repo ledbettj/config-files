@@ -1,5 +1,6 @@
 ;;; init.el - emacs configuration file
 ;; John Ledbetter <john.ledbetter@gmail.com>
+
 (require 'package)
 
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")

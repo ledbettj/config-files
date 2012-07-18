@@ -17,15 +17,15 @@
 
 ;; set default font to Consolas on OS X, or Ubuntu Monospace otherwise.
 (setq default-frame-alist
-      `((font . ,(if (eq system-type 'darwin) "Consolas-16" "Ubuntu Mono-14"))))
+  `((font . ,(if (eq system-type 'darwin) "Consolas-16" "Ubuntu Mono-14"))))
 
 ;; set frame title to user@host: <buffer> [modified?]
 (setq frame-title-format
-      (list
-       (user-login-name)
-       "@"
-       (system-name)
-       ": %b %+" ))
+  (list
+    (user-login-name)
+    "@"
+    (system-name)
+    ": %b %+" ))
 
 ;; customize autocomplete colors
 (eval-after-load "auto-complete"
@@ -51,17 +51,18 @@
 This used specifically to make whitespace appear as a slightly darker color
 than the background of the buffer."
   (if window-system
-      (let* ((values (color-values colour))
-              (r (floor (* factor (car values))))
-              (g (floor (* factor (cadr values))))
-              (b (floor (* factor (caddr values)))))
-        (format "#%02x%02x%02x"
-          (* (/ r 65280.0) 256)
-          (* (/ g 65280.0) 256)
-          (* (/ b 65280.0) 256)))
+    (let* ((values (color-values colour))
+            (r (floor (* factor (car values))))
+            (g (floor (* factor (cadr values))))
+            (b (floor (* factor (caddr values)))))
+      (format "#%02x%02x%02x"
+        (* (/ r 65280.0) 256)
+        (* (/ g 65280.0) 256)
+        (* (/ b 65280.0) 256)))
     colour))
 
 
+; show tabs and trailing whitespace as slightly darker background color
 (add-hook 'font-lock-mode-hook
   (lambda ()
     (font-lock-add-keywords

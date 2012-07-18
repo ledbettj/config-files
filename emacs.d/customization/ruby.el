@@ -1,3 +1,6 @@
+;;; ruby.el - ruby mode customization for emacs
+;; John Ledbetter <john.ledbetter@gmail.com>
+
 ;; fix ruby-mode multi-line parameter indentation
 (setq-default ruby-deep-indent-paren       nil)
 (setq-default ruby-deep-indent-paren-style nil)

@@ -1,3 +1,6 @@
+;;;; keybinds.el - global key rebinds for emacs
+;; John Ledbetter <john.ledbetter@gmail.com>
+
 (global-set-key [M-g]         'goto-line)
 (global-set-key [M-up]        'move-text-up)
 (global-set-key [M-down]      'move-text-down)
