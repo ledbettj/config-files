@@ -41,3 +41,13 @@
 
 (setq iswitchb-buffer-ignore
   '("^ " "^\\*"))
+
+
+; greedy whitespace delete
+(defun backward-delete-char-hungry (arg &optional killp)
+  "*Delete characters backward in \"hungry\" mode.
+    See the documentation of `backward-delete-char-untabify' and
+    `backward-delete-char-untabify-method' for details."
+  (interactive "*p\nP")
+  (let ((backward-delete-char-untabify-method 'hungry))
+    (backward-delete-char-untabify arg killp)))

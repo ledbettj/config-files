@@ -60,11 +60,11 @@
 (load custom-file 'noerror)
 
 ;; load user customization
-(load-user-file "ui.el")          ; UI tweaks (font, colors, etc.)
+(load-user-file "ui.el")
+(load-user-file "behavior.el")
 (load-user-file "modes.el")
 (load-user-file "ruby.el")
 (load-user-file "js.el")
-(load-user-file "behavior.el")
 (load-user-file "move-text.el")
 (load-user-file "keybinds.el")
 

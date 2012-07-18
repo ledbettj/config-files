@@ -12,7 +12,7 @@
 (setq column-number-mode t)     ; show column number in mode line
 (setq inhibit-startup-screen t) ; don't show splash screen
 
-(load-theme 'wombat t nil)      ; currently selected theme
+(load-theme 'tomorrow-night t nil)
 
 
 ;; set default font to Consolas on OS X, or Ubuntu Monospace otherwise.

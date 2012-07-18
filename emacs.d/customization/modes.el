@@ -2,6 +2,6 @@
 ;; John Ledbetter <john.ledbetter@gmail.com>
 
 (add-hook 'emacs-lisp-mode-hook
-	  '(lambda ()
-	     (setq lisp-indent-offset 2)
-	     (rainbow-mode t)))
+  '(lambda ()
+     (setq lisp-indent-offset 2)
+     (rainbow-mode t)))
