@@ -61,6 +61,8 @@
 (load custom-file 'noerror)
 
 ;; load user customization
+(if (eq system-type 'darwin)
+  (load-user-file "osx.el"))
 (load-user-file "ui.el")
 (load-user-file "behavior.el")
 (load-user-file "modes.el")
