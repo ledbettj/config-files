@@ -5,7 +5,7 @@
 (setq-default indent-tabs-mode nil) ; never use tabs for indenting
 (iswitchb-mode t)                   ; enhanced buffer switching
 (delete-selection-mode t)           ; when region is active, delete kills region
-
+(setq ring-bell-function 'ignore)   ; don't beep on error/end of buffer
 (put 'downcase-region 'disabled nil)
 (put 'upcase-region   'disabled nil)
 
