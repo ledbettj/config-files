@@ -5,3 +5,10 @@
   '(lambda ()
      (setq lisp-indent-offset 2)
      (rainbow-mode t)))
+
+(add-hook 'scss-mode-hook
+  '(lambda ()
+     (setq scss-compile-at-save nil)
+     (setq css-indent-offset 2)
+     (auto-complete-mode t)
+     (rainbow-mode t)))
