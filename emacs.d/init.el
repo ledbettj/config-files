@@ -36,8 +36,10 @@
      auto-complete-emacs-lisp
      flymake-point
      flymake-ruby
+     haml-mode
      markdown-mode
      rainbow-mode
+     rhtml-mode
      ruby-electric
      scss-mode
      yaml-mode))
