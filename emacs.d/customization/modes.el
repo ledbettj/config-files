@@ -12,3 +12,13 @@
      (setq css-indent-offset 2)
      (auto-complete-mode t)
      (rainbow-mode t)))
+
+(add-hook 'css-mode-hook
+  '(lambda ()
+     (setq css-indent-offset 2)
+     (rainbow-mode t)))
+
+(add-hook 'rhtml-mode-hook
+  '(lambda ()
+     (rainbow-mode t)
+     (auto-complete-mode t)))
