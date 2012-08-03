@@ -16,7 +16,7 @@ variable."
 
 (defun path-prepend (path)
   "append the given path to the PATH variable unless it's already present."
-  (unless (path-contains-p path)
+  (unless (or (path-contains-p path) (not (file-exists-p path)))
     (setenv "PATH"
       (path-env-string
         (append (list path) (env-path)))))
@@ -25,7 +25,7 @@ variable."
 
 (defun path-append (path)
   "prepend the given path to the PATH variable unless it's already present."
-  (unless (path-contains-p path)
+  (unless (or (path-contains-p path) (not (file-exists-p path)))
     (setenv "PATH"
       (path-env-string
         (append (env-path) (list path)))))
