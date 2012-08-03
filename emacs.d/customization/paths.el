@@ -1,4 +1,4 @@
-;;; osx.el - OS X specific emacs tweaks
+;;; paths.el - make sure exec-path and $PATH contain the correct items.
 ;; John Ledbetter <john.ledbetter@gmail.com>
 
 (defun env-path ()
