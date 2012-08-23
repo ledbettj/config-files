@@ -11,6 +11,11 @@
 
 (defalias 'yes-or-no-p 'y-or-n-p)   ; always ask Y/N? instead of yes/no.
 
+; don't let the point go into the minibuffer prompt
+(setq minibuffer-prompt-properties
+  (plist-put minibuffer-prompt-properties 'point-entered
+    'minibuffer-avoid-prompt))
+
 ; stop writing annoying autosave files to the current directory.
 (setq backup-directory-alist
       `((".*" . ,temporary-file-directory)))
