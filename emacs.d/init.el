@@ -44,6 +44,12 @@
      scss-mode
      yaml-mode))
 
+;; override notifications to be displayed in the message buffer if
+;; we're running in a terminal.
+(unless (display-graphic-p)
+  (defun el-get-notify (title msg)
+           (message "%s: %s" title msg)))
+
 (el-get 'sync required-packages)
 
 (push (expand-file-name "themes" user-emacs-directory) custom-theme-load-path)
