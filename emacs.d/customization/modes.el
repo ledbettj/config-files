@@ -22,3 +22,7 @@
   '(lambda ()
      (rainbow-mode t)
      (auto-complete-mode t)))
+
+(add-hook 'sh-mode-hook
+  '(lambda ()
+     (setq sh-basic-offset 2)))

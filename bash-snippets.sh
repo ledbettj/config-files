@@ -17,6 +17,28 @@ path_prepend() {
   fi
 }
 
+# touch the restart.txt file for a rails project from anywhere in the
+# project tree.
+repow() {
+  if [ -d ./tmp ]; then
+    touch ./tmp/restart.txt
+    echo "Touched restart file for '$(basename $(PWD))'"
+    return 0
+  else
+    MATCHING=$(echo $PWD | grep -oE 'Projects/[^/]+/')
+    RC=$?
+
+    if [ $RC -eq 0 ]; then
+      touch "$HOME/${MATCHING}tmp/restart.txt"
+      echo "Touched restart file for $(basename $MATCHING)."
+      return 0
+    fi
+
+    echo "No tmp folder anywhere to be found.  Sorry."
+    return 1
+  fi
+}
+
 # after every 'cd', perform 'ls' if cd succeeded
 cdls() {
   builtin cd "$*"
