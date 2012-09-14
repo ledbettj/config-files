@@ -26,3 +26,10 @@
 (add-hook 'sh-mode-hook
   '(lambda ()
      (setq sh-basic-offset 2)))
+
+(add-hook 'coffee-mode-hook
+  '(lambda ()
+     (flymake-coffee-load)
+     (auto-complete-mode t)
+     (make-local-variable 'tab-width)
+     (set 'tab-width 2)))

@@ -27,13 +27,17 @@
        :type elpa)
      (:name ruby-electric
        :type git
-       :url "http://github.com/leoc/ruby-electric.git")))
+       :url "http://github.com/leoc/ruby-electric.git")
+     (:name flymake-coffee
+       :type elpa)))
 
 ;; list of packages to have el-get install
 (defvar required-packages
   '(auto-complete
      auto-complete-css
      auto-complete-emacs-lisp
+     coffee-mode
+     flymake-coffee
      flymake-point
      flymake-ruby
      haml-mode
