@@ -42,6 +42,7 @@
      rhtml-mode
      ruby-electric
      scss-mode
+     slime
      yaml-mode))
 
 ;; override notifications to be displayed in the message buffer if
@@ -75,6 +76,7 @@
 (load-user-file "modes.el")
 (load-user-file "ruby.el")
 (load-user-file "js.el")
+(load-user-file "slime.el")
 (load-user-file "move-text.el")
 (load-user-file "keybinds.el")
 
