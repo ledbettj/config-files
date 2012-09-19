@@ -3,6 +3,7 @@
 
 (setq kill-whole-line t)            ; include EOL when killing lines
 (setq-default indent-tabs-mode nil) ; never use tabs for indenting
+(setq-default tab-width 2)          ; 2 spaces per tab
 (iswitchb-mode t)                   ; enhanced buffer switching
 (delete-selection-mode t)           ; when region is active, delete kills region
 (setq ring-bell-function 'ignore)   ; don't beep on error/end of buffer

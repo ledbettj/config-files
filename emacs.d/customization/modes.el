@@ -33,3 +33,7 @@
      (auto-complete-mode t)
      (make-local-variable 'tab-width)
      (set 'tab-width 2)))
+
+(add-hook 'c-mode-hook
+  '(lambda ()
+     (flymake-mode)))
