@@ -12,8 +12,9 @@
             "https://raw.github.com/dimitri/el-get/master/el-get-install.el")))
     (if buf
       (with-current-buffer buf
+	(let (el-get-master-branch)
         (end-of-buffer)
-        (eval-print-last-sexp)))))
+        (eval-print-last-sexp))))))
 
 (add-to-list 'package-archives
   '("melpa" . "http://melpa.milkbox.net/packages/") t)
