@@ -3,8 +3,9 @@
 
 ;; disable menu bar, tool bar, and scroll bar.
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
-(if (fboundp 'menu-bar-mode)   (menu-bar-mode -1))
 (if (fboundp 'tool-bar-mode)   (tool-bar-mode -1))
+(unless (eq system-type 'darwin)
+  (if (fboundp 'menu-bar-mode)   (menu-bar-mode -1)))
 
 (which-func-mode t)             ; show current function in mode line
 (show-paren-mode t)             ; highlight matching parentheses
