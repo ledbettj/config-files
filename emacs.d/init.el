@@ -68,10 +68,10 @@
   (interactive "f")
   "Load a file in the user's current configuration directory."
   (load-file (expand-file-name file
-               (expand-file-name "customization" user-emacs-directory))))
+               (expand-file-name "custom" user-emacs-directory))))
 
 ;; store emacs auto-customization in its own file.
-(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+(setq custom-file (expand-file-name "auto-custom.el" user-emacs-directory))
 (load custom-file 'noerror)
 
 ;; load user customization

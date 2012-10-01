@@ -3,4 +3,4 @@ auto-save-list
 *.elc
 elpa/*
 el-get/*
-custom.el
+auto-custom.el
