@@ -42,6 +42,7 @@
      flymake-point
      flymake-ruby
      haml-mode
+     iedit
      markdown-mode
      rainbow-mode
      rhtml-mode
