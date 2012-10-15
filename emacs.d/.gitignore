@@ -1,6 +1,7 @@
 ac-comphist.dat
-auto-save-list
-*.elc
-elpa/*
-el-get/*
 auto-custom.el
+auto-save-list
+el-get/*
+elpa/*
+tramp
+*.elc
