@@ -9,12 +9,15 @@ of useful third-party libraries, such that there are no dependencies or
 requirements for installation beyond cloning this repo and linking `.emacs.d`
 into place.
 
-My customizations live in the `customization/` directory:
+My customizations live in the `custom/` directory:
 
+* `paths.el` - make sure various directories are included in `PATH` and `exec-path`, in case Emacs was not started from the shell.
 * `ui.el` - tweaks to the Emacs UI, including specifying a theme.
-* `behavior.el` - tweaks to the way various Emacs features or commands work.
+* `behavior.el` - tweaks to the way various Emacs features or commands work, as well as new features.
 * `ruby.el` - tweaks to the behavior of `ruby-mode`.
 * `js.el` - tweaks to the behavior of `js-mode`.
+* `slime.el` - settings for `slime`.
+* `modes.el` - small tweaks to various other modes.
 * `keybinds.el` - my custom keybindings.
 
 Bash Snippets
