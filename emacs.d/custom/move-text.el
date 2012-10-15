@@ -1,4 +1,5 @@
 ;;; move-text.el - nifty moving up and down of blocks of text
+;; from http://www.emacswiki.org/emacs/MoveText
 ;; John Ledbetter <john.ledbetter@gmail.com>
 
 (defun move-text-internal (arg)
