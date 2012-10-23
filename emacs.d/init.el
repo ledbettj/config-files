@@ -47,6 +47,7 @@
      rainbow-mode
      rhtml-mode
      ruby-electric
+     rspec-mode
      scss-mode
      slime
      yaml-mode))
