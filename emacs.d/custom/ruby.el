@@ -30,8 +30,14 @@
     '("\\.ru"       . ruby-mode)
     '("\\.rake"     . ruby-mode)))
 
+
+(defun align-ruby-hash (BEG END)
+  (interactive "r")
+  (align-regexp BEG END "\\(\\s-*\\) =>" 1 1))
+
 (add-hook 'ruby-mode-hook
   '(lambda ()
+     (local-set-key "\C-c\C-a" 'align-ruby-hash)
      (rainbow-mode t)
      (ruby-electric-mode t)
      (electric-pair-mode t)))
