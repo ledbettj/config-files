@@ -21,7 +21,10 @@
 
 ;; custom packages
 (setq el-get-sources
-  '((:name scss-mode
+  '((:name flymake-node-jshint
+      :type git
+      :url "http://github.com/jegbjerg/flymake-node-jshint.git")
+     (:name scss-mode
       :type git
       :url "http://github.com/antonj/scss-mode.git")
      (:name rainbow-mode
@@ -40,6 +43,7 @@
      coffee-mode
      flymake-coffee
      flymake-point
+     flymake-node-jshint
      flymake-ruby
      haml-mode
      iedit

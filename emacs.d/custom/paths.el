@@ -37,3 +37,4 @@ variable."
 (path-prepend (expand-file-name "~/.rbenv/shims"))
 (path-prepend (expand-file-name "~/.rbenv/bin"))
 (path-append  "/usr/local/bin")
+(path-append  "/usr/local/share/npm/bin")
