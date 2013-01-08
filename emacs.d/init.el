@@ -46,6 +46,7 @@
      flymake-node-jshint
      flymake-ruby
      haml-mode
+     hl-line+
      iedit
      markdown-mode
      rainbow-mode

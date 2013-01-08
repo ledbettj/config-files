@@ -73,3 +73,8 @@ than the background of the buffer."
 (set-face-background 'trailing-whitespace
   (scale-colour (face-background 'default) 0.83))
 (setq-default show-trailing-whitespace t)
+
+
+(setq-default hl-line-sticky-flag nil)
+(set-face-background 'hl-line (scale-colour (face-background 'default) 1.20))
+(global-hl-line-mode t)
