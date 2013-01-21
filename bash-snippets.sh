@@ -49,6 +49,7 @@ cdls() {
 }
 
 alias cd="cdls"
+alias uncolor="perl -pe 's/\e\[?.*?[\@-~]//g'"
 
 # editor settings
 export EDITOR="emacs -nw"
