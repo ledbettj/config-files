@@ -48,6 +48,7 @@
      haml-mode
      hl-line+
      iedit
+     magit
      markdown-mode
      rainbow-mode
      rhtml-mode
