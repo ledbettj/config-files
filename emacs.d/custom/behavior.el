@@ -68,24 +68,3 @@
       (find-file (concat "/sudo:root@localhost:" file-name))
       (message "now editing %s as root" file-name))))
 
-(defadvice find-file (around my-find-file activate)
-  "Open FILENAME using tramp's sudo method if it is read-only
-   and not owned by current user."
-  (let* ((my-filename (ad-get-arg 0))
-          (file-owner-uid (nth 2 (file-attributes my-filename))))
-    (if (not (file-writable-p my-filename))
-      (if (and (not (= file-owner-uid (user-uid)))
-            (y-or-n-p (concat my-filename " is read-only. Open as root? ")))
-        (progn
-          (ad-set-arg 0 (concat "/sudo:root@localhost:" my-filename))
-          ad-do-it
-          (rename-buffer
-            (format "%s:%s"
-              (file-remote-p (buffer-file-name) 'method)
-              (buffer-name))))
-        (if (and (= file-owner-uid (user-uid))
-              (y-or-n-p (concat my-filename " is read-only. Make writable? ")))
-          (progn
-            ad-do-it
-            (toggle-read-only -1))))
-      ad-do-it)))
