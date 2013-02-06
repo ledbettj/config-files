@@ -12,9 +12,8 @@
 (setq line-number-mode   t)     ; show line number in mode line
 (setq column-number-mode t)     ; show column number in mode line
 (setq inhibit-startup-screen t) ; don't show splash screen
-
 (load-theme 'wombat t nil)
-
+(fringe-mode 0)
 
 ;; set default font to Consolas on OS X, or Ubuntu Monospace otherwise.
 (setq default-frame-alist
@@ -74,7 +73,10 @@ than the background of the buffer."
   (scale-colour (face-background 'default) 0.83))
 (setq-default show-trailing-whitespace t)
 
-
+(global-linum-mode t)
+(setq linum-format "%02d ")
 (setq-default hl-line-sticky-flag nil)
 (set-face-background 'hl-line (scale-colour (face-background 'default) 1.20))
+(set-face-foreground 'linum (scale-colour (face-background 'default) 1.20))
+(set-face-background 'linum (scale-colour (face-background 'default) 0.90))
 (global-hl-line-mode t)
