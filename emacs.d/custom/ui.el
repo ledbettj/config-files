@@ -12,6 +12,7 @@
 (setq line-number-mode   t)     ; show line number in mode line
 (setq column-number-mode t)     ; show column number in mode line
 (setq inhibit-startup-screen t) ; don't show splash screen
+(setq initial-scratch-message nil) ; don't show scratch placeholder
 (load-theme 'wombat t nil)
 (fringe-mode 0)
 
