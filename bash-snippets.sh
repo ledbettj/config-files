@@ -41,11 +41,7 @@ repow() {
 
 # after every 'cd', perform 'ls' if cd succeeded
 cdls() {
-  builtin cd "$*"
-  RC=$?
-  if [ $RC -eq 0 ]; then
-    ls
-  fi
+  builtin cd "$*" && ls
 }
 
 alias cd="cdls"
