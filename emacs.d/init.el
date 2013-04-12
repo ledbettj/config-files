@@ -2,7 +2,7 @@
 ;; John Ledbetter <john.ledbetter@gmail.com>
 
 (require 'package)
-
+(package-initialize)
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
 
 ;; install el-get if necessary
@@ -39,7 +39,7 @@
 (defvar required-packages
   '(auto-complete
      auto-complete-css
-     auto-complete-emacs-lisp
+;     auto-complete-emacs-lisp
      coffee-mode
      flymake-coffee
      flymake-point

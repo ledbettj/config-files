@@ -78,6 +78,6 @@ than the background of the buffer."
 (setq linum-format "%02d ")
 (setq-default hl-line-sticky-flag nil)
 (set-face-background 'hl-line (scale-colour (face-background 'default) 1.20))
-(set-face-foreground 'linum (scale-colour (face-background 'default) 1.20))
+(set-face-foreground 'linum (scale-colour (face-background 'default) 1.50))
 (set-face-background 'linum (scale-colour (face-background 'default) 0.90))
 (global-hl-line-mode t)

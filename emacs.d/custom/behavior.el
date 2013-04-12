@@ -26,10 +26,8 @@
 (defun toggle-fullscreen ()
   "Switch between fullscreen and windowed mode"
   (interactive)
-  (if (eq system-type 'darwin)
-      (ns-toggle-fullscreen) ; OS-X
-    (set-frame-parameter nil 'fullscreen
-      (if (frame-parameter nil 'fullscreen) nil 'fullboth))))
+  (set-frame-parameter nil 'fullscreen
+    (if (frame-parameter nil 'fullscreen) nil 'fullboth)))
 
 ; iswitchb customization
 (defadvice iswitchb-kill-buffer (after rescan-after-kill activate)
