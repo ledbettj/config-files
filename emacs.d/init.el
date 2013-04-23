@@ -21,10 +21,7 @@
 
 ;; custom packages
 (setq el-get-sources
-  '((:name flymake-node-jshint
-      :type git
-      :url "http://github.com/jegbjerg/flymake-node-jshint.git")
-     (:name scss-mode
+  '((:name scss-mode
       :type git
       :url "http://github.com/antonj/scss-mode.git")
      (:name rainbow-mode
@@ -32,7 +29,7 @@
      (:name ruby-electric
        :type git
        :url "http://github.com/leoc/ruby-electric.git")
-     (:name flymake-coffee
+     (:name flycheck
        :type elpa)))
 
 ;; list of packages to have el-get install
@@ -41,10 +38,8 @@
      auto-complete-css
 ;     auto-complete-emacs-lisp
      coffee-mode
-     flymake-coffee
-     flymake-point
-     flymake-node-jshint
-     flymake-ruby
+     flycheck
+     go-mode
      haml-mode
      hl-line+
      iedit

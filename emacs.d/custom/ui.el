@@ -7,7 +7,7 @@
 (unless (eq system-type 'darwin)
   (if (fboundp 'menu-bar-mode)   (menu-bar-mode -1)))
 
-(which-func-mode t)             ; show current function in mode line
+(which-function-mode t)         ; show current function in mode line
 (show-paren-mode t)             ; highlight matching parentheses
 (setq line-number-mode   t)     ; show line number in mode line
 (setq column-number-mode t)     ; show column number in mode line
@@ -81,3 +81,24 @@ than the background of the buffer."
 (set-face-foreground 'linum (scale-colour (face-background 'default) 1.50))
 (set-face-background 'linum (scale-colour (face-background 'default) 0.90))
 (global-hl-line-mode t)
+
+(eval-after-load 'diff-mode
+  '(progn
+     (set-face-foreground 'diff-added "green3")
+     (set-face-foreground 'diff-removed "red4")))
+
+(eval-after-load 'flycheck
+  '(progn
+     (set-face-attribute 'flycheck-warning-face nil
+       :background "orange4"
+       :foreground "white"
+       :bold nil
+       :box "orange1"
+       )
+
+     (set-face-attribute 'flycheck-error-face nil
+       :background "red4"
+       :foreground "white"
+       :bold nil
+       :box "red1"
+       )))

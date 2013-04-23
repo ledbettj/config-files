@@ -66,3 +66,6 @@
       (find-file (concat "/sudo:root@localhost:" file-name))
       (message "now editing %s as root" file-name))))
 
+
+; flycheck mode everywhere!!!!
+(add-hook 'after-init-hook #'global-flycheck-mode)

@@ -1,4 +1,4 @@
-;;; modes.el - hooks for customizing various modes
+;;; modes --- hooks for customizing various modes
 ;; John Ledbetter <john.ledbetter@gmail.com>
 
 (add-hook 'emacs-lisp-mode-hook
@@ -29,11 +29,11 @@
 
 (add-hook 'coffee-mode-hook
   '(lambda ()
-     (flymake-coffee-load)
      (auto-complete-mode t)
      (make-local-variable 'tab-width)
      (set 'tab-width 2)))
 
-(add-hook 'c-mode-hook
+(add-hook 'go-mode-hook
   '(lambda ()
-     (flymake-mode)))
+     (auto-complete-mode t)
+     (setq indent-tabs-mode nil)))
