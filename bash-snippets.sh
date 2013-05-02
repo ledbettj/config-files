@@ -54,3 +54,7 @@ export VISUAL="emacs"
 # if emacs is running in daemon mode
 alias ec="emacsclient -c"
 alias et="emacsclient -t"
+
+if [[ "$OSTYPE" =~ ^darwin ]]; then
+  alias ldd='otool -L'
+fi
