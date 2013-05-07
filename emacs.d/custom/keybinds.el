@@ -17,3 +17,8 @@
        ("<left>"  . iswitchb-prev-match))))
 
 (add-hook 'iswitchb-define-mode-map-hook 'iswitchb-local-keys)
+
+; treat fn as control on OS X since it lives where my control key should live
+(if (eq system-type 'darwin)
+  (setq-default ns-function-modifier 'control))
+
