@@ -1,0 +1,14 @@
+config defaultToCurrentScreen true
+bind g:cmd grid padding:5 0:4,6 1:6,6
+
+alias bottom-right-half move screenSizeX/2+screenOriginX;screenSizeY/2+screenOriginY screenSizeX/2;screenSizeY/2
+
+alias top-right-half move screenOriginX+screenSizeX/2;screenOriginY screenSizeX/2;screenSizeY/2
+
+alias left-half-full move screenOriginX;screenOriginY screenSizeX/2;screenSizeY
+
+layout worksies 'iTerm' ${bottom-right-half}
+layout worksies 'Google Chrome' ${top-right-half}
+layout worksies 'Emacs' ${left-half-full}
+
+bind 1:cmd layout worksies
