@@ -14,7 +14,7 @@
 (setq inhibit-startup-screen t) ; don't show splash screen
 (setq initial-scratch-message nil) ; don't show scratch placeholder
 (load-theme 'wombat t nil)
-(fringe-mode 0)
+(if (fboundp 'fringe-mode) (fringe-mode 0))
 
 ;; set default font to Consolas on OS X, or Ubuntu Monospace otherwise.
 (setq default-frame-alist
