@@ -33,7 +33,7 @@
 
 (defun align-ruby-hash (BEG END)
   (interactive "r")
-  (align-regexp BEG END "\\(\\s-*\\) =>" 1 1))
+  (align-regexp BEG END ":\\(\\s-*\\)" 1 1))
 
 (add-hook 'ruby-mode-hook
   '(lambda ()
