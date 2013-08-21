@@ -18,7 +18,12 @@
 
 ;; set default font to Consolas on OS X, or Ubuntu Monospace otherwise.
 (setq default-frame-alist
-  `((font . ,(if (eq system-type 'darwin) "Consolas-16" "Bitstream Vera Sans Mono-12"))))
+  `(
+     (font .
+       ,(if (eq system-type 'darwin)
+          "Consolas-16"
+          "Bitstream Vera Sans Mono-12"))
+     (width . 84)))
 
 ;; set frame title to user@host: <buffer> [modified?]
 (setq frame-title-format
@@ -89,6 +94,7 @@ than the background of the buffer."
 
 (eval-after-load 'flycheck
   '(progn
+     (setq flycheck-highlighting-mode 'lines)
      (set-face-attribute 'flycheck-warning-face nil
        :background "orange4"
        :foreground "white"
