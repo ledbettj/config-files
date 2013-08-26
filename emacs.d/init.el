@@ -36,7 +36,7 @@
 (defvar required-packages
   '(auto-complete
      auto-complete-css
-;     auto-complete-emacs-lisp
+     auto-complete-emacs-lisp
      coffee-mode
      flycheck
      go-mode
@@ -50,7 +50,6 @@
      ruby-electric
      rspec-mode
      scss-mode
-     slime
      yaml-mode))
 
 ;; override notifications to be displayed in the message buffer if
@@ -85,7 +84,6 @@
 (load-user-file "ruby.el")
 (load-user-file "js.el")
 (load-user-file "c.el")
-(load-user-file "slime.el")
 (load-user-file "move-text.el")
 (load-user-file "keybinds.el")
 
