@@ -95,14 +95,14 @@ than the background of the buffer."
 (eval-after-load 'flycheck
   '(progn
      (setq flycheck-highlighting-mode 'lines)
-     (set-face-attribute 'flycheck-warning-face nil
+     (set-face-attribute 'flycheck-warning nil
        :background "orange4"
        :foreground "white"
        :bold nil
        :box "orange1"
        )
 
-     (set-face-attribute 'flycheck-error-face nil
+     (set-face-attribute 'flycheck-error nil
        :background "red4"
        :foreground "white"
        :bold nil
