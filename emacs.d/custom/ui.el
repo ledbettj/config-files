@@ -13,7 +13,6 @@
 (setq column-number-mode t)     ; show column number in mode line
 (setq inhibit-startup-screen t) ; don't show splash screen
 (setq initial-scratch-message nil) ; don't show scratch placeholder
-(load-theme 'wombat t nil)
 (if (fboundp 'fringe-mode) (fringe-mode 0))
 
 ;; set default font to Consolas on OS X, or Ubuntu Monospace otherwise.
@@ -82,9 +81,15 @@ than the background of the buffer."
 (global-linum-mode t)
 (setq linum-format "%02d ")
 (setq-default hl-line-sticky-flag nil)
-(set-face-background 'hl-line (scale-colour (face-background 'default) 1.20))
-(set-face-foreground 'linum (scale-colour (face-background 'default) 1.50))
-(set-face-background 'linum (scale-colour (face-background 'default) 0.90))
+
+(defadvice load-theme (after do-some-scaling ())
+  (set-face-background 'hl-line (scale-colour (face-background 'default) 1.20))
+  (set-face-foreground 'linum (scale-colour (face-background 'default) 1.50))
+  (set-face-background 'linum (scale-colour (face-background 'default) 0.90))
+  (message "after load themezzz")
+  )
+(ad-activate 'load-theme)
+
 (global-hl-line-mode t)
 
 (eval-after-load 'diff-mode
@@ -108,3 +113,5 @@ than the background of the buffer."
        :bold nil
        :box "red1"
        )))
+
+(load-theme 'wombat t nil)
