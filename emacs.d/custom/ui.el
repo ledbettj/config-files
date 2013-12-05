@@ -74,8 +74,6 @@ than the background of the buffer."
       nil
       '(("\t" 0 'trailing-whitespace prepend)))))
 
-(set-face-background 'trailing-whitespace
-  (scale-colour (face-background 'default) 0.83))
 (setq-default show-trailing-whitespace t)
 
 (global-linum-mode t)
@@ -86,8 +84,8 @@ than the background of the buffer."
   (set-face-background 'hl-line (scale-colour (face-background 'default) 1.20))
   (set-face-foreground 'linum (scale-colour (face-background 'default) 1.50))
   (set-face-background 'linum (scale-colour (face-background 'default) 0.90))
-  (message "after load themezzz")
-  )
+  (set-face-background 'trailing-whitespace
+    (scale-colour (face-background 'default) 0.83)))
 (ad-activate 'load-theme)
 
 (global-hl-line-mode t)
