@@ -37,3 +37,8 @@
   '(lambda ()
      (auto-complete-mode t)
      (setq indent-tabs-mode nil)))
+
+
+(add-hook 'c-mode-hook
+  '(lambda ()
+     (local-set-key (kbd "RET") 'newline-and-indent)))
