@@ -10,6 +10,9 @@
 (put 'downcase-region 'disabled nil)
 (put 'upcase-region   'disabled nil)
 
+(savehist-mode t)          ; persist minibuffer history across restart
+(setq history-length 1000) ; let's remember a lot of stuff
+
 (defalias 'yes-or-no-p 'y-or-n-p)   ; always ask Y/N? instead of yes/no.
 
 ; don't let the point go into the minibuffer prompt
