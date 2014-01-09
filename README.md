@@ -16,7 +16,6 @@ My customizations live in the `custom/` directory:
 * `behavior.el` - tweaks to the way various Emacs features or commands work, as well as new features.
 * `ruby.el` - tweaks to the behavior of `ruby-mode`.
 * `js.el` - tweaks to the behavior of `js-mode`.
-* `slime.el` - settings for `slime`.
 * `modes.el` - small tweaks to various other modes.
 * `keybinds.el` - my custom keybindings.
 
@@ -29,3 +28,8 @@ InputRC
 =======
 
 Tweaks to readline.
+
+Slate
+=====
+
+Slate (for OS X) configuration to tile windows on enormous thunderbolt monitors.
