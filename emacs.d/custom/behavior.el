@@ -1,4 +1,4 @@
-;;; behavior.el - customization for varios emacs behavior
+;;; behavior.el - customization for various emacs behavior
 ;; John Ledbetter <john.ledbetter@gmail.com>
 
 (setq kill-whole-line t)            ; include EOL when killing lines
