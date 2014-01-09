@@ -49,6 +49,8 @@
 (setq iswitchb-buffer-ignore
   '("^ " "^\\*[^s][^c][^r][^a][^t][^c][^h]"))
 
+(setq uniquify-buffer-name-style 'forward)
+
 
 ; greedy whitespace delete
 (defun backward-delete-char-hungry (arg &optional killp)

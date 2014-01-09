@@ -2,6 +2,7 @@
 ;; John Ledbetter <john.ledbetter@gmail.com>
 
 (require 'package)
+(require 'uniquify)
 (package-initialize)
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
 
