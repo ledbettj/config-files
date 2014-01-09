@@ -41,6 +41,7 @@
      flycheck
      go-mode
      haml-mode
+     helm
      hl-line+
      iedit
      magit

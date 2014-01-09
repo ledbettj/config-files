@@ -5,3 +5,4 @@ el-get/*
 elpa/*
 tramp
 *.elc
+history

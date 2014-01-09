@@ -8,6 +8,10 @@
 (global-set-key [C-kp-delete] 'kill-word)
 (global-set-key [backspace]   'backward-delete-char-hungry)
 
+(if (eq system-type 'darwin)
+  (global-set-key [C-s-268632064] 'helm-mini) ; Command + Ctrl + Space ?
+  )
+
 ; make right and left arrow pick matching buffers in iswitchb-mode
 (defun iswitchb-local-keys ()
   (mapc (lambda (K)
