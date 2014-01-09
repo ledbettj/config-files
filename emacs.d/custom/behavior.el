@@ -69,6 +69,11 @@
       (find-file (concat "/sudo:root@localhost:" file-name))
       (message "now editing %s as root" file-name))))
 
+(defun helm-multi-occur-all ()
+  "Skip selecting buffers and search all open buffers."
+  (interactive)
+  (helm-multi-occur (buffer-list)))
+
 
 ; flycheck mode everywhere!!!!
 (add-hook 'after-init-hook #'global-flycheck-mode)

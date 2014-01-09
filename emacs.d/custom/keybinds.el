@@ -9,7 +9,7 @@
 (global-set-key [backspace]   'backward-delete-char-hungry)
 
 (if (eq system-type 'darwin)
-  (global-set-key [C-s-268632064] 'helm-mini) ; Command + Ctrl + Space ?
+  (global-set-key [C-s-268632064] 'helm-multi-occur-all)
   )
 
 ; make right and left arrow pick matching buffers in iswitchb-mode
