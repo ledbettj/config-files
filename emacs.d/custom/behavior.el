@@ -71,10 +71,26 @@
       (find-file (concat "/sudo:root@localhost:" file-name))
       (message "now editing %s as root" file-name))))
 
+(defun filter (condp lst)
+  "returns a new list containing only the elements of lst that pass condp"
+  (delq nil
+    (mapcar (lambda (x) (and (funcall condp x) x)) lst)))
+
+(defun magic-buffer-p (name)
+  "returns true if the provided buffer name is of the form *buffer*"
+  (string-match "^\s*\\*.+\\*\s*$" name))
+
+(defun buffer-list-no-magic ()
+  "returns only the buffers that don't match the pattern *BufferName*"
+  (filter
+    (lambda (n)
+      (not (magic-buffer-p (buffer-name n))))
+    (buffer-list)))
+
 (defun helm-multi-occur-all ()
   "Skip selecting buffers and search all open buffers."
   (interactive)
-  (helm-multi-occur (buffer-list)))
+  (helm-multi-occur (buffer-list-no-magic)))
 
 
 ; flycheck mode everywhere!!!!
