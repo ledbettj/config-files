@@ -10,7 +10,7 @@
 
 (if (eq system-type 'darwin)
   (global-set-key [C-s-268632064] 'helm-multi-occur-all)
-  )
+  (global-set-key (kbd "C-s-SPC") 'helm-multi-occur-all))
 
 ; make right and left arrow pick matching buffers in iswitchb-mode
 (defun iswitchb-local-keys ()
