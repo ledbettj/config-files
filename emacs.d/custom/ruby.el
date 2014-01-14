@@ -37,7 +37,9 @@
 
 (add-hook 'ruby-mode-hook
   '(lambda ()
-     (local-set-key "\C-c\C-a" 'align-ruby-hash)
+     (local-set-key (kbd "C-c a") 'align-ruby-hash)
+     (local-set-key (kbd "C-c b") 'magit-blame-mode)
+     (local-set-key (kbd "C-c s") 'rspec-toggle-spec-and-target)
      (rainbow-mode t)
      (ruby-electric-mode t)
      (electric-pair-mode t)))
