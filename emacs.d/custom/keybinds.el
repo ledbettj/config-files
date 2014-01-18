@@ -7,7 +7,8 @@
 (global-set-key [M-return]    'toggle-fullscreen)
 (global-set-key [C-kp-delete] 'kill-word)
 (global-set-key [backspace]   'backward-delete-char-hungry)
-
+(global-set-key (kbd "C-c c") 'comment-region)
+(global-set-key (kbd "C-c u") 'uncomment-region)
 (if (eq system-type 'darwin)
   (global-set-key [C-s-268632064] 'helm-multi-occur-all)
   (global-set-key (kbd "C-s-SPC") 'helm-multi-occur-all))
