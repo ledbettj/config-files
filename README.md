@@ -9,15 +9,23 @@ of useful third-party libraries, such that there are no dependencies or
 requirements for installation beyond cloning this repo and linking `.emacs.d`
 into place.
 
-My customizations live in the `custom/` directory:
+`init.el` handles bootstrapping and configuring `el-get`, and then loads
+customizations from the `custom/` directory.
 
-* `paths.el` - make sure various directories are included in `PATH` and `exec-path`, in case Emacs was not started from the shell.
-* `ui.el` - tweaks to the Emacs UI, including specifying a theme.
-* `behavior.el` - tweaks to the way various Emacs features or commands work, as well as new features.
-* `ruby.el` - tweaks to the behavior of `ruby-mode`.
-* `js.el` - tweaks to the behavior of `js-mode`.
-* `modes.el` - small tweaks to various other modes.
-* `keybinds.el` - my custom keybindings.
+`emacs@.service` provides a
+[systemd](http://freedesktop.org/wiki/Software/systemd) unit file for starting
+an emacs daemon.  Usage:
+
+    sudo cp emacs@.service /etc/systemd/system/
+    sudo systemctl enable emacs@${USER} # run this service on boot
+    sudo systemctl start  emacs@${USER} # start it now
+
+Once you have a daemon instance running, you can use `emacsclient` to attach:
+
+    emacsclient -c # create a new graphical frame
+    emacsclient -t # create a new frame in the current terminal
+
+These commands are aliased to `ec` and `et` respectively.
 
 Bash Snippets
 =============
