@@ -67,7 +67,7 @@ than the background of the buffer."
     colour))
 
 
-; show tabs and trailing whitespace as slightly darker background color
+;; show tabs and trailing whitespace as slightly darker background color
 (add-hook 'font-lock-mode-hook
   (lambda ()
     (font-lock-add-keywords
@@ -77,18 +77,24 @@ than the background of the buffer."
 (setq-default show-trailing-whitespace t)
 
 (global-linum-mode t)
-(setq linum-format "%02d ")
+(global-hl-line-mode t)
+(setq-default linum-format "%02d ")
 (setq-default hl-line-sticky-flag nil)
 
-(defadvice load-theme (after do-some-scaling ())
+(defadvice server-create-window-system-frame (after do-some-scaling ())
+  (scale-ui-colors))
+(defadvice enable-theme (after do-some-scaling ())
+  (scale-ui-colors))
+
+(ad-activate 'server-create-window-system-frame)
+(ad-activate 'enable-theme)
+
+(defun scale-ui-colors ()
   (set-face-background 'hl-line (scale-colour (face-background 'default) 1.20))
   (set-face-foreground 'linum (scale-colour (face-background 'default) 1.50))
   (set-face-background 'linum (scale-colour (face-background 'default) 0.90))
   (set-face-background 'trailing-whitespace
     (scale-colour (face-background 'default) 0.83)))
-(ad-activate 'load-theme)
-
-(global-hl-line-mode t)
 
 (eval-after-load 'diff-mode
   '(progn
