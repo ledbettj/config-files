@@ -6,3 +6,4 @@ elpa/*
 tramp
 *.elc
 history
+url/
