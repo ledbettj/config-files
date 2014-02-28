@@ -94,7 +94,8 @@ than the background of the buffer."
   (set-face-foreground 'linum (scale-colour (face-background 'default) 1.50))
   (set-face-background 'linum (scale-colour (face-background 'default) 0.90))
   (set-face-background 'trailing-whitespace
-    (scale-colour (face-background 'default) 0.83)))
+    (scale-colour (face-background 'default) 0.83))
+  (set-face-foreground 'which-func (face-foreground 'font-lock-keyword-face)))
 
 (eval-after-load 'diff-mode
   '(progn
