@@ -86,6 +86,7 @@
 (load-user-file "ruby.el")
 (load-user-file "js.el")
 (load-user-file "c.el")
+(load-user-file "org.el")
 (load-user-file "move-text.el")
 (load-user-file "keybinds.el")
 
