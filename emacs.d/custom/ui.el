@@ -19,7 +19,7 @@
 (add-to-list 'default-frame-alist
   `(font .
      ,(if (eq system-type 'darwin)
-        "Consolas-16"
+        "Source Code Pro-16"
         "Bitstream Vera Sans Mono-12")))
 
 (add-to-list 'default-frame-alist '(width . 84))
@@ -101,22 +101,5 @@ than the background of the buffer."
   '(progn
      (set-face-foreground 'diff-added "green3")
      (set-face-foreground 'diff-removed "red4")))
-
-(eval-after-load 'flycheck
-  '(progn
-     (setq flycheck-highlighting-mode 'lines)
-     (set-face-attribute 'flycheck-warning nil
-       :background "orange4"
-       :foreground "white"
-       :bold nil
-       :box "orange1"
-       )
-
-     (set-face-attribute 'flycheck-error nil
-       :background "red4"
-       :foreground "white"
-       :bold nil
-       :box "red1"
-       )))
 
 (load-theme 'wombat t nil)
