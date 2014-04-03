@@ -55,6 +55,7 @@
      rspec-mode
      scala-mode
      scss-mode
+     tern
      yaml-mode))
 
 ;; override notifications to be displayed in the message buffer if
