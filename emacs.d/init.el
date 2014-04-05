@@ -31,6 +31,8 @@
        :type git
        :url "http://github.com/leoc/ruby-electric.git")
      (:name flycheck
+       :type elpa)
+     (:name scala-mode
        :type elpa)))
 
 ;; list of packages to have el-get install
@@ -51,6 +53,7 @@
      rhtml-mode
      ruby-electric
      rspec-mode
+     scala-mode
      scss-mode
      yaml-mode))
 
