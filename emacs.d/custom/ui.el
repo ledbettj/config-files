@@ -22,6 +22,8 @@
         "Source Code Pro-16"
         "Bitstream Vera Sans Mono-12")))
 
+(set-face-attribute 'default nil :weight 'light)
+
 (add-to-list 'default-frame-alist '(width . 84))
 
 ;; set frame title to user@host: <buffer> [modified?]
@@ -81,6 +83,9 @@ than the background of the buffer."
 (setq-default linum-format "%02d ")
 (setq-default hl-line-sticky-flag nil)
 
+(set-face-attribute 'mode-line          nil :box nil)
+(set-face-attribute 'mode-line-inactive nil :box nil)
+
 (defadvice server-create-window-system-frame (after do-some-scaling ())
   (scale-ui-colors))
 (defadvice enable-theme (after do-some-scaling ())
@@ -90,12 +95,18 @@ than the background of the buffer."
 (ad-activate 'enable-theme)
 
 (defun scale-ui-colors ()
-  (set-face-background 'hl-line (scale-colour (face-background 'default) 1.20))
-  (set-face-foreground 'linum (scale-colour (face-background 'default) 1.50))
-  (set-face-background 'linum (scale-colour (face-background 'default) 0.90))
-  (set-face-background 'trailing-whitespace
-    (scale-colour (face-background 'default) 0.83))
-  (set-face-foreground 'which-func (face-foreground 'font-lock-keyword-face)))
+  (let ((bg (face-background 'default))
+        (fg (face-foreground 'default)))
+    (set-face-background 'hl-line (scale-colour bg 1.20))
+    (set-face-foreground 'linum   (scale-colour bg 1.50))
+    (set-face-background 'linum   (scale-colour bg 0.90))
+    (set-face-background 'trailing-whitespace (scale-colour bg 0.83))
+    (set-face-foreground 'which-func (face-foreground 'font-lock-keyword-face))
+    (set-face-background 'mode-line (scale-colour bg 0.75))
+    (set-face-foreground 'mode-line (scale-colour fg 0.75))
+    (set-face-background 'mode-line-inactive (scale-colour bg 0.65))
+    (set-face-foreground 'mode-line-inactive (scale-colour fg 0.65))))
+
 
 (eval-after-load 'diff-mode
   '(progn
