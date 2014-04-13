@@ -47,6 +47,16 @@
        :bold t
        :box nil)))
 
+(eval-after-load "flycheck-mode"
+  '(lambda ()
+     (set-face-attribute 'flycheck-error nil
+       :underline '(:style line :color "Red1"))
+     (set-face-attribute 'flycheck-warning nil
+       :underline '(:style line :color "DarkOrange"))
+     (set-face-attribute 'flycheck-info nil
+       :underline '(:style line :color "ForestGreen"))))
+
+
 ;; I love rainbow mode so much
 (eval-after-load "rainbow-mode"
   '(lambda ()
@@ -113,4 +123,4 @@ than the background of the buffer."
      (set-face-foreground 'diff-added "green3")
      (set-face-foreground 'diff-removed "red4")))
 
-(load-theme 'wombat t nil)
+(load-theme 'monokai t nil)
