@@ -123,4 +123,7 @@ than the background of the buffer."
      (set-face-foreground 'diff-added "green3")
      (set-face-foreground 'diff-removed "red4")))
 
-(load-theme 'monokai t nil)
+;; monokai has a green background in a terminal. don't use it.
+(if (window-system)
+  (load-theme 'monokai t nil)
+  (load-theme 'wombat  t nil))
