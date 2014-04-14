@@ -4,6 +4,7 @@
 ;; disable menu bar, tool bar, and scroll bar.
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 (if (fboundp 'tool-bar-mode)   (tool-bar-mode -1))
+(if (fboundp 'fringe-mode)     (fringe-mode 0))
 (unless (eq system-type 'darwin)
   (if (fboundp 'menu-bar-mode)   (menu-bar-mode -1)))
 
@@ -13,7 +14,6 @@
 (setq column-number-mode t)     ; show column number in mode line
 (setq inhibit-startup-screen t) ; don't show splash screen
 (setq initial-scratch-message nil) ; don't show scratch placeholder
-(if (fboundp 'fringe-mode) (fringe-mode 0))
 
 ;; set default font to Consolas on OS X, or Ubuntu Monospace otherwise.
 (add-to-list 'default-frame-alist
@@ -93,7 +93,6 @@ than the background of the buffer."
 (setq-default linum-format "%02d ")
 (setq-default hl-line-sticky-flag nil)
 
-(set-face-attribute 'mode-line          nil :box nil)
 (set-face-attribute 'mode-line-inactive nil :box nil)
 
 (defadvice server-create-window-system-frame (after do-some-scaling ())
@@ -115,7 +114,11 @@ than the background of the buffer."
     (set-face-background 'mode-line (scale-colour bg 0.75))
     (set-face-foreground 'mode-line (scale-colour fg 0.75))
     (set-face-background 'mode-line-inactive (scale-colour bg 0.65))
-    (set-face-foreground 'mode-line-inactive (scale-colour fg 0.65))))
+    (set-face-foreground 'mode-line-inactive (scale-colour fg 0.65))
+    (set-face-attribute  'mode-line nil :box
+      `(:line-width 1
+         :color ,(scale-colour (face-foreground 'font-lock-string-face) 0.75)
+         :style :none))))
 
 
 (eval-after-load 'diff-mode
