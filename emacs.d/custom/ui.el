@@ -47,16 +47,6 @@
        :bold t
        :box nil)))
 
-(eval-after-load "flycheck-mode"
-  '(lambda ()
-     (set-face-attribute 'flycheck-error nil
-       :underline '(:style line :color "Red1"))
-     (set-face-attribute 'flycheck-warning nil
-       :underline '(:style line :color "DarkOrange"))
-     (set-face-attribute 'flycheck-info nil
-       :underline '(:style line :color "ForestGreen"))))
-
-
 ;; I love rainbow mode so much
 (eval-after-load "rainbow-mode"
   '(lambda ()
@@ -114,17 +104,15 @@ than the background of the buffer."
     (set-face-background 'mode-line (scale-colour bg 0.75))
     (set-face-foreground 'mode-line (scale-colour fg 0.75))
     (set-face-background 'mode-line-inactive (scale-colour bg 0.65))
-    (set-face-foreground 'mode-line-inactive (scale-colour fg 0.65))
-    (set-face-attribute  'mode-line nil :box
-      `(:line-width 1
-         :color ,(scale-colour (face-foreground 'font-lock-string-face) 0.75)
-         :style :none))))
+    (set-face-foreground 'mode-line-inactive (scale-colour fg 0.65))))
 
 
 (eval-after-load 'diff-mode
   '(progn
      (set-face-foreground 'diff-added "green3")
      (set-face-foreground 'diff-removed "red4")))
+
+(powerline-default-theme)
 
 ;; monokai has a green background in a terminal. don't use it.
 (if (window-system)

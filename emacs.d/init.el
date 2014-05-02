@@ -51,6 +51,7 @@
      iedit
      magit
      markdown-mode
+     powerline
      rainbow-mode
      rhtml-mode
      ruby-electric
