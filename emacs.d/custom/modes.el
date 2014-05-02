@@ -1,6 +1,8 @@
 ;;; modes --- hooks for customizing various modes
 ;; John Ledbetter <john.ledbetter@gmail.com>
 
+;(add-to-list 'auto-mode-alist '("\\.vala\\'" . vala-mode))
+
 (add-hook 'emacs-lisp-mode-hook
   '(lambda ()
      (setq lisp-indent-offset 2)
@@ -37,3 +39,8 @@
   '(lambda ()
      (auto-complete-mode t)
      (setq indent-tabs-mode nil)))
+
+(add-hook 'vala-mode-hook
+  '(lambda ())
+     (auto-complete-mode t)
+     (setq indent-tabs-mode nil))

@@ -33,6 +33,8 @@
      (:name flycheck
        :type elpa)
      (:name scala-mode
+       :type elpa)
+     (:name vala-mode
        :type elpa)))
 
 ;; list of packages to have el-get install
@@ -56,6 +58,7 @@
      scala-mode
      scss-mode
      tern
+     vala-mode
      yaml-mode))
 
 ;; override notifications to be displayed in the message buffer if
