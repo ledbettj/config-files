@@ -14,7 +14,7 @@
     (if buf
       (with-current-buffer buf
         (let (el-get-master-branch)
-          (end-of-buffer)
+          (goto-char (point-max))
           (eval-print-last-sexp))))))
 
 (add-to-list 'package-archives
