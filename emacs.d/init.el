@@ -47,11 +47,9 @@
      go-mode
      haml-mode
      helm
-     hl-line+
      iedit
      magit
      markdown-mode
-     powerline
      rainbow-mode
      rhtml-mode
      ruby-electric
