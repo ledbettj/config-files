@@ -9,10 +9,9 @@
 (global-set-key [backspace]   'backward-delete-char-hungry)
 (global-set-key (kbd "C-c c") 'comment-region)
 (global-set-key (kbd "C-c u") 'uncomment-region)
-(global-set-key (kbd "C-c f") 'hs-toggle-hiding)
 
 (if (eq system-type 'darwin)
-  (global-set-key [C-s-268632064] 'helm-multi-occur-all)
+  (global-set-key [C-s-268632064] 'helm-multi-occur-all) ; ctrl-cmd-spc
   (global-set-key (kbd "C-s-SPC") 'helm-multi-occur-all))
 
 ; make right and left arrow pick matching buffers in iswitchb-mode

@@ -101,13 +101,3 @@
 ; flycheck mode everywhere!!!!
 (add-hook 'after-init-hook #'global-flycheck-mode)
 (setq-default flycheck-disabled-checkers '(ruby-rubocop)) ; rubocop is annoying
-
-
-; make hide-show mode work for ruby
-(eval-after-load "hideshow"
-  '(add-to-list 'hs-special-modes-alist
-                 `(ruby-mode
-                   ,(rx (or "def" "class" "module" "{" "[")) ; Block start
-                   ,(rx (or "}" "]" "end"))                  ; Block end
-                   ,(rx (or "#" "=begin"))                   ; Comment start
-                   ruby-forward-sexp nil)))
