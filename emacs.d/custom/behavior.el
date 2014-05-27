@@ -52,7 +52,7 @@
   (setq iswitchb-rescan t))
 
 (setq iswitchb-buffer-ignore
-  '("^ " "^\\*[^s][^c][^r][^a][^t][^c][^h]"))
+  '("^ " "^\\*Flycheck" "^\\*Messages" "^\\*Completions"))
 
 (setq uniquify-buffer-name-style 'forward)
 
