@@ -3,6 +3,10 @@
 
 ;(add-to-list 'auto-mode-alist '("\\.vala\\'" . vala-mode))
 
+(add-hook 'markdown-mode-hook
+  '(lambda ()
+     (flyspell-mode t)))
+
 (add-hook 'emacs-lisp-mode-hook
   '(lambda ()
      (setq lisp-indent-offset 2)
