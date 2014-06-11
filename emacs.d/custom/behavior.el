@@ -7,6 +7,8 @@
 (iswitchb-mode t)                   ; enhanced buffer switching
 (delete-selection-mode t)           ; when region is active, delete kills region
 (setq ring-bell-function 'ignore)   ; don't beep on error/end of buffer
+(setq use-dialog-box nil)           ; don't pop up dialog boxes.
+
 (put 'downcase-region 'disabled nil)
 (put 'upcase-region   'disabled nil)
 
