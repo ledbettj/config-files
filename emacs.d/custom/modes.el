@@ -48,3 +48,5 @@
   '(lambda ())
      (auto-complete-mode t)
      (setq indent-tabs-mode nil))
+
+(add-hook 'dired-mode-hook 'rspec-dired-mode)
