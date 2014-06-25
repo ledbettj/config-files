@@ -1,7 +1,7 @@
 ;;; modes --- hooks for customizing various modes
 ;; John Ledbetter <john.ledbetter@gmail.com>
 
-;(add-to-list 'auto-mode-alist '("\\.vala\\'" . vala-mode))
+(add-to-list 'auto-mode-alist '("\\.js.erb\\'" . js-mode))
 
 (add-hook 'markdown-mode-hook
   '(lambda ()
