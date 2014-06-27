@@ -86,9 +86,23 @@ slate.layout('worksies', {
   iTerm:           { operations: [bottomRight(right)] },
   'Google Chrome': { operations: [topRight(right)]    },
   Emacs:           { operations: [leftFull(right)]    },
-  Spotify:         { operations: [bottomFull(left)]   },
+  Komanda:         { operations: [rightFull(left)]    },
   HipChat:         { operations: [topLeft(left)]      },
-  Mail:            { operations: [topRight(left)]     }
+  Mail:            { operations: [bottomLeft(left)]   }
 });
 
 slate.bind('1:cmd', slate.operation('layout', {name: 'worksies'}));
+slate.bind('g:cmd', slate.operation('grid',  {
+  grids: {
+    '1440x900': {
+      width: 4,
+      height: 4
+    },
+
+    '2560x1440': {
+      width: 6,
+      height: 6
+    },
+  },
+  padding: 5
+}));
