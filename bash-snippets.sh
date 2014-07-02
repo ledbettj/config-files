@@ -43,8 +43,19 @@ repow() {
 cdls() {
   builtin cd "$*" && ls
 }
-
 alias cd="cdls"
+alias brake="bundle exec rake"
+alias be="bundle exec"
+bspec() {
+  if [ $# -eq 0 ]; then
+    bundle exec rake spec
+  elif [ "$1" == "here" ]; then
+    bundle exec rake spec "SPEC=$(pwd)"
+  else
+    bundle exec rake spec "SPEC=$(pwd)/$(basename $1)"
+  fi
+}
+
 alias uncolor="perl -pe 's/\e\[?.*?[\@-~]//g'"
 
 # editor settings
