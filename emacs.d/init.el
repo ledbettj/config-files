@@ -32,6 +32,9 @@
        :url "http://github.com/leoc/ruby-electric.git")
      (:name flycheck
        :type elpa)
+     (:name go-mode
+       :type github
+       :pkgname "dominikh/go-mode.el")
      (:name scala-mode
        :type elpa)
      (:name toml-mode

@@ -22,13 +22,13 @@
       (when (> offset 0) (forward-char offset)))))
 
 ;; add additional filenames to ruby-mode
-(nconc auto-mode-alist
-  (list
-    '("Gemfile$"    . ruby-mode)
-    '("Rakefile$"   . ruby-mode)
-    '("\\.gemspec$" . ruby-mode)
-    '("\\.ru"       . ruby-mode)
-    '("\\.rake"     . ruby-mode)))
+(setq auto-mode-alist
+  (append auto-mode-alist
+    '(("Gemfile$"    . ruby-mode)
+       ("Rakefile$"   . ruby-mode)
+       ("\\.gemspec$" . ruby-mode)
+       ("\\.ru"       . ruby-mode)
+       ("\\.rake"     . ruby-mode))))
 
 
 (defun align-ruby-hash (BEG END)

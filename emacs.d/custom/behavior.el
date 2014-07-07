@@ -4,11 +4,14 @@
 (setq kill-whole-line t)            ; include EOL when killing lines
 (setq-default indent-tabs-mode nil) ; never use tabs for indenting
 (setq-default tab-width 2)          ; 2 spaces per tab
-(iswitchb-mode t)                   ; enhanced buffer switching
+(ido-mode t)
+(setq-default ido-max-prospects 6)
+(setq-default ido-enable-dot-prefix t)
+(setq confirm-nonexistent-file-or-buffer nil)
+
 (delete-selection-mode t)           ; when region is active, delete kills region
 (setq ring-bell-function 'ignore)   ; don't beep on error/end of buffer
 (setq use-dialog-box nil)           ; don't pop up dialog boxes.
-
 (put 'downcase-region 'disabled nil)
 (put 'upcase-region   'disabled nil)
 
@@ -39,25 +42,8 @@
   (set-frame-parameter nil 'fullscreen
     (if (frame-parameter nil 'fullscreen) nil 'fullboth)))
 
-; iswitchb customization
-(defadvice iswitchb-kill-buffer (after rescan-after-kill activate)
-  "*Regenerate the list of matching buffer names after a kill.
-    Necessary if using `uniquifiy' with `uniquify-after-kill-buffer-p'
-    set to non-nil."
-  (setq iswitchb-buflist iswitchb-matches)
-  (iswitchb-rescan))
-
-(defun iswitchb-rescan ()
-  "*Regenerate the list of matching buffer names."
-  (interactive)
-  (iswitchb-makealist iswitchb-default)
-  (setq iswitchb-rescan t))
-
-(setq iswitchb-buffer-ignore
-  '("^ " "^\\*Flycheck" "^\\*Messages" "^\\*Completions"))
-
-(setq uniquify-buffer-name-style 'forward)
-
+(setq-default ido-ignore-buffers
+  '("\\` " "^\*\\(Messages\\|Warning\\|Flycheck\\|Completions\\)"))
 
 ; greedy whitespace delete
 (defun backward-delete-char-hungry (arg &optional killp)
