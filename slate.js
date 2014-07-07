@@ -5,9 +5,9 @@ slate.config('defaultToCurrentScreen', false);
 var leftFull = function(monitor) {
   return slate.operation('move', {
     screen: monitor,
-    x: 'screenOriginX',
-    y: 'screenOriginY',
-    width: 'screenSizeX/2',
+    x:      'screenOriginX',
+    y:      'screenOriginY',
+    width:  'screenSizeX/2',
     height: 'screenSizeY'
   });
 };
@@ -15,9 +15,9 @@ var leftFull = function(monitor) {
 var rightFull = function(monitor) {
   return slate.operation('move', {
     screen: monitor,
-    x: 'screenOriginX+screenSizeX/2',
-    y: 'screenOriginY',
-    width: 'screenSizeX/2',
+    x:      'screenOriginX+screenSizeX/2',
+    y:      'screenOriginY',
+    width:  'screenSizeX/2',
     height: 'screenSizeY'
   });
 };
@@ -25,9 +25,9 @@ var rightFull = function(monitor) {
 var topFull = function(monitor) {
   return slate.operation('move', {
     screen: monitor,
-    x: 'screenOriginX',
-    y: 'screenOriginY',
-    width: 'screenSizeX',
+    x:      'screenOriginX',
+    y:      'screenOriginY',
+    width:  'screenSizeX',
     height: 'screenSizeY/2'
   });
 };
@@ -35,9 +35,9 @@ var topFull = function(monitor) {
 var bottomFull = function(monitor) {
   return slate.operation('move', {
     screen: monitor,
-    x: 'screenOriginX',
-    y: 'screenOriginY+screenSizeY/2',
-    width: 'screenSizeX',
+    x:      'screenOriginX',
+    y:      'screenOriginY+screenSizeY/2',
+    width:  'screenSizeX',
     height: 'screenSizeY/2'
   });
 };
@@ -45,9 +45,9 @@ var bottomFull = function(monitor) {
 var topRight = function(monitor) {
   return slate.operation('move', {
     screen: monitor,
-    x: 'screenOriginX+screenSizeX/2',
-    y: 'screenOriginY',
-    width: 'screenSizeX/2',
+    x:      'screenOriginX+screenSizeX/2',
+    y:      'screenOriginY',
+    width:  'screenSizeX/2',
     height: 'screenSizeY/2'
   });
 };
@@ -55,9 +55,9 @@ var topRight = function(monitor) {
 var topLeft = function(monitor) {
   return slate.operation('move', {
     screen: monitor,
-    x: 'screenOriginX',
-    y: 'screenOriginY',
-    width: 'screenSizeX/2',
+    x:      'screenOriginX',
+    y:      'screenOriginY',
+    width:  'screenSizeX/2',
     height: 'screenSizeY/2'
   });
 };
@@ -65,9 +65,9 @@ var topLeft = function(monitor) {
 var bottomRight = function(monitor) {
   return slate.operation('move',  {
     screen: monitor,
-    x: 'screenOriginX+screenSizeX/2',
-    y: 'screenOriginY+screenSizeY/2',
-    width: 'screenSizeX/2',
+    x:      'screenOriginX+screenSizeX/2',
+    y:      'screenOriginY+screenSizeY/2',
+    width:  'screenSizeX/2',
     height: 'screenSizeY/2'
   });
 };
@@ -75,9 +75,9 @@ var bottomRight = function(monitor) {
 var bottomLeft = function(monitor) {
   return slate.operation('move',  {
     screen: monitor,
-    x: 'screenOriginX',
-    y: 'screenOriginY+screenSizeY/2',
-    width: 'screenSizeX/2',
+    x:      'screenOriginX',
+    y:      'screenOriginY+screenSizeY/2',
+    width:  'screenSizeX/2',
     height: 'screenSizeY/2'
   });
 };
@@ -95,12 +95,12 @@ slate.bind('1:cmd', slate.operation('layout', {name: 'worksies'}));
 slate.bind('g:cmd', slate.operation('grid',  {
   grids: {
     '1440x900': {
-      width: 4,
+      width:  4,
       height: 4
     },
 
     '2560x1440': {
-      width: 6,
+      width:  6,
       height: 6
     },
   },

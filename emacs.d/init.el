@@ -34,8 +34,9 @@
        :type elpa)
      (:name scala-mode
        :type elpa)
-     (:name vala-mode
-       :type elpa)))
+     (:name toml-mode
+       :type github
+       :pkgname "dryman/toml-mode.el")))
 
 ;; list of packages to have el-get install
 (defvar required-packages
@@ -44,6 +45,7 @@
      auto-complete-emacs-lisp
      coffee-mode
      flycheck
+     git-timemachine
      go-mode
      haml-mode
      helm
@@ -53,11 +55,12 @@
      rainbow-mode
      rhtml-mode
      ruby-electric
+     rust-mode
      rspec-mode
      scala-mode
      scss-mode
      tern
-     vala-mode
+     toml-mode
      yaml-mode))
 
 ;; override notifications to be displayed in the message buffer if

@@ -7,7 +7,8 @@
     (tern-mode t)))
 
 (eval-after-load 'tern
-   '(progn
-      (require 'tern-auto-complete)
-      (tern-ac-setup)))
+  '(progn
+     (require 'tern-auto-complete)
+     (tern-ac-setup)))
+
 (setq-default js-indent-level 2)
