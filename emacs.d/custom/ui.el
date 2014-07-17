@@ -122,4 +122,5 @@ than the background of the buffer."
     (set-fontset-font t '(#x1f300 . #x1f5ff) "Symbola")
     (set-fontset-font t '(#x1f600 . #x1f64f) "Symbola")
     (set-fontset-font t '(#x1f680 . #x1f6ff) "Symbola")
-    (set-fontset-font t '(#x2600  . #x26ff)  "Symbola")))
+    (set-fontset-font t '(#x2600  . #x26ff)  "Symbola")
+    (set-fontset-font t '(#x4e00  . #x9fff)  "Noto")))
