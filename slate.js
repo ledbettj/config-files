@@ -82,16 +82,24 @@ var bottomLeft = function(monitor) {
   });
 };
 
-slate.layout('worksies', {
+slate.layout('dualMonitor', {
   iTerm:           { operations: [bottomRight(right)] },
   'Google Chrome': { operations: [topRight(right)]    },
   Emacs:           { operations: [leftFull(right)]    },
-  Komanda:         { operations: [rightFull(left)]    },
-  HipChat:         { operations: [topLeft(left)]      },
-  Mail:            { operations: [bottomLeft(left)]   }
+  HipChat:         { operations: [leftFull(left)]     },
+  Mail:            { operations: [rightFull(left)]    }
 });
 
-slate.bind('1:cmd', slate.operation('layout', {name: 'worksies'}));
+slate.layout('unplugged', {
+  iTerm:           { operations: [bottomRight(left)] },
+  'Google Chrome': { operations: [topRight(left)]    },
+  Emacs:           { operations: [leftFull(left)]    }
+});
+
+
+slate.bind('1:cmd', slate.operation('layout', {name: 'dualMonitor'}));
+slate.bind('2:cmd', slate.operation('layout', {name: 'unplugged'}));
+
 slate.bind('g:cmd', slate.operation('grid',  {
   grids: {
     '1440x900': {
