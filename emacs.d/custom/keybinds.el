@@ -9,6 +9,8 @@
 (global-set-key [backspace]   'backward-delete-char-hungry)
 (global-set-key (kbd "C-c c") 'comment-region)
 (global-set-key (kbd "C-c u") 'uncomment-region)
+(global-set-key (kbd "C-<next>") (lambda() (interactive) (next-line 10)))
+(global-set-key (kbd "C-<prior>") (lambda() (interactive) (previous-line 10)))
 
 (if (eq system-type 'darwin)
   (global-set-key [C-s-268632064] 'helm-multi-occur-all) ; ctrl-cmd-spc
