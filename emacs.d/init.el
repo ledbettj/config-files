@@ -64,6 +64,7 @@
      scss-mode
      tern
      toml-mode
+     vala-mode
      yaml-mode))
 
 ;; override notifications to be displayed in the message buffer if
@@ -100,6 +101,7 @@
 (load-user-file "c.el")
 (load-user-file "org.el")
 (load-user-file "move-text.el")
+(load-user-file "magic-align.el")
 (load-user-file "keybinds.el")
 
 ;; display startup timing after load

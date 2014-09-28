@@ -8,3 +8,5 @@ tramp
 history
 url/
 ido.last
+%backup%~
+session.*

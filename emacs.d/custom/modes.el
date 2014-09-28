@@ -3,6 +3,11 @@
 
 (add-to-list 'auto-mode-alist '("\\.js.erb\\'" . js-mode))
 
+; turn on auto-complete-mode pretty much everywhere it's not by default.
+(mapc (lambda (mode) (add-to-list 'ac-modes mode))
+  '(scss-mode css-mode rhtml-mode coffee-mode go-mode vala-mode rust-mode
+     text-mode fundamental-mode))
+
 (add-hook 'markdown-mode-hook
   '(lambda ()
      (flyspell-mode t)))
@@ -16,7 +21,6 @@
   '(lambda ()
      (setq scss-compile-at-save nil)
      (setq css-indent-offset 2)
-     (auto-complete-mode t)
      (rainbow-mode t)))
 
 (add-hook 'css-mode-hook
@@ -26,8 +30,7 @@
 
 (add-hook 'rhtml-mode-hook
   '(lambda ()
-     (rainbow-mode t)
-     (auto-complete-mode t)))
+     (rainbow-mode t)))
 
 (add-hook 'sh-mode-hook
   '(lambda ()
@@ -35,18 +38,19 @@
 
 (add-hook 'coffee-mode-hook
   '(lambda ()
-     (auto-complete-mode t)
      (make-local-variable 'tab-width)
      (set 'tab-width 2)))
 
 (add-hook 'go-mode-hook
   '(lambda ()
-     (auto-complete-mode t)
      (setq indent-tabs-mode nil)))
 
 (add-hook 'vala-mode-hook
-  '(lambda ())
-     (auto-complete-mode t)
-     (setq indent-tabs-mode nil))
+  '(lambda ()
+     (setq indent-tabs-mode nil)))
+
+(add-hook 'text-mode-hook
+  '(lambda ()
+     (flyspell-mode t)))
 
 (add-hook 'dired-mode-hook 'rspec-dired-mode)
