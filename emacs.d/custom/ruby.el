@@ -31,9 +31,18 @@
        ("\\.rake"     . ruby-mode))))
 
 
+(defun convert-hash-rocket (BEG END)
+  "Convert hash rocket syntax to JSON syntax"
+  (interactive "r")
+  (if (not (region-active-p))
+    (message "mark not active")
+    (replace-regexp ":\\([^\s]+\\)\s*=>\s*\\([^\s]+\\)" "\\1: \\2" nil BEG END)))
+
+
 (add-hook 'ruby-mode-hook
   '(lambda ()
      (local-set-key (kbd "C-c b") 'magit-blame-mode)
+     (local-set-key (kbd "C-c r") 'convert-hash-rocket)
      (rainbow-mode t)
      (ruby-electric-mode t)
      (electric-pair-mode t)))
