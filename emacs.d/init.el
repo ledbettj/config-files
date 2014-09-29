@@ -23,23 +23,17 @@
 ;; custom packages
 (setq el-get-sources
   '((:name scss-mode
-      :type git
-      :url "http://github.com/antonj/scss-mode.git")
+      :type elpa)
      (:name rainbow-mode
        :type elpa)
-     (:name ruby-electric
-       :type git
-       :url "http://github.com/leoc/ruby-electric.git")
      (:name flycheck
        :type elpa)
      (:name go-mode
-       :type github
-       :pkgname "dominikh/go-mode.el")
+       :type elpa)
      (:name scala-mode
        :type elpa)
      (:name toml-mode
-       :type github
-       :pkgname "dryman/toml-mode.el")))
+       :type elpa)))
 
 ;; list of packages to have el-get install
 (defvar required-packages
@@ -57,9 +51,9 @@
      markdown-mode
      rainbow-mode
      rhtml-mode
+     rspec-mode
      ruby-electric
      rust-mode
-     rspec-mode
      scala-mode
      scss-mode
      tern

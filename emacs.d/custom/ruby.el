@@ -47,5 +47,4 @@
      (local-set-key (kbd "C-c b") 'magit-blame-mode)
      (local-set-key (kbd "C-c r") 'convert-hash-rocket)
      (rainbow-mode t)
-     (ruby-electric-mode t)
-     (electric-pair-mode t)))
+     (ruby-electric-mode t)))
