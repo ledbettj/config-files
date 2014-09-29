@@ -5,7 +5,7 @@
 
 ; turn on auto-complete-mode pretty much everywhere it's not by default.
 (mapc (lambda (mode) (add-to-list 'ac-modes mode))
-  '(scss-mode css-mode rhtml-mode coffee-mode go-mode vala-mode rust-mode
+  '(scss-mode css-mode rhtml-mode coffee-mode go-mode vala-mode rust-mode enh-ruby-mode
      text-mode fundamental-mode))
 
 (add-hook 'markdown-mode-hook
