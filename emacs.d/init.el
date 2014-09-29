@@ -106,5 +106,5 @@
 
 ;; display startup timing after load
 (fset 'startup-echo-area-message
-  '(lambda ()
+  #'(lambda ()
      (message "emacs loaded in %s" (emacs-init-time))))
