@@ -2,6 +2,10 @@
 
 # user@host:working-dir$
 PS1="\[\e[1;34m\]\u@\h:\[\e[0m\]\w\$ "
+# or with git integration:
+GIT_BRANCH='$(__git_ps1 "|\[\e[0;32m\]%s\[\e[m\]")'
+PS1="\[\e[1;34m\]\u@\h:\[\e[m\]\w"$GIT_BRANCH"\$ "
+
 
 # add the specified directory to the end of $PATH if it is not already present
 path_append() {
