@@ -1,34 +1,14 @@
 ;;; ruby.el - ruby mode customization for emacs
 ;; John Ledbetter <john.ledbetter@gmail.com>
 
-;; fix ruby-mode multi-line parameter indentation
-(setq-default ruby-deep-indent-paren       nil)
-(setq-default ruby-deep-indent-paren-style nil)
-(setq-default ruby-deep-arglist            nil)
-
-(defadvice ruby-indent-line (after unindent-closing-paren activate)
-  (let ((column (current-column))
-         indent offset)
-    (save-excursion
-      (back-to-indentation)
-      (let ((state (syntax-ppss)))
-        (setq offset (- column (current-column)))
-        (when (and (eq (char-after) ?\))
-                (not (zerop (car state))))
-          (goto-char (cadr state))
-          (setq indent (current-indentation)))))
-    (when indent
-      (indent-line-to indent)
-      (when (> offset 0) (forward-char offset)))))
-
-;; add additional filenames to ruby-mode
 (setq auto-mode-alist
   (append auto-mode-alist
-    '(("Gemfile$"    . ruby-mode)
-       ("Rakefile$"   . ruby-mode)
-       ("\\.gemspec$" . ruby-mode)
-       ("\\.ru"       . ruby-mode)
-       ("\\.rake"     . ruby-mode))))
+    '(("\\.rb$"       . enh-ruby-mode)
+       ("Gemfile$"    . enh-ruby-mode)
+       ("Rakefile$"   . enh-ruby-mode)
+       ("\\.gemspec$" . enh-ruby-mode)
+       ("\\.ru"       . enh-ruby-mode)
+       ("\\.rake"     . enh-ruby-mode))))
 
 
 (defun convert-hash-rocket (BEG END)
@@ -41,10 +21,16 @@
       (while (re-search-forward ":\\([^\s]+\\)\s*=>\s*\\([^\s]+\\)" END t)
         (replace-match "\\1: \\2")))))
 
+(defun jl/ruby-setup ()
+  (local-set-key (kbd "C-c b") 'magit-blame-mode)
+  (local-set-key (kbd "C-c r") 'convert-hash-rocket)
+  (rainbow-mode t)
+  (set-face-foreground 'enh-ruby-op-face (face-foreground 'default))
+  (ruby-electric-mode t))
 
-(add-hook 'ruby-mode-hook
-  '(lambda ()
-     (local-set-key (kbd "C-c b") 'magit-blame-mode)
-     (local-set-key (kbd "C-c r") 'convert-hash-rocket)
-     (rainbow-mode t)
-     (ruby-electric-mode t)))
+(add-hook 'enh-ruby-mode-hook 'jl/ruby-setup)
+
+(eval-after-load "enh-ruby-mode"
+  '(progn
+    (setq enh-ruby-bounce-deep-indent t) ; tab toggles between deep indent
+    (setq enh-ruby-check-syntax nil)))   ; flycheck can handle this

@@ -30,6 +30,8 @@
        :type elpa)
      (:name go-mode
        :type elpa)
+     (:name enh-ruby-mode
+       :type elpa)
      (:name scala-mode
        :type elpa)
      (:name toml-mode
@@ -41,6 +43,7 @@
      auto-complete-css
      auto-complete-emacs-lisp
      coffee-mode
+     enh-ruby-mode
      flycheck
      git-timemachine
      go-mode
