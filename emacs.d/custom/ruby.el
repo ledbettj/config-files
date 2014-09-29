@@ -36,7 +36,10 @@
   (interactive "r")
   (if (not (region-active-p))
     (message "mark not active")
-    (replace-regexp ":\\([^\s]+\\)\s*=>\s*\\([^\s]+\\)" "\\1: \\2" nil BEG END)))
+    (save-excursion
+      (goto-char BEG)
+      (while (re-search-forward ":\\([^\s]+\\)\s*=>\s*\\([^\s]+\\)" END t)
+        (replace-match "\\1: \\2")))))
 
 
 (add-hook 'ruby-mode-hook
