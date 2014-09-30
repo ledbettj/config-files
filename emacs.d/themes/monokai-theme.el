@@ -18,7 +18,7 @@
 ;; You should have received a copy of the GNU General Public License
 ;; along with GNU Emacs.
 
-(unless (>= 24 emacs-major-version)
+(unless (>= emacs-major-version 24)
   (error "monokai-theme requires Emacs 24 or later."))
 
 (deftheme monokai

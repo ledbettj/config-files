@@ -124,3 +124,7 @@ than the background of the buffer."
     (set-fontset-font t '(#x1f680 . #x1f6ff) "Symbola")
     (set-fontset-font t '(#x2600  . #x26ff)  "Symbola")
     (set-fontset-font t '(#x4e00  . #x9fff)  "Noto")))
+
+(when (eq system-type 'darwin)
+  (setq ns-use-srgb-colorspace t)
+  (setq ns-use-native-fullscreen t))
