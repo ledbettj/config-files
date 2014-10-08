@@ -52,6 +52,7 @@
      haml-mode
      helm
      iedit
+     lua-mode
      magit
      markdown-mode
      move-text
