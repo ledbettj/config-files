@@ -32,6 +32,8 @@
        :type elpa)
      (:name enh-ruby-mode
        :type elpa)
+     (:name move-text
+       :type elpa)
      (:name scala-mode
        :type elpa)
      (:name toml-mode
@@ -52,6 +54,7 @@
      iedit
      magit
      markdown-mode
+     move-text
      rainbow-mode
      rhtml-mode
      rspec-mode
@@ -97,7 +100,6 @@
 (load-user-file "js.el")
 (load-user-file "c.el")
 (load-user-file "org.el")
-(load-user-file "move-text.el")
 (load-user-file "magic-align.el")
 (load-user-file "keybinds.el")
 
