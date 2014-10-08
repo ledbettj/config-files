@@ -113,17 +113,14 @@ than the background of the buffer."
      (set-face-foreground 'diff-removed "red4")))
 
 ;; monokai has a green background in a terminal. don't use it.
-(if (window-system)
-  (load-theme 'monokai t nil)
-  (load-theme 'wombat  t nil))
+(load-theme (if (window-system) 'monokai 'wombat) t nil)
 
 (unless (eq system-type 'darwin)
-  (progn
     (set-fontset-font t '(#x1f300 . #x1f5ff) "Symbola")
     (set-fontset-font t '(#x1f600 . #x1f64f) "Symbola")
     (set-fontset-font t '(#x1f680 . #x1f6ff) "Symbola")
     (set-fontset-font t '(#x2600  . #x26ff)  "Symbola")
-    (set-fontset-font t '(#x4e00  . #x9fff)  "Noto")))
+    (set-fontset-font t '(#x4e00  . #x9fff)  "Noto"))
 
 (when (eq system-type 'darwin)
   (setq ns-use-srgb-colorspace t)
