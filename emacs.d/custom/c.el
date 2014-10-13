@@ -24,7 +24,9 @@
     (let ((filename (buffer-file-name)))
       ;; Enable kernel mode for files in a linux directory
       (when (and filename
-              (string-match "/linux/" filename))
+              (or
+                (string-match "/linux/" filename)
+                (string-match "/qemu-strap/" filename)))
         (setq indent-tabs-mode t)
         (setq tab-width 8)
         (c-set-style "linux-tabs-only")))))

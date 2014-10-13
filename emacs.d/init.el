@@ -10,7 +10,7 @@
 (unless (require 'el-get nil t)
   (let ((buf
           (url-retrieve-synchronously
-            "https://raw.github.com/dimitri/el-get/master/el-get-install.el")))
+            "https://raw.githubusercontent.com/dimitri/el-get/master/el-get-install.el")))
     (if buf
       (with-current-buffer buf
         (let (el-get-master-branch)
@@ -22,10 +22,8 @@
 
 ;; custom packages
 (setq el-get-sources
-  '((:name scss-mode
+  '((:name rainbow-mode
       :type elpa)
-     (:name rainbow-mode
-       :type elpa)
      (:name flycheck
        :type elpa)
      (:name go-mode
@@ -33,10 +31,6 @@
      (:name enh-ruby-mode
        :type elpa)
      (:name move-text
-       :type elpa)
-     (:name scala-mode
-       :type elpa)
-     (:name toml-mode
        :type elpa)))
 
 ;; list of packages to have el-get install
@@ -61,10 +55,8 @@
      rspec-mode
      ruby-electric
      rust-mode
-     scala-mode
      scss-mode
      tern
-     toml-mode
      vala-mode
      yaml-mode))
 

@@ -20,7 +20,7 @@
   `(font .
      ,(if (eq system-type 'darwin)
         "Source Code Pro-16"
-        "Source Code Pro Light-12")))
+        "Source Code Pro-12")))
 
 (set-face-attribute 'default nil :weight 'light)
 
