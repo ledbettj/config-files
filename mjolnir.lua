@@ -18,18 +18,20 @@ function winfromtitle(title)
    return nil
 end
 
+-- move the given window to the given screen, keeping the same relative
+-- dimensions and placement.
 function wintoscreen(win, screen)
    if not win or not screen then
       return false
    end
 
-   local old_screen = win:screen()
+   local old_screen       = win:screen()
    local old_screen_frame = old_screen:frame()
-   local win_frame = win:frame()
-   local new_screen = screen
-   local new_frame  = new_screen:frame()
-   local off_x_pct = (win_frame.x - old_screen_frame.x) / (old_screen_frame.w)
-   local off_y_pct = (win_frame.y - old_screen_frame.y) / (old_screen_frame.h)
+   local win_frame        = win:frame()
+   local new_screen       = screen
+   local new_frame        = new_screen:frame()
+   local off_x_pct        = (win_frame.x - old_screen_frame.x) / (old_screen_frame.w)
+   local off_y_pct        = (win_frame.y - old_screen_frame.y) / (old_screen_frame.h)
 
    local w_pct = win_frame.w / old_screen_frame.w
    local h_pct = win_frame.h / old_screen_frame.h
@@ -42,6 +44,8 @@ function wintoscreen(win, screen)
    win:setframe(win_frame)
 end
 
+-- move the given window to the position ('topleft', 'topright', etc),
+-- also moving it to the provided screen if any.
 function move(win, where, screen)
    if not win or not where then
       return false
