@@ -6,7 +6,7 @@
     (let* ((body (buffer-substring-no-properties BEG END))
             (regex (cond
                      ((string-match-p "=>" body)               "\\(\\s-*\\)=>")
-                     ((string-match-p "[^\s:]:[^:]" body)      ":\\(\\s-*\\)")
+                     ((string-match-p "[^\s:]:\s" body)        ":\\(\\s-*\\)")
                      ((string-match-p "[^=><!]=[^=<>~]" body)  "\\(\\s-*\\)=")
                      (t nil))))
       (if regex
