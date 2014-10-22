@@ -26,6 +26,9 @@
       :type elpa)
      (:name flycheck
        :type elpa)
+     (:name ruby-electric
+       :type http
+       :url "https://raw.githubusercontent.com/ruby/ruby/trunk/misc/ruby-electric.el")
      (:name go-mode
        :type elpa)
      (:name enh-ruby-mode
@@ -50,6 +53,7 @@
      magit
      markdown-mode
      move-text
+     projectile
      rainbow-mode
      rhtml-mode
      rspec-mode

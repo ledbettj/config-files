@@ -83,7 +83,9 @@
 (defun helm-multi-occur-all ()
   "Skip selecting buffers and search all open buffers."
   (interactive)
-  (helm-multi-occur (buffer-list-no-magic)))
+  (if (and (boundp 'projectile-project-p) (projectile-project-p))
+    (helm-do-grep-1 (list (projectile-expand-root "")) t nil '("*"))
+    (helm-multi-occur (buffer-list-no-magic))))
 
 
 ; flycheck mode everywhere!!!!
