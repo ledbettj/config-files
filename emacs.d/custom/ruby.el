@@ -26,9 +26,6 @@
   (local-set-key (kbd "C-c r") 'convert-hash-rocket)
   (rainbow-mode t)
   (set-face-foreground 'enh-ruby-op-face (scale-colour (face-foreground 'default) 0.85))
-  (projectile-mode t)
-  (require 'helm-projectile)
-  (helm-projectile-on)
   (smartparens-mode t))
 
 (add-hook 'enh-ruby-mode-hook 'jl/ruby-setup)

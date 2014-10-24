@@ -83,9 +83,13 @@
 (defun helm-multi-occur-all ()
   "Skip selecting buffers and search all open buffers."
   (interactive)
-  (if (and (boundp 'projectile-project-p) (projectile-project-p))
-    (helm-do-grep-1 (list (projectile-expand-root "")) t nil '("*"))
-    (helm-multi-occur (buffer-list-no-magic))))
+    (helm-multi-occur (buffer-list-no-magic)))
+
+(defun helm-project-grep ()
+  "search all files in the project."
+  (interactive)
+  (helm-do-grep-1 (list (projectile-expand-root "")) t nil
+      '("*.rb" "*.erb" "*.js" "*.yml" "*.c" "*.h" "*.rake" "Rakefile")))
 
 
 ; flycheck mode everywhere!!!!

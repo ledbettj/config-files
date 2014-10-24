@@ -75,6 +75,10 @@
 (require 'auto-complete-config)
 (ac-config-default)
 
+(require 'projectile)
+(require 'helm-projectile)
+(projectile-global-mode)
+
 (defun load-user-file (file)
   (interactive "f")
   "Load a file in the user's current configuration directory."

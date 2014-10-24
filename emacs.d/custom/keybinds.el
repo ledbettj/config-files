@@ -13,9 +13,13 @@
 (global-set-key (kbd "C-<prior>") (lambda() (interactive) (previous-line 10)))
 (global-set-key (kbd "C-c a") 'magic-align)
 
-(if (eq system-type 'darwin)
-  (global-set-key [C-s-268632064] 'helm-multi-occur-all) ; ctrl-cmd-spc
-  (global-set-key (kbd "C-s-SPC") 'helm-multi-occur-all))
+(when (eq system-type 'darwin)
+  (global-set-key [C-s-268632064] 'helm-project-grep) ; ctrl-cmd-spc
+  (global-set-key [C-s-268632083] 'helm-multi-occur-all)) ; ctrl-cmd-s
+
+(unless (eq system-type 'darwin)
+  (global-set-key (kbd "C-s-SPC") 'helm-project-grep))
+;  (global-set-key (kbd "C-s-SPC") 'helm-multi-occur-all))
 
 ; make right and left arrow pick matching buffers in iswitchb-mode
 (defun iswitchb-local-keys ()
