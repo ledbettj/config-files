@@ -2,7 +2,7 @@
 ;; John Ledbetter <john.ledbetter@gmail.com>
 
 (require 'package)
-(require 'uniquify)
+
 (package-initialize)
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
 
@@ -18,7 +18,7 @@
           (eval-print-last-sexp))))))
 
 (add-to-list 'package-archives
-  '("melpa" . "http://melpa.milkbox.net/packages/") t)
+  '("melpa" . "http://melpa.org/packages/") t)
 
 ;; custom packages
 (setq el-get-sources
@@ -26,9 +26,6 @@
       :type elpa)
      (:name flycheck
        :type elpa)
-     (:name ruby-electric
-       :type http
-       :url "https://raw.githubusercontent.com/ruby/ruby/trunk/misc/ruby-electric.el")
      (:name go-mode
        :type elpa)
      (:name enh-ruby-mode
@@ -57,9 +54,9 @@
      rainbow-mode
      rhtml-mode
      rspec-mode
-     ruby-electric
      rust-mode
      scss-mode
+     smartparens
      tern
      vala-mode
      yaml-mode))

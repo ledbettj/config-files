@@ -26,10 +26,10 @@
   (local-set-key (kbd "C-c r") 'convert-hash-rocket)
   (rainbow-mode t)
   (set-face-foreground 'enh-ruby-op-face (scale-colour (face-foreground 'default) 0.85))
-  (ruby-electric-mode t)
   (projectile-mode t)
   (require 'helm-projectile)
-  (helm-projectile-on))
+  (helm-projectile-on)
+  (smartparens-mode t))
 
 (add-hook 'enh-ruby-mode-hook 'jl/ruby-setup)
 
@@ -39,3 +39,9 @@
      (erm-reset)
      (setq enh-ruby-bounce-deep-indent t) ; tab toggles between deep indent
      (setq enh-ruby-check-syntax nil)))   ; flycheck can handle this
+
+(eval-after-load "smartparens"
+  '(progn
+     (require 'smartparens-ruby)
+     (setq-default sp-autoescape-string-quote nil)
+     (setq-default sp-highlight-pair-overlay  nil)))
