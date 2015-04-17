@@ -15,12 +15,13 @@
 (setq inhibit-startup-screen t) ; don't show splash screen
 (setq initial-scratch-message nil) ; don't show scratch placeholder
 
-;; set default font to Consolas on OS X, or Ubuntu Monospace otherwise.
 (add-to-list 'default-frame-alist
   `(font .
      ,(if (eq system-type 'darwin)
-        "Source Code Pro-16"
-        "Source Code Pro-12")))
+        (if (eq (display-pixel-width) 1280)
+          "DejaVu Sans Mono-14"
+          "DejaVu Sans Mono-16")
+        "DejaVu Sans Mono-12")))
 
 (set-face-attribute 'default nil :weight 'light)
 
@@ -125,3 +126,5 @@ than the background of the buffer."
 (when (eq system-type 'darwin)
   (setq ns-use-srgb-colorspace t)
   (setq ns-use-native-fullscreen t))
+
+(sml/setup)

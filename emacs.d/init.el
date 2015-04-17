@@ -57,6 +57,7 @@
      rust-mode
      scss-mode
      smartparens
+     smart-mode-line
      tern
      vala-mode
      yaml-mode))
