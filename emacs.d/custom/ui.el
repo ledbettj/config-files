@@ -35,19 +35,6 @@
     (system-name)
     ": %b %+" ))
 
-;; customize autocomplete colors
-(eval-after-load "auto-complete"
-  '(progn
-     (set-face-attribute 'ac-candidate-face nil
-       :background (face-foreground 'default)
-       :foreground (face-background 'default)
-       :box nil)
-     (set-face-attribute 'ac-selection-face nil
-       :background (face-foreground 'font-lock-keyword-face)
-       :foreground "#000000"
-       :bold t
-       :box nil)))
-
 ;; I love rainbow mode so much
 (eval-after-load "rainbow-mode"
   '(progn
@@ -69,7 +56,6 @@ than the background of the buffer."
         (* (/ g 65280.0) 256)
         (* (/ b 65280.0) 256)))
     colour))
-
 
 ;; show tabs and trailing whitespace as slightly darker background color
 (add-hook 'font-lock-mode-hook
@@ -106,13 +92,26 @@ than the background of the buffer."
     (set-face-background 'mode-line-inactive (scale-colour bg 0.65))
     (set-face-foreground 'mode-line-inactive (scale-colour fg 0.65))
     (set-face-attribute 'mode-line-inactive nil :box nil)
-    (set-face-attribute 'mode-line nil :box (scale-colour fg 0.50))))
-
+    (set-face-attribute 'mode-line nil :box (scale-colour fg 0.50))
+    (set-face-foreground 'popup-tip-face bg)
+    (set-face-background 'popup-tip-face fg)
+    (set-face-attribute 'ac-candidate-face nil
+      :background (face-foreground 'default)
+      :foreground (face-background 'default)
+      :box nil)
+    (set-face-attribute 'ac-selection-face nil
+      :background (face-foreground 'font-lock-keyword-face)
+      :foreground "#000000"
+      :bold t
+      :box nil)))
 
 (eval-after-load 'diff-mode
   '(progn
      (set-face-foreground 'diff-added "green3")
      (set-face-foreground 'diff-removed "red4")))
+
+(eval-after-load "auto-complete" '(progn (scale-ui-colors)))
+
 
 ;; monokai has a green background in a terminal. don't use it.
 (load-theme (if (window-system) 'monokai 'wombat) t nil)
@@ -134,11 +133,10 @@ than the background of the buffer."
   (setq-default powerline-default-separator 'wave)
   (setq-default powerline-default-separator 'utf-8))
 
-(setcar (cdr (assq 'auto-complete-mode minor-mode-alist)) " Ⓐ")
-;(setq-default flycheck-mode-line
-;  '(lambda ()
-                                        ;     " Ⓕ"))
+(setq-default powerline-utf-8-separator-left #x20)
+(setq-default powerline-utf-8-separator-right #x20)
 
+(setcar (cdr (assq 'auto-complete-mode minor-mode-alist)) " Ⓐ")
 
 (setq flycheck-mode-line
       '(:eval
@@ -161,9 +159,10 @@ than the background of the buffer."
 (setq-default projectile-mode-line  " Ⓟ")
 (setq-default powerline-display-buffer-size nil)
 
-;(eval-after-load "abbrev"
-;  '(progn
-     (setcar (cdr (assq 'abbrev-mode minor-mode-alist)) nil) ;))
+(setcar (cdr (assq 'abbrev-mode minor-mode-alist)) nil)
+(eval-after-load "rspec-mode"
+  '(progn
+     (setcar (cdr (assq 'rspec-mode minor-mode-alist)) " RS")))
 
 (defun jwl/powerline-theme ()
   "Setup the (customized) default mode-line."
@@ -217,3 +216,7 @@ than the background of the buffer."
              (powerline-render rhs)))))))
 
 (jwl/powerline-theme)
+
+(set-face-font 'mode-line "Ubuntu Condensed-10")
+(set-face-font 'mode-line-inactive "Ubuntu Condensed-10")
+(set-face-font 'popup-tip-face "Ubuntu Mono")

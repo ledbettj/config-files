@@ -81,8 +81,8 @@
 (projectile-global-mode)
 
 (defun load-user-file (file)
+  "Load the file FILE in the user's current configuration directory."
   (interactive "f")
-  "Load a file in the user's current configuration directory."
   (load-file (expand-file-name file
                (expand-file-name "custom" user-emacs-directory))))
 
