@@ -50,6 +50,7 @@
      magit
      markdown-mode
      move-text
+     powerline
      projectile
      rainbow-mode
      rhtml-mode
@@ -57,7 +58,6 @@
      rust-mode
      scss-mode
      smartparens
-     smart-mode-line
      tern
      vala-mode
      yaml-mode))

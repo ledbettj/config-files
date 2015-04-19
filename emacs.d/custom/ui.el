@@ -8,7 +8,7 @@
 (unless (eq system-type 'darwin)
   (if (fboundp 'menu-bar-mode)   (menu-bar-mode -1)))
 
-(which-function-mode t)         ; show current function in mode line
+(which-function-mode -1)        ; show current function in mode line
 (show-paren-mode t)             ; highlight matching parentheses
 (setq line-number-mode   t)     ; show line number in mode line
 (setq column-number-mode t)     ; show column number in mode line
@@ -37,7 +37,7 @@
 
 ;; customize autocomplete colors
 (eval-after-load "auto-complete"
-  '(lambda ()
+  '(progn
      (set-face-attribute 'ac-candidate-face nil
        :background (face-foreground 'default)
        :foreground (face-background 'default)
@@ -50,9 +50,10 @@
 
 ;; I love rainbow mode so much
 (eval-after-load "rainbow-mode"
-  '(lambda ()
+  '(progn
      (nconc rainbow-html-colors-major-mode-list
-       '(scss-mode emacs-lisp-mode javascript-mode))))
+       '(scss-mode emacs-lisp-mode javascript-mode))
+     (setcar (cdr (assq 'rainbow-mode minor-mode-alist)) " Ⓡ")))
 
 (defun scale-colour (colour factor)
   "Scale the given hex colour (#112233) by the given factor.
@@ -84,8 +85,6 @@ than the background of the buffer."
 (setq-default linum-format "%02d ")
 (setq-default hl-line-sticky-flag nil)
 
-(set-face-attribute 'mode-line-inactive nil :box nil)
-
 (defadvice server-create-window-system-frame (after do-some-scaling ())
   (scale-ui-colors))
 (defadvice enable-theme (after do-some-scaling ())
@@ -96,7 +95,7 @@ than the background of the buffer."
 
 (defun scale-ui-colors ()
   (let ((bg (face-background 'default))
-        (fg (face-foreground 'default)))
+         (fg (face-foreground 'default)))
     (set-face-background 'hl-line (scale-colour bg 1.20))
     (set-face-foreground 'linum   (scale-colour bg 1.50))
     (set-face-background 'linum   (scale-colour bg 0.90))
@@ -105,7 +104,9 @@ than the background of the buffer."
     (set-face-background 'mode-line (scale-colour bg 0.75))
     (set-face-foreground 'mode-line (scale-colour fg 0.75))
     (set-face-background 'mode-line-inactive (scale-colour bg 0.65))
-    (set-face-foreground 'mode-line-inactive (scale-colour fg 0.65))))
+    (set-face-foreground 'mode-line-inactive (scale-colour fg 0.65))
+    (set-face-attribute 'mode-line-inactive nil :box nil)
+    (set-face-attribute 'mode-line nil :box (scale-colour fg 0.50))))
 
 
 (eval-after-load 'diff-mode
@@ -117,14 +118,102 @@ than the background of the buffer."
 (load-theme (if (window-system) 'monokai 'wombat) t nil)
 
 (unless (eq system-type 'darwin)
-    (set-fontset-font t '(#x1f300 . #x1f5ff) "Symbola")
-    (set-fontset-font t '(#x1f600 . #x1f64f) "Symbola")
-    (set-fontset-font t '(#x1f680 . #x1f6ff) "Symbola")
-    (set-fontset-font t '(#x2600  . #x26ff)  "Symbola")
-    (set-fontset-font t '(#x4e00  . #x9fff)  "Noto"))
+  (set-fontset-font t '(#x1f300 . #x1f5ff) "Symbola")
+  (set-fontset-font t '(#x1f600 . #x1f64f) "Symbola")
+  (set-fontset-font t '(#x1f680 . #x1f6ff) "Symbola")
+  (set-fontset-font t '(#x2600  . #x26ff)  "Symbola")
+  (set-fontset-font t '(#x4e00  . #x9fff)  "Noto"))
 
 (when (eq system-type 'darwin)
   (setq ns-use-srgb-colorspace t)
   (setq ns-use-native-fullscreen t))
 
-(sml/setup)
+(set-face-attribute 'mode-line nil :height 1.0)
+
+(if (display-graphic-p)
+  (setq-default powerline-default-separator 'wave)
+  (setq-default powerline-default-separator 'utf-8))
+
+(setcar (cdr (assq 'auto-complete-mode minor-mode-alist)) " Ⓐ")
+;(setq-default flycheck-mode-line
+;  '(lambda ()
+                                        ;     " Ⓕ"))
+
+
+(setq flycheck-mode-line
+      '(:eval
+        (pcase flycheck-last-status-change
+          (`not-checked " Ⓕ")
+          (`no-checker (propertize " Ⓕ-" 'face 'warning))
+          (`running (propertize " Ⓕ%" 'face 'success))
+          (`errored (propertize " Ⓕ!" 'face 'error))
+          (`finished
+            (let* ((error-counts (flycheck-count-errors flycheck-current-errors))
+                    (no-errors (cdr (assq 'error error-counts)))
+                    (no-warnings (cdr (assq 'warning error-counts)))
+                    (face (cond (no-errors 'error)
+                            (no-warnings 'warning)
+                            (t 'success))))
+              (propertize " Ⓕ" 'face face)))
+          (`interrupted " Ⓕ~")
+          (`suspicious '(propertize "Ⓕ?" 'face 'warning)))))
+
+(setq-default projectile-mode-line  " Ⓟ")
+(setq-default powerline-display-buffer-size nil)
+
+;(eval-after-load "abbrev"
+;  '(progn
+     (setcar (cdr (assq 'abbrev-mode minor-mode-alist)) nil) ;))
+
+(defun jwl/powerline-theme ()
+  "Setup the (customized) default mode-line."
+  (interactive)
+  (setq-default mode-line-format
+    '("%e"
+       (:eval
+         (let* ((active (powerline-selected-window-active))
+                 (mode-line (if active 'mode-line 'mode-line-inactive))
+                 (face1 (if active 'powerline-active1 'powerline-inactive1))
+                 (face2 (if active 'powerline-active2 'powerline-inactive2))
+                 (separator-left (intern (format "powerline-%s-%s"
+                                           (powerline-current-separator)
+                                           (car powerline-default-separator-dir))))
+                 (separator-right (intern (format "powerline-%s-%s"
+                                            (powerline-current-separator)
+                                            (cdr powerline-default-separator-dir))))
+                 (lhs (list (powerline-raw "%*" nil 'l)
+                        (when powerline-display-buffer-size
+                          (powerline-buffer-size nil 'l))
+                        (when powerline-display-mule-info
+                          (powerline-raw mode-line-mule-info nil 'l))
+                        (powerline-buffer-id nil 'l)
+                        (when (and (boundp 'which-func-mode) which-func-mode)
+                          (powerline-raw which-func-format nil 'l))
+                        (powerline-raw " ")
+                        (funcall separator-left mode-line face1)
+                        (when (boundp 'erc-modified-channels-object)
+                          (powerline-raw erc-modified-channels-object face1 'l))
+                        (powerline-major-mode face1 'l)
+                        (powerline-process face1)
+                        (powerline-minor-modes face1 'l)
+                        (powerline-narrow face1 'l)
+                        (powerline-raw " " face1)
+                        (funcall separator-left face1 face2)
+                        (powerline-vc face2 'r)
+                        (when (bound-and-true-p nyan-mode)
+                          (powerline-raw (list (nyan-create)) face2 'l))))
+                 (rhs (list (powerline-raw global-mode-string face2 'r)
+                        (funcall separator-right face2 face1)
+                        (unless window-system
+                          (powerline-raw (char-to-string #xe0a1) face1 'l))
+                        (powerline-raw "%l:%c " face1 'l)
+                        (funcall separator-right face1 mode-line)
+                        (powerline-raw " ")
+                        (powerline-raw "%3p" nil 'r)
+                        (when powerline-display-hud
+                          (powerline-hud face2 face1)))))
+           (concat (powerline-render lhs)
+             (powerline-fill face2 (powerline-width rhs))
+             (powerline-render rhs)))))))
+
+(jwl/powerline-theme)
