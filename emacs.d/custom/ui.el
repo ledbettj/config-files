@@ -164,7 +164,7 @@ than the background of the buffer."
   '(progn
      (setcar (cdr (assq 'rspec-mode minor-mode-alist)) " RS")))
 
-(defun jwl/powerline-theme ()
+(defun jl/powerline-theme ()
   "Setup the (customized) default mode-line."
   (interactive)
   (setq-default mode-line-format
@@ -215,8 +215,8 @@ than the background of the buffer."
              (powerline-fill face2 (powerline-width rhs))
              (powerline-render rhs)))))))
 
-(jwl/powerline-theme)
-
 (set-face-font 'mode-line "Ubuntu Condensed-10")
 (set-face-font 'mode-line-inactive "Ubuntu Condensed-10")
 (set-face-font 'popup-tip-face "Ubuntu Mono")
+(jl/powerline-theme)
+
