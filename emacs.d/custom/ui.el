@@ -129,12 +129,11 @@ than the background of the buffer."
 
 (set-face-attribute 'mode-line nil :height 1.0)
 
-(if (display-graphic-p)
-  (setq-default powerline-default-separator 'wave)
-  (setq-default powerline-default-separator 'utf-8))
-
-(setq-default powerline-utf-8-separator-left #x20)
-(setq-default powerline-utf-8-separator-right #x20)
+(setq-default powerline-default-separator
+  (cond
+    ((eq system-type 'darwin) nil)
+    ((display-graphic-p)      'wave)
+    (t                        nil)))
 
 (setcar (cdr (assq 'auto-complete-mode minor-mode-alist)) " Ⓐ")
 
