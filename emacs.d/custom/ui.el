@@ -215,8 +215,14 @@ than the background of the buffer."
              (powerline-fill face2 (powerline-width rhs))
              (powerline-render rhs)))))))
 
-(set-face-font 'mode-line "Ubuntu Condensed-10")
-(set-face-font 'mode-line-inactive "Ubuntu Condensed-10")
+(let ((mode-line-font (if (eq system-type 'darwin)
+                        "Ubuntu Condensed-16"
+                        "Ubuntu Condensed-12")))
+  
+  (set-face-font 'mode-line mode-line-font)
+  (set-face-font 'mode-line-inactive mode-line-font))
+
 (set-face-font 'popup-tip-face "Ubuntu Mono")
+(set-face-attribute 'popup-tip-face nil :height (if (eq system-type 'darwin) 160 140))
 (jl/powerline-theme)
 

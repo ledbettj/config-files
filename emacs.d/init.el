@@ -3,7 +3,6 @@
 
 (require 'package)
 
-(package-initialize)
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
 
 ;; install el-get if necessary
@@ -69,6 +68,7 @@
            (message "%s: %s" title msg)))
 
 (el-get 'sync required-packages)
+(package-initialize)
 
 (push (expand-file-name "themes" user-emacs-directory) custom-theme-load-path)
 
