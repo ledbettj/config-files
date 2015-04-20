@@ -1,6 +1,8 @@
 Emacs Configuration
 ===================
 
+![Emacs!](https://raw.githubusercontent.com/ledbettj/config-files/master/emacs.png)
+
 This is my [GNU Emacs](http://www.gnu.org/software/emacs/) configuration file,
 which customizes Emacs to behave the way I like it.  It's been re-written
 several times, hopefully getting better each time.  Currently, it bootstraps
