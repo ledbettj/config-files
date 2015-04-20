@@ -5,6 +5,9 @@
 (setq-default indent-tabs-mode nil) ; never use tabs for indenting
 (setq-default tab-width 2)          ; 2 spaces per tab
 (ido-mode t)
+(ido-vertical-mode t)
+(setq-default ido-use-faces t)
+(setq ido-vertical-define-keys 'C-n-C-p-up-and-down)
 (setq-default ido-max-prospects 6)
 (setq-default ido-enable-dot-prefix t)
 (setq confirm-nonexistent-file-or-buffer nil)

@@ -44,6 +44,7 @@
      go-mode
      haml-mode
      helm
+     ido-vertical-mode
      iedit
      lua-mode
      magit
