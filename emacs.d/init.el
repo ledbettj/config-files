@@ -21,16 +21,11 @@
 
 ;; custom packages
 (setq el-get-sources
-  '((:name rainbow-mode
-      :type elpa)
-     (:name flycheck
-       :type elpa)
-     (:name go-mode
-       :type elpa)
-     (:name enh-ruby-mode
-       :type elpa)
-     (:name move-text
-       :type elpa)))
+  '( (:name rainbow-mode  :type elpa)
+     (:name flycheck      :type elpa)
+     (:name go-mode       :type elpa)
+     (:name enh-ruby-mode :type elpa)
+     (:name move-text     :type elpa)))
 
 ;; list of packages to have el-get install
 (defvar required-packages
@@ -66,7 +61,7 @@
 ;; we're running in a terminal.
 (unless (display-graphic-p)
   (defun el-get-notify (title msg)
-           (message "%s: %s" title msg)))
+    (message "%s: %s" title msg)))
 
 (el-get 'sync required-packages)
 (package-initialize)
@@ -75,35 +70,40 @@
 
 ;; turn on autocomplete
 (require 'auto-complete-config)
-(ac-config-default)
-
 (require 'projectile)
 (require 'helm-projectile)
+
+(ac-config-default)
 (projectile-global-mode)
 
 (defun load-user-file (file)
   "Load the file FILE in the user's current configuration directory."
   (interactive "f")
-  (load-file (expand-file-name file
-               (expand-file-name "custom" user-emacs-directory))))
+  (let* ((user-dir (expand-file-name "custom" user-emacs-directory))
+          (custom-file (expand-file-name file user-dir)))
+    (if (file-exists-p custom-file)
+      (load-file custom-file)
+      (message "custom file %s not found" file)
+    )))
 
 ;; store emacs auto-customization in its own file.
 (setq custom-file (expand-file-name "auto-custom.el" user-emacs-directory))
 (load custom-file 'noerror)
 
-;; load user customization
-(load-user-file "paths.el")
-(load-user-file "ui.el")
-(load-user-file "behavior.el")
-(load-user-file "modes.el")
-(load-user-file "ruby.el")
-(load-user-file "js.el")
-(load-user-file "c.el")
-(load-user-file "org.el")
-(load-user-file "magic-align.el")
-(load-user-file "keybinds.el")
+(map nil 'load-user-file
+  '( "paths.el"
+     "ui.el"
+     "modeline.el"
+     "behavior.el"
+     "modes.el"
+     "ruby.el"
+     "js.el"
+     "c.el"
+     "org.el"
+     "magic-align.el"
+     "keybinds.el"))
 
 ;; display startup timing after load
 (fset 'startup-echo-area-message
   #'(lambda ()
-     (message "emacs loaded in %s" (emacs-init-time))))
+      (message "emacs loaded in %s" (emacs-init-time))))
