@@ -29,10 +29,8 @@
 
 ;; list of packages to have el-get install
 (defvar required-packages
-  '(auto-complete
-     auto-complete-css
-     auto-complete-emacs-lisp
-     coffee-mode
+  '(coffee-mode
+     company-mode
      enh-ruby-mode
      flycheck
      git-timemachine
@@ -69,11 +67,10 @@
 (push (expand-file-name "themes" user-emacs-directory) custom-theme-load-path)
 
 ;; turn on autocomplete
-(require 'auto-complete-config)
 (require 'projectile)
 (require 'helm-projectile)
+(require 'company)
 
-(ac-config-default)
 (projectile-global-mode)
 
 (defun load-user-file (file)

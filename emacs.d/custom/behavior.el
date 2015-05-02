@@ -21,6 +21,14 @@
 (savehist-mode t)          ; persist minibuffer history across restart
 (setq history-length 1000) ; let's remember a lot of stuff
 
+(setq-default company-frontends
+  '(company-pseudo-tooltip-unless-just-one-frontend
+     company-echo-metadata-frontend
+     company-preview-frontend))
+
+(setq-default company-lighter-base "Comp")
+(setq-default company-show-numbers t)
+
 (unless (eq system-type 'darwin)
   (setq-default
     browse-url-browser-function 'browse-url-generic

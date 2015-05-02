@@ -1,12 +1,8 @@
 ;;; modes --- hooks for customizing various modes
 ;; John Ledbetter <john.ledbetter@gmail.com>
+(add-hook 'after-init-hook 'global-company-mode)
 
 (add-to-list 'auto-mode-alist '("\\.js.erb\\'" . js-mode))
-
-; turn on auto-complete-mode pretty much everywhere it's not by default.
-(mapc (lambda (mode) (add-to-list 'ac-modes mode))
-  '(scss-mode css-mode rhtml-mode coffee-mode go-mode vala-mode rust-mode enh-ruby-mode
-     text-mode fundamental-mode))
 
 (add-hook 'markdown-mode-hook
   '(lambda ()

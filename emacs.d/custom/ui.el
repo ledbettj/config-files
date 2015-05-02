@@ -93,17 +93,34 @@ than the background of the buffer."
     (set-face-foreground 'mode-line-inactive (scale-colour fg 0.65))
     (set-face-attribute 'mode-line-inactive nil :box nil)
     (set-face-attribute 'mode-line nil :box (scale-colour fg 0.50))
-    (set-face-foreground 'popup-tip-face bg)
-    (set-face-background 'popup-tip-face fg)
-    (set-face-attribute 'ac-candidate-face nil
-      :background (face-foreground 'default)
-      :foreground (face-background 'default)
+    (set-face-attribute 'company-preview-common nil
+      :background (scale-colour bg 1.20)
+      :foreground fg
+      :underline t
       :box nil)
-    (set-face-attribute 'ac-selection-face nil
-      :background (face-foreground 'font-lock-keyword-face)
-      :foreground "#000000"
+    (set-face-attribute 'company-preview nil
+      :background (scale-colour bg 1.20)
+      :foreground fg
+      :underline t
+      :box nil)
+    (set-face-attribute 'company-tooltip nil
+      :background fg
+      :foreground bg)
+    (set-face-attribute 'company-tooltip-common-selection nil
+      :background nil
+      :foreground nil
       :bold t
-      :box nil)))
+      )
+    (set-face-attribute 'company-tooltip-selection nil
+      :background (face-foreground 'font-lock-keyword-face)
+      :foreground "#000000")
+    (set-face-attribute 'company-tooltip-common nil
+      :background nil
+      :foreground nil
+      :underline nil
+      :bold t)
+    (set-face-background 'company-scrollbar-bg (scale-colour fg 0.85))
+    (set-face-background 'company-scrollbar-fg (scale-colour fg 0.65))))
 
 (eval-after-load 'diff-mode
   '(progn
