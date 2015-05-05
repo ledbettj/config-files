@@ -152,8 +152,6 @@ than the background of the buffer."
     ((display-graphic-p)      'wave)
     (t                        nil)))
 
-(setcar (cdr (assq 'auto-complete-mode minor-mode-alist)) " Ⓐ")
-
 (setq flycheck-mode-line
       '(:eval
         (pcase flycheck-last-status-change
@@ -238,7 +236,5 @@ than the background of the buffer."
   (set-face-font 'mode-line mode-line-font)
   (set-face-font 'mode-line-inactive mode-line-font))
 
-(set-face-font 'popup-tip-face "Ubuntu Mono")
-(set-face-attribute 'popup-tip-face nil :height (if (eq system-type 'darwin) 160 140))
 (jl/powerline-theme)
 
