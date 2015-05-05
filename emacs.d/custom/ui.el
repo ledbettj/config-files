@@ -39,8 +39,7 @@
 (eval-after-load "rainbow-mode"
   '(progn
      (nconc rainbow-html-colors-major-mode-list
-       '(scss-mode emacs-lisp-mode javascript-mode))
-     (setcar (cdr (assq 'rainbow-mode minor-mode-alist)) " Ⓡ")))
+       '(scss-mode emacs-lisp-mode javascript-mode))))
 
 (defun scale-colour (colour factor)
   "Scale the given hex colour (#112233) by the given factor.
@@ -82,6 +81,7 @@ than the background of the buffer."
 (defun scale-ui-colors ()
   (let ((bg (face-background 'default))
          (fg (face-foreground 'default)))
+    (set-face-background 'region  (scale-colour (face-foreground 'font-lock-string-face) 0.95))
     (set-face-background 'hl-line (scale-colour bg 1.20))
     (set-face-foreground 'linum   (scale-colour bg 1.50))
     (set-face-background 'linum   (scale-colour bg 0.90))
@@ -149,10 +149,10 @@ than the background of the buffer."
 (setq flycheck-mode-line
       '(:eval
         (pcase flycheck-last-status-change
-          (`not-checked " Ⓕ")
-          (`no-checker (propertize " Ⓕ-" 'face 'warning))
-          (`running (propertize " Ⓕ%" 'face 'success))
-          (`errored (propertize " Ⓕ!" 'face 'error))
+          (`not-checked " Fly")
+          (`no-checker (propertize " NoFly" 'face 'warning))
+          (`running (propertize " Fly" 'face 'success))
+          (`errored (propertize " Fly" 'face 'error))
           (`finished
             (let* ((error-counts (flycheck-count-errors flycheck-current-errors))
                     (no-errors (cdr (assq 'error error-counts)))
@@ -160,13 +160,12 @@ than the background of the buffer."
                     (face (cond (no-errors 'error)
                             (no-warnings 'warning)
                             (t 'success))))
-              (propertize " Ⓕ" 'face face)))
-          (`interrupted " Ⓕ~")
-          (`suspicious '(propertize "Ⓕ?" 'face 'warning)))))
-
-(setq-default projectile-mode-line  " Ⓟ")
+              (propertize " Fly" 'face face)))
+          (`interrupted " Fly~")
+          (`suspicious '(propertize "Fly" 'face 'warning)))))
 
 (setcar (cdr (assq 'abbrev-mode minor-mode-alist)) nil)
+
 (eval-after-load "rspec-mode"
   '(progn
      (setcar (cdr (assq 'rspec-mode minor-mode-alist)) " RS")))
