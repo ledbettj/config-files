@@ -2,14 +2,14 @@
 ;; John Ledbetter <john.ledbetter@gmail.com>
 
 (setq auto-mode-alist
-  (append auto-mode-alist
+  (append
     '(("\\.rb$"       . enh-ruby-mode)
        ("Gemfile$"    . enh-ruby-mode)
        ("Rakefile$"   . enh-ruby-mode)
        ("\\.gemspec$" . enh-ruby-mode)
        ("\\.ru"       . enh-ruby-mode)
-       ("\\.rake"     . enh-ruby-mode))))
-
+       ("\\.rake"     . enh-ruby-mode))
+  auto-mode-alist))
 
 (defun convert-hash-rocket (BEG END)
   "Convert hash rocket syntax to JSON syntax"
