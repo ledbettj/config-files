@@ -43,7 +43,6 @@
      magit
      markdown-mode
      move-text
-     powerline
      projectile
      rainbow-mode
      rhtml-mode
