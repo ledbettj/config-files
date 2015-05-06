@@ -1,5 +1,6 @@
 ;;; ui.el - user interface customizations for emacs
 ;; John Ledbetter <john.ledbetter@gmail.com>
+(require 'color)
 
 ;; disable menu bar, tool bar, and scroll bar.
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
@@ -41,21 +42,6 @@
      (nconc rainbow-html-colors-major-mode-list
        '(scss-mode emacs-lisp-mode javascript-mode))))
 
-(defun scale-colour (colour factor)
-  "Scale the given hex colour (#112233) by the given factor.
-This used specifically to make whitespace appear as a slightly darker color
-than the background of the buffer."
-  (if window-system
-    (let* ((values (color-values colour))
-            (r (floor (* factor (car values))))
-            (g (floor (* factor (cadr values))))
-            (b (floor (* factor (caddr values)))))
-      (format "#%02x%02x%02x"
-        (min (* (/ r 65280.0) 256) 255)
-        (min (* (/ g 65280.0) 256) 255)
-        (min (* (/ b 65280.0) 256) 255)))
-    colour))
-
 ;; show tabs and trailing whitespace as slightly darker background color
 (add-hook 'font-lock-mode-hook
   (lambda ()
@@ -81,25 +67,25 @@ than the background of the buffer."
 (defun scale-ui-colors ()
   (let ((bg (face-background 'default))
          (fg (face-foreground 'default)))
-    (set-face-background 'region  (scale-colour (face-foreground 'font-lock-string-face) 1.55))
-    (set-face-background 'hl-line (scale-colour bg 1.20))
-    (set-face-foreground 'linum   (scale-colour bg 1.50))
-    (set-face-background 'linum   (scale-colour bg 0.90))
-    (set-face-background 'trailing-whitespace (scale-colour bg 0.83))
+    (set-face-background 'region  (color-lighten-name (face-foreground 'font-lock-string-face) 10))
+    (set-face-background 'hl-line (color-lighten-name bg 8.5))
+    (set-face-foreground 'linum   (color-lighten-name bg 15))
+    (set-face-background 'linum   (color-darken-name bg 5))
+    (set-face-background 'trailing-whitespace (color-darken-name bg 25))
     (set-face-foreground 'which-func (face-foreground 'font-lock-keyword-face))
-    (set-face-background 'mode-line (scale-colour bg 0.75))
-    (set-face-foreground 'mode-line (scale-colour fg 0.75))
-    (set-face-background 'mode-line-inactive (scale-colour bg 0.65))
-    (set-face-foreground 'mode-line-inactive (scale-colour fg 0.65))
+    (set-face-background 'mode-line (color-darken-name bg 15))
+    (set-face-foreground 'mode-line (color-darken-name fg 5))
+    (set-face-background 'mode-line-inactive (color-darken-name bg 25))
+    (set-face-foreground 'mode-line-inactive (color-darken-name fg 25))
     (set-face-attribute 'mode-line-inactive nil :box nil)
-    (set-face-attribute 'mode-line nil :box (scale-colour fg 0.50))
+    (set-face-attribute 'mode-line nil :box (color-darken-name fg 25))
     (set-face-attribute 'company-preview-common nil
-      :background (scale-colour bg 1.20)
+      :background (color-lighten-name bg 20)
       :foreground fg
       :underline t
       :box nil)
     (set-face-attribute 'company-preview nil
-      :background (scale-colour bg 1.20)
+      :background (color-lighten-name bg 20)
       :foreground fg
       :underline t
       :box nil)
@@ -119,8 +105,8 @@ than the background of the buffer."
       :foreground nil
       :underline nil
       :bold t)
-    (set-face-background 'company-scrollbar-bg (scale-colour fg 0.85))
-    (set-face-background 'company-scrollbar-fg (scale-colour fg 0.65))))
+    (set-face-background 'company-scrollbar-bg (color-darken-name fg 15))
+    (set-face-background 'company-scrollbar-fg (color-darken-name fg 35))))
 
 (eval-after-load 'diff-mode
   '(progn
@@ -128,7 +114,6 @@ than the background of the buffer."
      (set-face-foreground 'diff-removed "red4")))
 
 (eval-after-load "auto-complete" '(progn (scale-ui-colors)))
-
 
 ;; monokai has a green background in a terminal. don't use it.
 (load-theme (if (window-system) 'monokai 'wombat) t nil)
