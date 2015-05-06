@@ -78,7 +78,7 @@
   (let* ((user-dir (expand-file-name "custom" user-emacs-directory))
           (custom-file (expand-file-name file user-dir)))
     (if (file-exists-p custom-file)
-      (load-file custom-file)
+      (load custom-file nil t)
       (message "custom file %s not found" file)
     )))
 

@@ -25,7 +25,7 @@
   (local-set-key (kbd "C-c b") 'magit-blame-mode)
   (local-set-key (kbd "C-c r") 'convert-hash-rocket)
   (rainbow-mode t)
-  (set-face-foreground 'enh-ruby-op-face (scale-colour (face-foreground 'default) 0.85))
+  (set-face-foreground 'enh-ruby-op-face (color-darken-name (face-foreground 'default) 25))
   (smartparens-mode t))
 
 (add-hook 'enh-ruby-mode-hook 'jl/ruby-setup)
