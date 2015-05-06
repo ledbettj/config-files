@@ -51,9 +51,9 @@ than the background of the buffer."
             (g (floor (* factor (cadr values))))
             (b (floor (* factor (caddr values)))))
       (format "#%02x%02x%02x"
-        (* (/ r 65280.0) 256)
-        (* (/ g 65280.0) 256)
-        (* (/ b 65280.0) 256)))
+        (min (* (/ r 65280.0) 256) 255)
+        (min (* (/ g 65280.0) 256) 255)
+        (min (* (/ b 65280.0) 256) 255)))
     colour))
 
 ;; show tabs and trailing whitespace as slightly darker background color
