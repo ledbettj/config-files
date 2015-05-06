@@ -81,7 +81,7 @@ than the background of the buffer."
 (defun scale-ui-colors ()
   (let ((bg (face-background 'default))
          (fg (face-foreground 'default)))
-    (set-face-background 'region  (scale-colour (face-foreground 'font-lock-string-face) 0.95))
+    (set-face-background 'region  (scale-colour (face-foreground 'font-lock-string-face) 1.55))
     (set-face-background 'hl-line (scale-colour bg 1.20))
     (set-face-foreground 'linum   (scale-colour bg 1.50))
     (set-face-background 'linum   (scale-colour bg 0.90))
