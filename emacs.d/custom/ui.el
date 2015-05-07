@@ -22,9 +22,7 @@
         (if (eq (display-pixel-width) 1280)
           "Ubuntu Mono-16"
           "Ubuntu Mono-18")
-        "Ubuntu Mono-12")))
-
-(set-face-attribute 'default nil :weight 'light)
+        "Ubuntu Mono-13")))
 
 (add-to-list 'default-frame-alist '(width . 84))
 
