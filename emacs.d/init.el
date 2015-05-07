@@ -55,6 +55,9 @@
      vala-mode
      yaml-mode))
 
+(unless (eq system-type 'darwin)
+  (nconc required-packages '(svg-mode-line-themes)))
+
 ;; override notifications to be displayed in the message buffer if
 ;; we're running in a terminal.
 (unless (display-graphic-p)
