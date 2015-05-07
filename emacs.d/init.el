@@ -51,6 +51,7 @@
      scss-mode
      smartparens
      tern
+     toml-mode
      vala-mode
      yaml-mode))
 
