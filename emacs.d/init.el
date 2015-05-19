@@ -73,6 +73,9 @@
 (require 'projectile)
 (require 'helm-projectile)
 (require 'company)
+(require 'company-dabbrev-code)
+(setq company-dabbrev-code-modes
+  (add-to-list 'company-dabbrev-code-modes 'enh-ruby-mode))
 
 (projectile-global-mode)
 
@@ -102,6 +105,8 @@
      "org.el"
      "magic-align.el"
      "keybinds.el"))
+
+(setq magit-last-seen-setup-instructions "1.4.0")
 
 ;; display startup timing after load
 (fset 'startup-echo-area-message
