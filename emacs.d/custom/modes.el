@@ -50,7 +50,7 @@
      (flyspell-mode t)))
 
 (add-hook 'dired-mode-hook 'rspec-dired-mode)
-
+(add-hook 'enh-ruby-mode-hook 'rspec-mode)
 (defun byte-compile-current-buffer ()
   "`byte-compile' current buffer if it's emacs-lisp-mode and compiled file exists."
   (interactive)

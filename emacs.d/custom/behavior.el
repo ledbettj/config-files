@@ -32,7 +32,7 @@
 (unless (eq system-type 'darwin)
   (setq-default
     browse-url-browser-function 'browse-url-generic
-    browse-url-generic-program  "google-chrome-unstable"))
+    browse-url-generic-program  "google-chrome-stable"))
 
 (defalias 'yes-or-no-p 'y-or-n-p)   ; always ask Y/N? instead of yes/no.
 
