@@ -39,7 +39,8 @@
 
 (add-hook 'go-mode-hook
   '(lambda ()
-     (setq indent-tabs-mode nil)))
+     (local-set-key (kbd "C-c f") 'gofmt)
+     (setq tab-width 4 indent-tabs-mode t)))
 
 (add-hook 'vala-mode-hook
   '(lambda ()

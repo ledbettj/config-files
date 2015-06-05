@@ -44,7 +44,7 @@
 (add-hook 'font-lock-mode-hook
   (lambda ()
     (font-lock-add-keywords
-      nil
+      'enh-ruby-mode
       '(("\t" 0 'trailing-whitespace prepend)))))
 
 (setq-default show-trailing-whitespace t)
