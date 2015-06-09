@@ -64,3 +64,14 @@
     (byte-compile-file buffer-file-name)))
 
 (add-hook 'after-save-hook 'byte-compile-current-buffer)
+
+(setq company-lighter " Cmp")
+(setq projectile-mode-line '(:eval
+  (format " Prj[%s]"
+    (projectile-project-name))))
+
+(delight '((emacs-lisp-mode "Elisp" :major)
+            (enh-ruby-mode "Ruby+" :major)
+            (rspec-mode  " RS")
+            (smartparens-mode " ()" smartparens)
+            (rainbow-mode)))

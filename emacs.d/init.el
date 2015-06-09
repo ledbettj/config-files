@@ -32,6 +32,7 @@
   '(coffee-mode
      company-mode
      enh-ruby-mode
+     delight
      fic-mode
      flycheck
      git-timemachine

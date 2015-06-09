@@ -74,9 +74,9 @@
     (set-face-background 'mode-line (color-darken-name bg 15))
     (set-face-foreground 'mode-line (color-darken-name fg 5))
     (set-face-background 'mode-line-inactive (color-darken-name bg 25))
-    (set-face-foreground 'mode-line-inactive (color-darken-name fg 25))
+    (set-face-foreground 'mode-line-inactive (color-darken-name fg 35))
     (set-face-attribute 'mode-line-inactive nil :box nil)
-    (set-face-attribute 'mode-line nil :box (color-darken-name fg 25))
+    (set-face-attribute 'mode-line nil :box nil)
     (set-face-attribute 'company-preview-common nil
       :background (color-lighten-name bg 20)
       :foreground fg
@@ -132,10 +132,10 @@
 (setq flycheck-mode-line
       '(:eval
         (pcase flycheck-last-status-change
-          (`not-checked " Fly")
-          (`no-checker (propertize " NoFly" 'face 'warning))
-          (`running (propertize " Fly" 'face 'success))
-          (`errored (propertize " Fly" 'face 'error))
+          (`not-checked " ?")
+          (`no-checker (propertize " -" 'face 'warning))
+          (`running (propertize " ❂" 'face 'escape-glyph))
+          (`errored (propertize " ⚠" 'face 'error))
           (`finished
             (let* ((error-counts (flycheck-count-errors flycheck-current-errors))
                     (no-errors (cdr (assq 'error error-counts)))
@@ -143,20 +143,8 @@
                     (face (cond (no-errors 'error)
                             (no-warnings 'warning)
                             (t 'success))))
-              (propertize " Fly" 'face face)))
-          (`interrupted " Fly~")
-          (`suspicious '(propertize "Fly" 'face 'warning)))))
+              (propertize (if (or no-errors no-warnings) " ✘" " ✔") 'face face)))
+          (`interrupted " ⚠")
+          (`suspicious '(propertize " ⚠" 'face 'warning)))))
 
 (setcar (cdr (assq 'abbrev-mode minor-mode-alist)) nil)
-
-(eval-after-load "rspec-mode"
-  '(progn
-     (setcar (cdr (assq 'rspec-mode minor-mode-alist)) " RS")))
-
-
-(let ((mode-line-font (if (eq system-type 'darwin)
-                        "Ubuntu Condensed-16"
-                        "Ubuntu Condensed-12")))
-  
-  (set-face-font 'mode-line mode-line-font)
-  (set-face-font 'mode-line-inactive mode-line-font))
