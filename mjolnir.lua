@@ -97,10 +97,10 @@ mjolnir.hotkey.bind({"ctrl", "alt"}, "pad*",
          ["Google Chrome"] = {"topright", screens[1]},
          ["Emacs"]         = {"left",     screens[1]},
          ["iTerm"]         = {"bottomright", screens[1]},
-         ["HipChat"]       = {"right", screens[2]},
+         ["HipChat"]       = {"left", screens[2]},
          ["Slack"]         = {"full", screens[2]},
-         ["Mail"]          = {"left",  screens[2]},
-         ["Mailbox (Beta)"]= {"left",  screens[2]}
+         ["Mail"]          = {"right",  screens[2]},
+         ["Mailbox (Beta)"]= {"right",  screens[2]}
       }
 
       for name, pos in pairs(apps) do
