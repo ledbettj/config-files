@@ -52,6 +52,10 @@
 
 (add-hook 'dired-mode-hook 'rspec-dired-mode)
 (add-hook 'enh-ruby-mode-hook 'rspec-mode)
+(add-hook 'enh-ruby-mode-hook 'fic-mode)
+(add-hook 'js-mode-hook 'fic-mode)
+(add-hook 'rust-mode-hook 'fic-mode)
+
 (defun byte-compile-current-buffer ()
   "`byte-compile' current buffer if it's emacs-lisp-mode and compiled file exists."
   (interactive)

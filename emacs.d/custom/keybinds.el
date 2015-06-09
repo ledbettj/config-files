@@ -13,7 +13,7 @@
 (global-set-key (kbd "C-<prior>") (lambda() (interactive) (previous-line 10)))
 (global-set-key (kbd "C-c a") 'magic-align)
 (global-set-key (kbd "C-c C-s") 'reopen-file-with-sudo)
-
+(global-set-key (kbd "C-c i") 'inf-ruby-console-auto)
 (when (eq system-type 'darwin)
   (global-set-key [C-s-268632064] 'helm-project-grep) ; ctrl-cmd-spc
   (global-set-key [C-s-268632083] 'helm-multi-occur-all)) ; ctrl-cmd-s

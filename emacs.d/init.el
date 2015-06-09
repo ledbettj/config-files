@@ -32,6 +32,7 @@
   '(coffee-mode
      company-mode
      enh-ruby-mode
+     fic-mode
      flycheck
      git-timemachine
      go-mode
@@ -39,6 +40,7 @@
      helm
      ido-vertical-mode
      iedit
+     inf-ruby
      lua-mode
      magit
      markdown-mode

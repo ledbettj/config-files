@@ -100,7 +100,7 @@
   "search all files in the project."
   (interactive)
   (helm-do-grep-1 (list (projectile-expand-root "")) t nil
-    '("*.rb" "*.erb" "*.js" "*.yml" "*.c" "*.h" "*.rake" "Rakefile"
+    '("*.rb" "*.erb" "*.js" "*.yml" "*.c" "*.h" "*.rake" "Rakefile" "*.scss" "*.css"
        "*.el")))
 
 
