@@ -3,6 +3,7 @@ set show-all-if-unmodified on
 set completion-ignore-case on
 set skip-completed-text on
 set colored-stats on
+set completion-map-case on
 
 # OS X doesn't include an /etc/inputrc
 # so this is shamelessly copied from Arch's inputrc
