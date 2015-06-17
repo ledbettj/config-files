@@ -1,5 +1,8 @@
-set show-all-if-ambiguous on   # single tab to start completion help
-set completion-ignore-case on  # completion is case-insensitive
+set show-all-if-ambiguous on
+set show-all-if-unmodified on
+set completion-ignore-case on
+set skip-completed-text on
+set colored-stats on
 
 # OS X doesn't include an /etc/inputrc
 # so this is shamelessly copied from Arch's inputrc
