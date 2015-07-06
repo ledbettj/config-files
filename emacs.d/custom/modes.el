@@ -2,7 +2,12 @@
 ;; John Ledbetter <john.ledbetter@gmail.com>
 (add-hook 'after-init-hook 'global-company-mode)
 
-(add-to-list 'auto-mode-alist '("\\.js.erb\\'" . js-mode))
+(add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.jsx\\'" . web-mode))
+
+(setq-default web-mode-markup-indent-offset 2)
+(setq-default web-mode-code-indent-offset 2)
+(setq-default web-mode-css-indent-offset 2)
 
 (add-hook 'markdown-mode-hook
   '(lambda ()
@@ -22,10 +27,6 @@
 (add-hook 'css-mode-hook
   '(lambda ()
      (setq css-indent-offset 2)
-     (rainbow-mode t)))
-
-(add-hook 'rhtml-mode-hook
-  '(lambda ()
      (rainbow-mode t)))
 
 (add-hook 'sh-mode-hook

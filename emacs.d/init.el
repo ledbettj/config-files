@@ -31,6 +31,7 @@
 (defvar required-packages
   '(coffee-mode
      company-mode
+     company-tern
      enh-ruby-mode
      delight
      fic-mode
@@ -48,14 +49,16 @@
      move-text
      projectile
      rainbow-mode
-     rhtml-mode
      rspec-mode
      rust-mode
      scss-mode
      smartparens
+     solarized-emacs
      tern
      toml-mode
+     tomorrow-theme
      vala-mode
+     web-mode
      yaml-mode))
 
 (unless (eq system-type 'darwin)

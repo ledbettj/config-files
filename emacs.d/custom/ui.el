@@ -65,18 +65,20 @@
 (defun scale-ui-colors ()
   (let ((bg (face-background 'default))
          (fg (face-foreground 'default)))
-    (set-face-background 'region  (color-lighten-name (face-foreground 'font-lock-string-face) 10))
+    (set-face-background 'region  (color-lighten-name (face-foreground 'font-lock-string-face) 1))
     (set-face-background 'hl-line (color-lighten-name bg 8.5))
-    (set-face-foreground 'linum   (color-lighten-name bg 15))
-    (set-face-background 'linum   (color-darken-name bg 5))
-    (set-face-background 'trailing-whitespace (color-darken-name bg 25))
+    (set-face-foreground 'linum   (color-lighten-name bg 10))
+    (set-face-background 'linum   (color-darken-name bg 3))
+    (set-face-background 'trailing-whitespace (color-darken-name bg 5))
     (set-face-foreground 'which-func (face-foreground 'font-lock-keyword-face))
-    (set-face-background 'mode-line (color-darken-name bg 15))
-    (set-face-foreground 'mode-line (color-darken-name fg 5))
+    (set-face-background 'mode-line (color-darken-name bg 10))
+    (set-face-foreground 'mode-line (color-darken-name fg 2))
     (set-face-background 'mode-line-inactive (color-darken-name bg 25))
     (set-face-foreground 'mode-line-inactive (color-darken-name fg 35))
-    (set-face-attribute 'mode-line-inactive nil :box nil)
-    (set-face-attribute 'mode-line nil :box nil)
+    (set-face-attribute 'mode-line-inactive nil :box nil :underline nil)
+    (set-face-attribute 'mode-line nil :box nil :underline nil)
+    (if (facep 'flycheck-info)
+      (set-face-attribute 'flycheck-info nil :underline `(:color ,(face-foreground 'font-lock-comment-face) :style line)))
     (set-face-attribute 'company-preview-common nil
       :background (color-lighten-name bg 20)
       :foreground fg
@@ -111,10 +113,7 @@
      (set-face-foreground 'diff-added "green3")
      (set-face-foreground 'diff-removed "red4")))
 
-(eval-after-load "auto-complete" '(progn (scale-ui-colors)))
-
-;; monokai has a green background in a terminal. don't use it.
-(load-theme (if (window-system) 'monokai 'wombat) t nil)
+(load-theme (if (display-graphic-p) 'solarized-dark 'wombat) t nil)
 
 (unless (eq system-type 'darwin)
   (set-fontset-font t '(#x1f300 . #x1f5ff) "Symbola")
@@ -128,6 +127,12 @@
   (setq ns-use-native-fullscreen t))
 
 (set-face-attribute 'mode-line nil :height 1.0)
+
+(eval-after-load 'flycheck
+  '(progn
+     (set-face-attribute 'flycheck-error   nil :underline '(:color "Red1" :style line))
+     (set-face-attribute 'flycheck-info nil :underline `(:color ,(face-foreground 'font-lock-comment-face) :style line))
+     (set-face-attribute 'flycheck-warning nil :underline '(:color "DarkOrange" :style line))))
 
 (setq flycheck-mode-line
       '(:eval
