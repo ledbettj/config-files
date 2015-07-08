@@ -54,6 +54,7 @@
      scss-mode
      smartparens
      solarized-emacs
+     swiper
      tern
      toml-mode
      tomorrow-theme
