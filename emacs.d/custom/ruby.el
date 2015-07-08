@@ -7,8 +7,8 @@
        ("Gemfile$"    . enh-ruby-mode)
        ("Rakefile$"   . enh-ruby-mode)
        ("\\.gemspec$" . enh-ruby-mode)
-       ("\\.ru"       . enh-ruby-mode)
-       ("\\.rake"     . enh-ruby-mode))
+       ("\\.ru$"      . enh-ruby-mode)
+       ("\\.rake$"    . enh-ruby-mode))
   auto-mode-alist))
 
 (defun convert-hash-rocket (BEG END)
