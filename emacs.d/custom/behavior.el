@@ -106,4 +106,3 @@
 
 ; flycheck mode everywhere!!!!
 (add-hook 'after-init-hook #'global-flycheck-mode)
-(setq-default flycheck-disabled-checkers '(ruby-rubocop)) ; rubocop is annoying

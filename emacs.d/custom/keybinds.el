@@ -17,7 +17,6 @@
 (global-set-key (kbd "C-s") 'swiper)
 (global-set-key (kbd "C-r") 'swiper)
 
-
 (when (eq system-type 'darwin)
   (global-set-key [C-s-268632064] 'helm-project-grep) ; ctrl-cmd-spc
   (global-set-key [C-s-268632083] 'helm-multi-occur-all)) ; ctrl-cmd-s
