@@ -16,6 +16,7 @@
 (global-set-key (kbd "C-c i") 'inf-ruby-console-auto)
 (global-set-key (kbd "C-s") 'swiper)
 (global-set-key (kbd "C-r") 'swiper)
+(global-set-key (kbd "C-c g") 'magit-status)
 
 (when (eq system-type 'darwin)
   (global-set-key [C-s-268632064] 'helm-project-grep) ; ctrl-cmd-spc
