@@ -103,6 +103,9 @@
     '("*.rb" "*.erb" "*.js" "*.yml" "*.c" "*.h" "*.rake" "Rakefile" "*.scss" "*.css"
        "*.el")))
 
+(defun close-all-buffers ()
+  (interactive)
+  (mapc 'kill-buffer (buffer-list)))
 
 ; flycheck mode everywhere!!!!
 (add-hook 'after-init-hook #'global-flycheck-mode)

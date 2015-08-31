@@ -25,6 +25,7 @@
      (:name flycheck      :type elpa)
      (:name go-mode       :type elpa)
      (:name enh-ruby-mode :type elpa)
+     (:name rinari        :type elpa)
      (:name move-text     :type elpa)))
 
 ;; list of packages to have el-get install
@@ -50,6 +51,7 @@
      projectile
      rainbow-mode
      rspec-mode
+     rinari
      rust-mode
      scss-mode
      smartparens

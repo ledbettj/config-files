@@ -7,9 +7,19 @@
        ("Gemfile$"    . enh-ruby-mode)
        ("Rakefile$"   . enh-ruby-mode)
        ("\\.gemspec$" . enh-ruby-mode)
-       ("\\.ru$"      . enh-ruby-mode)
+       ("\\.cap$"     . enh-ruby-mode)
+       ("\\.thor$"    . enh-ruby-mode)
        ("\\.rake$"    . enh-ruby-mode))
-  auto-mode-alist))
+    auto-mode-alist))
+
+(setq interpreter-mode-alist
+  (append
+    '(("ruby1.8"  . enh-ruby-mode)
+       ("ruby1.9" . enh-ruby-mode)
+       ("jruby"   . enh-ruby-mode)
+       ("rbx"     . enh-ruby-mode)
+       ("ruby"    . enh-ruby-mode))
+    interpreter-mode-alist))
 
 (defun convert-hash-rocket (BEG END)
   "Convert hash rocket syntax to JSON syntax"
@@ -21,9 +31,30 @@
       (while (re-search-forward ":\\([^\s]+\\)\s*=>\s*\\([^\s]+\\)" END t)
         (replace-match "\\1: \\2")))))
 
+(defun symbolify-hash (BEG END)
+  "Convert a string hash into a symbol hash"
+  (interactive "r")
+  (if (not (region-active-p))
+    (message "mark not active")
+    (save-excursion
+      (goto-char BEG)
+      (while (re-search-forward "['\"]\\(.+\\)['\"]\s+=>\s+\\(.+\\),?$" END t)
+        (replace-match "\\1: \\2")))))
+
+(defun convert-quotes-to-single (BEG END)
+  "Convert double quotes to single in region"
+  (interactive "r")
+  (if (not (region-active-p))
+    (message "mark not active")
+    (save-excursion
+      (goto-char BEG)
+      (while (re-search-forward "\\(\"\\)" END t)
+        (replace-match "'")))))
+
 (defun jl/ruby-setup ()
-  (local-set-key (kbd "C-c b") 'magit-blame-mode)
+  (local-set-key (kbd "C-c b") 'magit-blame)
   (local-set-key (kbd "C-c r") 'convert-hash-rocket)
+  (local-set-key (kbd "C-c q") 'convert-quotes-to-single)
   (rainbow-mode t)
   (smartparens-mode t))
 
