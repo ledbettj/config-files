@@ -14,9 +14,12 @@
 (global-set-key (kbd "C-c a") 'magic-align)
 (global-set-key (kbd "C-c C-s") 'reopen-file-with-sudo)
 (global-set-key (kbd "C-c i") 'inf-ruby-console-auto)
-(global-set-key (kbd "C-s") 'swiper)
-(global-set-key (kbd "C-r") 'swiper)
 (global-set-key (kbd "C-c g") 'magit-status)
+
+(global-set-key (kbd "<C-s-up>")     'buf-move-up)
+(global-set-key (kbd "<C-s-down>")   'buf-move-down)
+(global-set-key (kbd "<C-s-left>")   'buf-move-left)
+(global-set-key (kbd "<C-s-right>")  'buf-move-right)
 
 (when (eq system-type 'darwin)
   (global-set-key [C-s-268632064] 'helm-project-grep) ; ctrl-cmd-spc

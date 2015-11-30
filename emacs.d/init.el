@@ -30,7 +30,8 @@
 
 ;; list of packages to have el-get install
 (defvar required-packages
-  '(coffee-mode
+  '(buffer-move
+     coffee-mode
      company-mode
      company-tern
      enh-ruby-mode
@@ -56,7 +57,6 @@
      scss-mode
      smartparens
      solarized-emacs
-     swiper
      tern
      toml-mode
      tomorrow-theme

@@ -22,6 +22,7 @@
     (local-set-key (kbd "RET") 'newline-and-indent)
     (setq flycheck-gcc-language-standard "c99")
     (setq flycheck-clang-language-standard "c99")
+    (setq c-basic-offset 4)
     (let ((filename (buffer-file-name)))
       ;; Enable kernel mode for files in a linux directory
       (when (and filename
