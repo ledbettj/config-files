@@ -1,5 +1,6 @@
 ;;; init.el - emacs configuration file
 ;; John Ledbetter <john.ledbetter@gmail.com>
+(setq gc-cons-threshold (* 8192 8192))
 
 (require 'package)
 
@@ -44,6 +45,7 @@
      helm
      ido-vertical-mode
      iedit
+     jinja2-mode
      inf-ruby
      lua-mode
      magit
