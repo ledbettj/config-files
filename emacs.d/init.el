@@ -40,6 +40,7 @@
      fic-mode
      flycheck
      git-timemachine
+     git-gutter
      go-mode
      haml-mode
      helm
@@ -47,6 +48,7 @@
      iedit
      jinja2-mode
      inf-ruby
+     livedown
      lua-mode
      magit
      markdown-mode

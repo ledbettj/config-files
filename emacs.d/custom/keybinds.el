@@ -20,6 +20,7 @@
 (global-set-key (kbd "<C-s-down>")   'buf-move-down)
 (global-set-key (kbd "<C-s-left>")   'buf-move-left)
 (global-set-key (kbd "<C-s-right>")  'buf-move-right)
+(global-set-key (kbd "C-c f") 'helm-projectile-find-file)
 
 (when (eq system-type 'darwin)
   (global-set-key [C-s-268632064] 'helm-project-grep) ; ctrl-cmd-spc
