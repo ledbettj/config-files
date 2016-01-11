@@ -40,7 +40,6 @@
      fic-mode
      flycheck
      git-timemachine
-     git-gutter
      go-mode
      haml-mode
      helm

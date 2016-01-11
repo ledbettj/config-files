@@ -69,12 +69,6 @@
     (set-face-background 'hl-line (color-lighten-name bg 8.5))
     (set-face-foreground 'linum   (color-lighten-name bg 10))
     (set-face-background 'linum   (color-darken-name bg 3))
-    (when (facep 'git-gutter:added)
-      (set-face-background 'git-gutter:added   (color-darken-name bg 3))
-      (set-face-background 'git-gutter:deleted   (color-darken-name bg 3))
-      (set-face-background 'git-gutter:modified   (color-darken-name bg 3))
-      (set-face-background 'git-gutter:unchanged   (color-darken-name bg 3))
-      (set-face-background 'git-gutter:separator   (color-darken-name bg 3)))
     (set-face-background 'trailing-whitespace (color-darken-name bg 5))
     (set-face-foreground 'which-func (face-foreground 'font-lock-keyword-face))
     (set-face-background 'mode-line (color-darken-name bg 10))
@@ -139,8 +133,6 @@
      (set-face-attribute 'flycheck-error   nil :underline '(:color "Red1" :style line))
      (set-face-attribute 'flycheck-info nil :underline `(:color ,(face-foreground 'font-lock-comment-face) :style line))
      (set-face-attribute 'flycheck-warning nil :underline '(:color "DarkOrange" :style line))))
-
-(eval-after-load 'git-gutter '(progn (scale-ui-colors) (setq-default git-gutter:unchanged-sign " ")))
 
 (setq flycheck-mode-line
       '(:eval
