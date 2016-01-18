@@ -113,6 +113,8 @@
      (set-face-foreground 'diff-added "green3")
      (set-face-foreground 'diff-removed "red4")))
 
+(setq-default solarized-use-variable-pitch nil)
+(setq-default solarized-scale-org-headlines nil)
 (load-theme (if (display-graphic-p) 'solarized-dark 'wombat) t nil)
 
 (unless (eq system-type 'darwin)
