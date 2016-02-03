@@ -27,6 +27,7 @@
      (:name go-mode       :type elpa)
      (:name enh-ruby-mode :type elpa)
      (:name rinari        :type elpa)
+     (:name toggle-quotes :type elpa)
      (:name move-text     :type elpa)))
 
 ;; list of packages to have el-get install
@@ -61,6 +62,7 @@
      smartparens
      solarized-emacs
      tern
+     toggle-quotes
      toml-mode
      tomorrow-theme
      vala-mode
