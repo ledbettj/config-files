@@ -67,7 +67,8 @@
      tomorrow-theme
      vala-mode
      web-mode
-     yaml-mode))
+     yaml-mode
+     yascroll))
 
 ;; override notifications to be displayed in the message buffer if
 ;; we're running in a terminal.

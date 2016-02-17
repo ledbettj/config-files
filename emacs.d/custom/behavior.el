@@ -105,6 +105,8 @@
     '("*.rb" "*.erb" "*.js" "*.yml" "*.c" "*.h" "*.rake" "Rakefile" "*.scss" "*.css"
        "*.el")))
 
+(helm-mode -1)
+
 (defun close-all-buffers ()
   (interactive)
   (mapc 'kill-buffer (buffer-list)))

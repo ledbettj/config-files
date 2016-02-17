@@ -5,7 +5,11 @@
 ;; disable menu bar, tool bar, and scroll bar.
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 (if (fboundp 'tool-bar-mode)   (tool-bar-mode -1))
-(if (fboundp 'fringe-mode)     (fringe-mode 0))
+(when (fboundp 'fringe-mode)
+  (set-fringe-mode '(0 . 8)))
+
+(global-yascroll-bar-mode 1)
+
 (unless (eq system-type 'darwin)
   (if (fboundp 'menu-bar-mode)   (menu-bar-mode -1)))
 
