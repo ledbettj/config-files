@@ -20,9 +20,9 @@
   `(font .
      ,(if (eq system-type 'darwin)
         (if (eq (display-pixel-width) 1280)
-          "Ubuntu Mono-16"
-          "Ubuntu Mono-18")
-        "Ubuntu Mono-13")))
+          "Hack-16"
+          "Hack-18")
+        "Hack-12")))
 
 (add-to-list 'default-frame-alist '(width . 84))
 
