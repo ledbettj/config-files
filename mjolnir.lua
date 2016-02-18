@@ -173,3 +173,25 @@ mjolnir.hotkey.bind({"ctrl", "alt"}, "padenter",
    end
 )
 
+mjolnir.hotkey.bind({"ctrl", "alt"}, "left",
+   function()
+      left(mjolnir.window.focusedwindow())
+   end
+)
+
+mjolnir.hotkey.bind({"ctrl", "alt"}, "right",
+   function()
+      right(mjolnir.window.focusedwindow())
+   end
+)
+
+mjolnir.hotkey.bind({"ctrl", "alt"}, "up",
+   function()
+      top(mjolnir.window.focusedwindow())
+   end
+)
+mjolnir.hotkey.bind({"ctrl", "alt"}, "down",
+   function()
+      bottom(mjolnir.window.focusedwindow())
+   end
+)
