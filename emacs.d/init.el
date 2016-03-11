@@ -32,7 +32,8 @@
 
 ;; list of packages to have el-get install
 (defvar required-packages
-  '(buffer-move
+  '(browse-at-remote
+     buffer-move
      coffee-mode
      company-mode
      company-tern
