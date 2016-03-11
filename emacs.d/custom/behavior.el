@@ -8,6 +8,7 @@
 (ido-vertical-mode t)
 
 (setq-default flycheck-indication-mode nil)
+(setq-default flycheck-navigation-minimum-level 'warning)
 (setq-default ido-use-faces t)
 (setq ido-vertical-define-keys 'C-n-C-p-up-and-down)
 (setq-default ido-max-prospects 6)
