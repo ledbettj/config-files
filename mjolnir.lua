@@ -96,7 +96,7 @@ mjolnir.hotkey.bind({"ctrl", "alt"}, "pad*",
       local apps = {
          ["Google Chrome"] = {"topright", screens[1]},
          ["Emacs"]         = {"left",     screens[1]},
-         ["iTerm"]         = {"bottomright", screens[1]},
+         ["iTerm2"]        = {"bottomright", screens[1]},
          ["HipChat"]       = {"left", screens[2]},
          ["Slack"]         = {"full", screens[2]},
          ["Mail"]          = {"right",  screens[2]},
@@ -193,5 +193,11 @@ mjolnir.hotkey.bind({"ctrl", "alt"}, "up",
 mjolnir.hotkey.bind({"ctrl", "alt"}, "down",
    function()
       bottom(mjolnir.window.focusedwindow())
+   end
+)
+
+mjolnir.hotkey.bind({"ctrl", "alt"}, "return",
+   function()
+      full(mjolnir.window.focusedwindow())
    end
 )

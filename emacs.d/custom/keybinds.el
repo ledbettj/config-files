@@ -15,7 +15,7 @@
 (global-set-key (kbd "C-c C-s") 'reopen-file-with-sudo)
 (global-set-key (kbd "C-c i") 'inf-ruby-console-auto)
 (global-set-key (kbd "C-c g") 'magit-status)
-(global-set-key (kbd "C-c b") 'browse-at-remote/browse)
+(global-set-key (kbd "C-c h") 'browse-at-remote/browse)
 (global-set-key (kbd "<C-s-up>")     'buf-move-up)
 (global-set-key (kbd "<C-s-down>")   'buf-move-down)
 (global-set-key (kbd "<C-s-left>")   'buf-move-left)
