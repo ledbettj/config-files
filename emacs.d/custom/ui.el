@@ -82,7 +82,7 @@
     (set-face-attribute 'mode-line-inactive nil :box nil :underline nil)
     (set-face-attribute 'mode-line nil :box nil :underline nil)
     (if (facep 'flycheck-info)
-      (set-face-attribute 'flycheck-info nil :underline `(:color ,(face-foreground 'font-lock-comment-face) :style line)))
+      (set-face-attribute 'flycheck-info nil :underline `(:color ,(color-lighten-name (face-foreground 'font-lock-comment-face) 25) :style line)))
     (set-face-attribute 'company-preview-common nil
       :background (color-lighten-name bg 20)
       :foreground fg
