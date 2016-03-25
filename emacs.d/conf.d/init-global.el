@@ -1,5 +1,7 @@
 (require 'use-package)
 
+(global-set-key (kbd "M-g") 'goto-line)
+
 (use-package hungry-delete
   :load-path "local/"
   :bind (([remap backward-delete-char-untabify] . hungry-delete-backwards)))
