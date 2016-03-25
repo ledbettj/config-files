@@ -39,7 +39,7 @@
 (setq-default tab-width        2)
 (setq-default confirm-nonexistent-file-or-buffer nil)
 (setq ring-bell-function 'ignore)
-(setq use-dialog-box     nil)
+(setq use-dialog-box      nil)
 (put 'downcase-region 'disabled nil)
 (put 'upcase-region   'disabled nil)
 (delete-selection-mode 1)
@@ -48,7 +48,7 @@
 ;; then let's load everything else.
 
 (use-package load-dir
-;  :defer 1
+  :defer 1
   :init
   (setq force-load-messages nil)
   (setq load-dir-debug nil)
