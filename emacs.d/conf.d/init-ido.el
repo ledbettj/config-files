@@ -1,5 +1,9 @@
 (require 'use-package)
 
+(use-package ido-vertical-mode :ensure t :pin melpa
+  :config
+  (ido-vertical-mode 1))
+
 (use-package ido
   :config
   (setq-default ido-use-faces t)
