@@ -110,5 +110,16 @@
 			  :background (color-darken-name bg 25)
 			  :foreground (color-darken-name fg 35)
 			  :box        nil
-			  :underline  nil)))
+			  :underline  nil)
+
+      (set-face-attribute 'flycheck-error nil
+                          :underline '(:color "Red1" :style line))
+      (set-face-attribute 'flycheck-info nil
+                        :underline `(:color ,com :style line))
+      (set-face-attribute 'flycheck-warning nil
+                          :underline '(:color "DarkOrange" :style line))))
   (scale-ui-colors))
+
+(use-package abbrev
+  :config
+  (setcar (cdr (assq 'abbrev-mode minor-mode-alist)) nil))
