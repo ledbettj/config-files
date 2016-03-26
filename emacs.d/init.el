@@ -52,6 +52,8 @@
 ;; then let's load everything else.
 
 (use-package load-dir
+  :ensure t
+  :pin melpa
   :defer 1
   :init
   (setq force-load-messages nil)
