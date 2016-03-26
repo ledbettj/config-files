@@ -4,6 +4,7 @@
   :config
   (setq-default flycheck-indication-mode nil)
   (setq-default flycheck-navigation-minimum-level 'warning)
+  (setq flycheck-checkers (delete 'emacs-lisp-checkdoc flycheck-checkers))
   (global-flycheck-mode)
   (setq flycheck-mode-line
         '(:eval
