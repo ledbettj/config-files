@@ -2,6 +2,11 @@
 
 (global-set-key (kbd "M-g") 'goto-line)
 
+(unless (eq system-type 'darwin)
+  (setq-default
+   browse-url-browser-function 'browse-url-generic
+   browse-url-generic-program  "google-chrome-stable"))
+
 (use-package hungry-delete
   :load-path "local/"
   :bind (([remap backward-delete-char-untabify] . hungry-delete-backwards)))
