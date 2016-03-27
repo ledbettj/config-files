@@ -4,18 +4,22 @@
   (setq ns-use-srgb-colorspace   t)
   (setq ns-use-native-fullscreen t))
 
+;; turn off scrollbar
 (use-package scroll-bar
   :config
   (scroll-bar-mode -1))
 
+;; turn off tool bar
 (use-package tool-bar
   :config
   (tool-bar-mode -1))
 
+;; turn off menu bar
 (use-package menu-bar
   :config
   (menu-bar-mode -1))
 
+;; set up fringe only on the right side, for the yascroll
 (use-package fringe
   :config
   (set-fringe-mode '(0 . 8)))
@@ -24,34 +28,37 @@
   :init
   (load-theme 'solarized-dark t)
   :config
+  ;; don't use variable height text in org mode.
   (setq-default solarized-use-variable-pitch nil)
   (setq-default solarized-scale-org-headlines nil))
 
+;; fancy mac-style scroll bar.
 (use-package yascroll :ensure t :pin melpa
   :config
   (global-yascroll-bar-mode 1))
 
 (use-package simple
   :init
-  (which-function-mode -1)
-  (show-paren-mode      1)
-  (line-number-mode     1)
-  (column-number-mode   1)
-  (setq-default show-trailing-whitespace 1)
-  (setq frame-title-format
+  (which-function-mode -1) ; turn off function display in modelinae
+  (show-paren-mode      1) ; highlight matching parens
+  (line-number-mode     1) ; show line number in mode line
+  (column-number-mode   1) ; show column number in mode line
+  (setq-default show-trailing-whitespace 1) ; show trailing whitespace.
+  (setq frame-title-format ; user@host *modified
 	(list
 	 (user-login-name)
 	 "@"
 	 (system-name)
 	 ": %b %+"))
-
+  ;; use 12px on Linux, 16px on Mac built in screen, 18x on Mac large screen.
   (add-to-list 'default-frame-alist
-	       `(font .
-		      ,(if (eq system-type 'darwin)
-			   (if (eq (display-pixel-width) 1280)
-			       "Hack-16"
-			     "Hack-18")
-			 "Hack-12")))
+               `(font .
+                      ,(if (eq system-type 'darwin)
+                           (if (eq (display-pixel-width) 1280)
+                               "Hack-16"
+                             "Hack-18")
+                         "Hack-12")))
+  ;; default window width is 84 columns.
   (add-to-list 'default-frame-alist '(width . 84)))
 
 (use-package linum
@@ -61,8 +68,8 @@
 
 (use-package hl-line
   :config
-  (global-hl-line-mode 1)
-  (setq-default hl-line-sticky-flag nil))
+  (global-hl-line-mode 1) ; always highlight current line
+  (setq-default hl-line-sticky-flag nil)) ; except in an inactive buffer
 
 (use-package rainbow-mode :ensure t :pin melpa
   :init
