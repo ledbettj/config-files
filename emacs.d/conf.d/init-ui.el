@@ -122,9 +122,43 @@
       (set-face-attribute 'flycheck-error nil
                           :underline '(:color "Red1" :style line))
       (set-face-attribute 'flycheck-info nil
-                        :underline `(:color ,com :style line))
+                          :underline `(:color ,com :style line))
       (set-face-attribute 'flycheck-warning nil
-                          :underline '(:color "DarkOrange" :style line))))
+                          :underline '(:color "DarkOrange" :style line))
+
+    (set-face-attribute 'company-preview-common nil
+                        :background (color-lighten-name bg 20)
+                        :foreground fg
+                        :underline  t
+                        :box        nil)
+
+    (set-face-attribute 'company-preview nil
+                        :background (color-lighten-name bg 20)
+                        :foreground fg
+                        :underline  t
+                        :box        nil)
+
+    (set-face-attribute 'company-tooltip nil
+                        :background fg
+                        :foreground bg)
+
+    (set-face-attribute 'company-tooltip-common-selection nil
+                        :background nil
+                        :foreground nil
+                        :bold       t)
+
+    (set-face-attribute 'company-tooltip-selection nil
+                        :background key
+                        :foreground "#000000")
+
+    (set-face-attribute 'company-tooltip-common nil
+                        :background nil
+                        :foreground nil
+                        :underline  nil
+                        :bold       t)
+
+    (set-face-background 'company-scrollbar-bg (color-darken-name fg 15))
+    (set-face-background 'company-scrollbar-fg (color-darken-name fg 35))))
   (scale-ui-colors))
 
 (use-package abbrev
