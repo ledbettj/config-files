@@ -4,14 +4,7 @@
   "check if the specified font is present on the system"
   (if (null (x-list-fonts font)) nil t))
 
-;; preferred fonts, in order. the first one found on the system will be used.
-(defconst jl/preferred-fonts '(
-  "Hack"
-  "Source Code Pro"
-  "Ubuntu Mono"
-  "Monaco"))
-
-(defconst jl/use-font (cl-find-if 'font-exists-p jl/preferred-fonts))
+(defconst prefs/use-font (cl-find-if 'font-exists-p prefs/font))
 
 (when (eq system-type 'darwin)
   (setq ns-use-srgb-colorspace   t)
@@ -38,12 +31,14 @@
   (set-fringe-mode '(0 . 8)))
 
 (use-package solarized-theme :ensure t :pin melpa
-  :init
-  (load-theme 'solarized-dark t)
   :config
   ;; don't use variable height text in org mode.
   (setq-default solarized-use-variable-pitch nil)
   (setq-default solarized-scale-org-headlines nil))
+
+(use-package spacemacs-theme :ensure t :pin melpa)
+
+(load-theme prefs/theme)
 
 ;; fancy mac-style scroll bar.
 (use-package yascroll :ensure t :pin melpa
@@ -69,9 +64,9 @@
                `(font .
                       ,(if (eq system-type 'darwin)
                            (if (eq (display-pixel-width) 1280)
-                               (concat jl/use-font "-16")
-                             (concat jl/use-font "-18"))
-                               (concat jl/use-font "-12"))))
+                               (concat prefs/use-font "-" (number-to-string prefs/font-size-macbook-builtin))
+                               (concat prefs/use-font "-" (number-to-string prefs/font-size-macbook-external)))
+                               (concat prefs/use-font "-" (number-to-string prefs/font-size)))))
   ;; default window width is 84 columns.
   (add-to-list 'default-frame-alist '(width . 84)))
 
@@ -173,6 +168,11 @@
 
     (set-face-background 'company-scrollbar-bg (color-darken-name fg 15))
     (set-face-background 'company-scrollbar-fg (color-darken-name fg 35))))
+
+  (defadvice server-create-window-system-frame (after do-some-scaling ()) (scale-ui-colors))
+  (defadvice enable-theme (after do-some-scaling ()) (scale-ui-colors))
+  (ad-activate 'server-create-window-system-frame)
+  (ad-activate 'enable-theme)
   (scale-ui-colors))
 
 (use-package abbrev

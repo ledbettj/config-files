@@ -2,6 +2,7 @@
 
 (defconst jl/custom-file "~/.emacs.d/auto-custom.el")
 (defconst jl/init-dir    "~/.emacs.d/conf.d")
+(defconst jl/prefs       "~/.emacs.d/prefs.el")
 
 (setq custom-file               jl/custom-file)
 (setq package-enable-at-startup nil)
@@ -60,4 +61,5 @@
   (setq load-dir-debug nil)
   (setq load-dir-recursive t)
   :config
+  (load-file jl/prefs)
   (load-dir-one jl/init-dir))
