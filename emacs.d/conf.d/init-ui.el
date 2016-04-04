@@ -1,5 +1,18 @@
 (require 'use-package)
 
+(defun font-exists-p (font)
+  "check if the specified font is present on the system"
+  (if (null (x-list-fonts font)) nil t))
+
+;; preferred fonts, in order. the first one found on the system will be used.
+(defconst jl/preferred-fonts '(
+  "Hack"
+  "Source Code Pro"
+  "Ubuntu Mono"
+  "Monaco"))
+
+(defconst jl/use-font (cl-find-if 'font-exists-p jl/preferred-fonts))
+
 (when (eq system-type 'darwin)
   (setq ns-use-srgb-colorspace   t)
   (setq ns-use-native-fullscreen t))
@@ -50,14 +63,15 @@
 	 "@"
 	 (system-name)
 	 ": %b %+"))
+
   ;; use 12px on Linux, 16px on Mac built in screen, 18x on Mac large screen.
   (add-to-list 'default-frame-alist
                `(font .
                       ,(if (eq system-type 'darwin)
                            (if (eq (display-pixel-width) 1280)
-                               "Hack-16"
-                             "Hack-18")
-                         "Hack-12")))
+                               (concat jl/use-font "-16")
+                             (concat jl/use-font "-18"))
+                               (concat jl/use-font "-12"))))
   ;; default window width is 84 columns.
   (add-to-list 'default-frame-alist '(width . 84)))
 
