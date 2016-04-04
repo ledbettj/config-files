@@ -1,126 +1,63 @@
-;;; init.el - emacs configuration file
-;; John Ledbetter <john.ledbetter@gmail.com>
-(setq gc-cons-threshold (* 8192 8192))
-
 (require 'package)
 
-(add-to-list 'load-path "~/.emacs.d/el-get/el-get")
+(defconst jl/custom-file "~/.emacs.d/auto-custom.el")
+(defconst jl/init-dir    "~/.emacs.d/conf.d")
 
-;; install el-get if necessary
-(unless (require 'el-get nil t)
-  (let ((buf
-          (url-retrieve-synchronously
-            "https://raw.githubusercontent.com/dimitri/el-get/master/el-get-install.el")))
-    (if buf
-      (with-current-buffer buf
-        (let (el-get-master-branch)
-          (goto-char (point-max))
-          (eval-print-last-sexp))))))
+(setq custom-file               jl/custom-file)
+(setq package-enable-at-startup nil)
+(setq inhibit-splash-screen     t)
+(setq backup-directory-alist         `((".*" . ,temporary-file-directory)))
+(setq auto-save-file-name-transforms `((".*" ,temporary-file-directory t)))
+(setq initial-scratch-message
+";;   ___ _ __ ___   __ _  ___ ___ _
+;;  / _ \\ '_ ` _ \\ / _` |/ __/ __| |
+;; |  __/ | | | | | (_| | (__\\__ \\_|
+;;  \\___|_| |_| |_|\\__,_|\\___|___(_)
+")
+(load jl/custom-file t)
 
-(add-to-list 'package-archives
-  '("melpa" . "http://melpa.org/packages/") t)
-
-;; custom packages
-(setq el-get-sources
-  '( (:name rainbow-mode  :type elpa)
-     (:name flycheck      :type elpa)
-     (:name go-mode       :type elpa)
-     (:name enh-ruby-mode :type elpa)
-     (:name rinari        :type elpa)
-     (:name toggle-quotes :type elpa)
-     (:name move-text     :type elpa)))
-
-;; list of packages to have el-get install
-(defvar required-packages
-  '(browse-at-remote
-     buffer-move
-     coffee-mode
-     company-mode
-     company-tern
-     enh-ruby-mode
-     delight
-     fic-mode
-     flycheck
-     git-timemachine
-     go-mode
-     haml-mode
-     helm
-     ido-vertical-mode
-     iedit
-     jinja2-mode
-     inf-ruby
-     livedown
-     lua-mode
-     magit
-     markdown-mode
-     move-text
-     projectile
-     rainbow-mode
-     rspec-mode
-     rinari
-     rust-mode
-     scss-mode
-     smartparens
-     solarized-emacs
-     tern
-     toggle-quotes
-     toml-mode
-     tomorrow-theme
-     vala-mode
-     web-mode
-     yaml-mode
-     yascroll))
-
-;; override notifications to be displayed in the message buffer if
-;; we're running in a terminal.
-(unless (display-graphic-p)
-  (defun el-get-notify (title msg)
-    (message "%s: %s" title msg)))
-
-(el-get 'sync required-packages)
-(package-initialize)
-
-(push (expand-file-name "themes" user-emacs-directory) custom-theme-load-path)
-
-;; turn on autocomplete
-(require 'projectile)
-(require 'helm-projectile)
-(require 'company)
-(require 'company-dabbrev-code)
-(setq company-dabbrev-code-modes
-  (add-to-list 'company-dabbrev-code-modes 'enh-ruby-mode))
-
-(projectile-global-mode)
-
-(defun load-user-file (file)
-  "Load the file FILE in the user's current configuration directory."
-  (interactive "f")
-  (let* ((user-dir (expand-file-name "custom" user-emacs-directory))
-          (custom-file (expand-file-name file user-dir)))
-    (if (file-exists-p custom-file)
-      (load custom-file nil t)
-      (message "custom file %s not found" file)
-    )))
-
-;; store emacs auto-customization in its own file.
-(setq custom-file (expand-file-name "auto-custom.el" user-emacs-directory))
-(load custom-file 'noerror)
-
-(map nil 'load-user-file
-  '( "paths.el"
-     "ui.el"
-     "behavior.el"
-     "modes.el"
-     "ruby.el"
-     "js.el"
-     "c.el"
-     "org.el"
-     "magic-align.el"
-     "keybinds.el"))
-
-(setq magit-last-seen-setup-instructions "1.4.0")
-
-;; display startup timing after load
 (fset 'startup-echo-area-message
   #'(lambda ()
       (message "emacs loaded in %s" (emacs-init-time))))
+
+(add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/"))
+(package-initialize)
+
+(eval-when-compile (package-initialize))
+
+(if (null (require 'use-package nil t))
+    (progn (let* ((ARCHIVES (if (null package-archive-contents)
+                                (progn (package-refresh-contents)
+                                       package-archive-contents)
+                              package-archive-contents))
+                  (AVAIL (assoc 'use-package ARCHIVES)))
+             (if AVAIL
+                 (package-install 'use-package)))
+           (require 'use-package)))
+
+(require 'use-package)
+
+;; quick global configuration ...
+(setq-default kill-whole-line  1)
+(setq-default indent-tabs-mode nil)
+(setq-default tab-width        2)
+(setq-default confirm-nonexistent-file-or-buffer nil)
+(setq ring-bell-function 'ignore)
+(setq use-dialog-box      nil)
+(put 'downcase-region 'disabled nil)
+(put 'upcase-region   'disabled nil)
+(delete-selection-mode 1)
+(defalias 'yes-or-no-p 'y-or-n-p)
+
+;; then let's load everything else.
+
+(use-package load-dir
+  :ensure t
+  :pin melpa
+  :defer 1
+  :init
+  (setq force-load-messages nil)
+  (setq load-dir-debug nil)
+  (setq load-dir-recursive t)
+  :config
+  (load-dir-one jl/init-dir))

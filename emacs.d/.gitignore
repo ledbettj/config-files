@@ -1,7 +1,6 @@
 ac-comphist.dat
 auto-custom.el
 auto-save-list
-el-get/*
 elpa/*
 tramp
 *.elc
@@ -12,3 +11,4 @@ ido.last
 session.*
 games/
 projectile-bookmarks.eld
+tutorial/
