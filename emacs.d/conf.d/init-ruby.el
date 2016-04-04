@@ -11,7 +11,9 @@
         (replace-match "\\1: \\2")))))
 
 (use-package enh-ruby-mode :ensure t :pin melpa
-  :bind (("C-c r" . convert-hash-rocket))
+  :bind (
+         :map enh-ruby-mode-map
+         ("C-c r" . convert-hash-rocket))
   :diminish "Ruby+"
   :init
   (setq auto-mode-alist
