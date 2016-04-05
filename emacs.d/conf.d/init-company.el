@@ -2,6 +2,10 @@
 
 (use-package company-tern :ensure t :pin melpa)
 
+(use-package company-quickhelp :ensure t :pin melpa
+  :config
+  (company-quickhelp-mode 1))
+
 (use-package company :ensure t :pin melpa
   :config
   (setq-default company-lighter-base "Comp")
