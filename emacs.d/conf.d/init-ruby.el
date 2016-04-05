@@ -32,3 +32,8 @@
   (erm-reset)
   (setq enh-ruby-bounce-deep-indent t) ; tab toggles between deep indent
   (setq enh-ruby-check-syntax nil))   ; flycheck can handle this
+
+(use-package rspec-mode :ensure t :pin melpa
+  :init
+  (add-hook 'enh-ruby-mode-hook #'rspec-mode)
+  (add-hook 'ruby-mode-hook     #'rspec-mode))
