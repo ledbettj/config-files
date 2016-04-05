@@ -4,7 +4,10 @@
   "check if the specified font is present on the system"
   (if (null (x-list-fonts font)) nil t))
 
-(defconst prefs/use-font (cl-find-if 'font-exists-p prefs/font))
+(defconst prefs/use-font
+  (if (display-graphic-p)
+      (cl-find-if 'font-exists-p prefs/font)
+    (car prefs/font)))
 
 (when (eq system-type 'darwin)
   (setq ns-use-srgb-colorspace   t)
@@ -42,7 +45,7 @@
   (before theme-dont-propagate activate)
   (mapcar #'disable-theme custom-enabled-themes))
 
-(load-theme prefs/theme)
+(load-theme (if (display-graphic-p) prefs/theme prefs/theme/terminal))
 
 ;; fancy mac-style scroll bar.
 (use-package yascroll :ensure t :pin melpa
@@ -68,8 +71,8 @@
                `(font .
                       ,(if (eq system-type 'darwin)
                            (if (eq (display-pixel-width) 1280)
-                               (concat prefs/use-font "-" (number-to-string prefs/font-size-macbook-builtin))
-                               (concat prefs/use-font "-" (number-to-string prefs/font-size-macbook-external)))
+                               (concat prefs/use-font "-" (number-to-string prefs/font-size/macbook-builtin))
+                               (concat prefs/use-font "-" (number-to-string prefs/font-size/macbook-external)))
                                (concat prefs/use-font "-" (number-to-string prefs/font-size)))))
   ;; default window width is 84 columns.
   (add-to-list 'default-frame-alist '(width . 84)))
