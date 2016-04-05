@@ -38,6 +38,10 @@
 
 (use-package spacemacs-theme :ensure t :pin melpa)
 
+(defadvice load-theme
+  (before theme-dont-propagate activate)
+  (mapcar #'disable-theme custom-enabled-themes))
+
 (load-theme prefs/theme)
 
 ;; fancy mac-style scroll bar.
