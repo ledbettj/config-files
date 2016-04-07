@@ -24,9 +24,9 @@
   :load-path "local/"
   :bind (("C-c a" . magic-align)))
 
-(use-package move-text :ensure t :pin melpa
-  :bind (([M-up] . move-text-up)
-         ([M-down] . move-text-down)))
+(use-package move-dup :ensure t :pin melpa
+  :bind (([M-up] . md/move-lines-up)
+         ([M-down] . md/move-lines-down)))
 
 (use-package newcomment
   :bind (("C-c c" . comment-region)
