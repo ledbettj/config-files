@@ -7,9 +7,9 @@
    browse-url-browser-function 'browse-url-generic
    browse-url-generic-program  "google-chrome-stable"))
 
-; laptop keyboard has Fn where Control should be.
-(if (eq system-type 'darwin)
-  (setq-default ns-function-modifier 'control))
+(when (eq system-type 'darwin)
+  (setq-default ns-function-modifier 'control) ; laptop keyboard has Fn where Control should be.
+  (unbind-key (kbd "s-t"))) ; don't pop up font dialog.
 
 (use-package hungry-delete
   :load-path "local/"
