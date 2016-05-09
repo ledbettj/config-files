@@ -14,7 +14,8 @@
 (use-package hungry-delete
   :load-path "local/"
   :bind (([remap backward-delete-char-untabify] . hungry-delete-backwards)
-         ([remap delete-backward-char] . hungry-delete-backwards)))
+         ([remap delete-backward-char] . hungry-delete-backwards)
+         ([remap c-electric-backspace] . hungry-delete-backwards)))
 
 (use-package sudo
   :load-path "local/"

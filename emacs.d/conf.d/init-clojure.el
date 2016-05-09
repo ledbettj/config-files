@@ -3,7 +3,9 @@
 (use-package rainbow-delimiters :ensure t :pin melpa)
 
 (use-package cider :ensure t :pin melpa
-  :bind (("C-c d" . cider-doc))
+  :bind (
+         :map clojure-mode-map
+         ("C-c d" . cider-doc))
   :config
   ;; don't prompt to save on C-c C-k to recompile.
   (setq cider-prompt-save-file-on-load 'always-save)
