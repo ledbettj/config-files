@@ -1,9 +1,15 @@
 (require 'use-package)
 
 (use-package projectile :ensure t :pin melpa
+  :init
+  (add-hook 'ruby-mode-hook 'projectile-mode)
   :config
-  (setq projectile-mode-line '(:eval (format "Prj[%s]"
+  (setq projectile-mode-line '(:eval (format " P[%s]"
                                              (projectile-project-name)))))
+
+(use-package projectile-rails :ensure t :pin melpa
+  :init
+  (add-hook 'projectile-mode-hook 'projectile-rails-mode))
 
 (use-package helm-projectile :ensure t :pin melpa
   :bind (("C-c f" . helm-projectile-find-file)
