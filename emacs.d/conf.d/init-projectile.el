@@ -4,10 +4,10 @@
   :init
   :config
   (projectile-global-mode)
-  (setq projectile-mode-line '(:eval (format " P[%s]"
-                                             (projectile-project-name)))))
+  (setq projectile-mode-line " Ⓟ"))
 
 (use-package projectile-rails :ensure t :pin melpa
+  :diminish projectile-rails-mode
   :init
   (add-hook 'projectile-mode-hook 'projectile-rails-on)
   :config

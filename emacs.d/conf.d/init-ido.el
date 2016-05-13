@@ -12,8 +12,7 @@
   (setq-default ido-enable-dot-prefix t)
   (setq-default ido-ignore-buffers
   '("\\` " "^\*\\(Messages\\|Warning\\|Flycheck\\|Completions\\)"))
-  (ido-mode 1)
-  (ido-everywhere 1))
+  (ido-mode 1))
 
 (use-package flx-ido :ensure t :pin melpa
   :config

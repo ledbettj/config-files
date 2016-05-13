@@ -109,6 +109,7 @@
   (setq-default hl-line-sticky-flag nil)) ; except in an inactive buffer
 
 (use-package rainbow-mode :ensure t :pin melpa
+  :diminish rainbow-mode
   :init
   (add-hook 'prog-mode-hook #'rainbow-mode))
 
@@ -119,10 +120,9 @@
 (use-package delight :ensure t :pin melpa
   :config
   (delight '((emacs-lisp-mode "Elisp" :major)
-             (enh-ruby-mode "Ruby+"   :major)
-             (rspec-mode  " RS")
-             (smartparens-mode " ()" smartparens)
-             (rainbow-mode " Rbow"))))
+             (ruby-mode "Rb" :major)
+             (rspec-mode  " Ⓡ")
+             (smartparens-mode " Ⓢ" smartparens))))
 
 (use-package color
   :config

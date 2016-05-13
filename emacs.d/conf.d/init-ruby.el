@@ -11,6 +11,7 @@
         (replace-match "\\1: \\2")))))
 
 (use-package robe :ensure t :pin melpa
+  :diminish robe-mode
   :init
   (add-hook 'ruby-mode-hook 'robe-mode))
 ;; this is super slow and not very helpful in rails.

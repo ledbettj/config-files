@@ -10,8 +10,8 @@
         '(:eval
           (pcase flycheck-last-status-change
             (`not-checked " ?")
-            (`no-checker (propertize " -" 'face 'warning))
-            (`running (propertize " ❂" 'face 'escape-glyph))
+            (`no-checker (propertize " -" 'face 'font-lock-comment-face))
+            (`running (propertize " ◌" 'face 'escape-glyph))
             (`errored (propertize " ⚠" 'face 'error))
             (`finished
              (let* ((error-counts (flycheck-count-errors flycheck-current-errors))
