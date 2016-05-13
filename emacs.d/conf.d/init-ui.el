@@ -9,6 +9,12 @@
       (cl-find-if 'font-exists-p prefs/font)
     (car prefs/font)))
 
+(defun is-selected-theme (theme)
+  (or (eq prefs/theme theme)
+      (and
+       (eq prefs/theme/terminal theme)
+       (display-graphic-p))))
+
 (when (eq system-type 'darwin)
   (setq ns-use-srgb-colorspace   t)
   (setq ns-use-native-fullscreen t))
@@ -34,18 +40,28 @@
   (set-fringe-mode '(0 . 8)))
 
 (use-package solarized-theme :ensure t :pin melpa
+  :if (is-selected-theme 'solarized-dark)
   :config
   ;; don't use variable height text in org mode.
   (setq-default solarized-use-variable-pitch nil)
   (setq-default solarized-scale-org-headlines nil))
 
-(use-package spacemacs-theme :ensure t :pin melpa)
+(use-package spacemacs-theme :ensure t :pin melpa
+    :if (is-selected-theme 'spacemacs-dark))
+(use-package afternoon-theme :ensure t :pin melpa
+  :if (is-selected-theme 'afternoon))
+
+(use-package zenburn-theme   :ensure t :pin melpa
+  :if (is-selected-theme 'zenburn))
 
 (defadvice load-theme
   (before theme-dont-propagate activate)
   (mapcar #'disable-theme custom-enabled-themes))
 
 (load-theme (if (display-graphic-p) prefs/theme prefs/theme/terminal))
+
+(if (is-selected-theme 'afternoon)
+    (set-face-attribute 'mode-line nil :family "Ubuntu Condensed" :width 'extra-condensed))
 
 ;; fancy mac-style scroll bar.
 (use-package yascroll :ensure t :pin melpa
