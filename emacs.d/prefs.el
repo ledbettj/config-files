@@ -5,8 +5,8 @@
 
 
 ;; See (custom-available-themes) for the list of available themes.
-(defconst prefs/theme          'solarized-dark)
-(defconst prefs/theme/terminal 'wombat) ; use me when running in a terminal.
+(defconst prefs/theme          'monokai)
+(defconst prefs/theme/terminal 'monokai) ; use me when running in a terminal.
 
 ;; preferred fonts, in order. the first one found on the system will be used.
 (defconst prefs/font '(

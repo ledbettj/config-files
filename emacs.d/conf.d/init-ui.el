@@ -47,12 +47,17 @@
   (setq-default solarized-scale-org-headlines nil))
 
 (use-package spacemacs-theme :ensure t :pin melpa
-    :if (is-selected-theme 'spacemacs-dark))
+  :if (or (is-selected-theme 'spacemacs-dark)
+          (is-selected-theme 'spacemacs-light)))
 (use-package afternoon-theme :ensure t :pin melpa
   :if (is-selected-theme 'afternoon))
 
 (use-package zenburn-theme   :ensure t :pin melpa
   :if (is-selected-theme 'zenburn))
+
+(use-package monokai-theme   :ensure t :pin melpa
+  :if (is-selected-theme 'monokai))
+
 
 (defadvice load-theme
   (before theme-dont-propagate activate)
