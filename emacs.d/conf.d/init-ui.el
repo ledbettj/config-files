@@ -34,10 +34,10 @@
   :config
   (menu-bar-mode -1))
 
-;; set up fringe only on the right side, for the yascroll
+;; set up fringe for hl-diff and yascroll
 (use-package fringe
   :config
-  (set-fringe-mode '(0 . 8)))
+  (set-fringe-mode '(8 . 8)))
 
 (use-package solarized-theme :ensure t :pin melpa
   :if (is-selected-theme 'solarized-dark)
