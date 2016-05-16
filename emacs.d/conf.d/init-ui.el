@@ -120,8 +120,10 @@
 (use-package delight :ensure t :pin melpa
   :config
   (delight '((emacs-lisp-mode "Elisp" :major)
+             (js3-mode "JS+" :major)
              (ruby-mode "Rb" :major)
-             (rspec-mode  " Ⓡ")
+             (rspec-mode " Ⓡ")
+             (tern-mode  " Ⓣ" tern)
              (smartparens-mode " Ⓢ" smartparens))))
 
 (use-package color

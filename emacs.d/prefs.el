@@ -17,4 +17,4 @@
 
 (defconst prefs/font-size                  12) ; default font size.
 (defconst prefs/font-size/macbook-builtin  16) ; font size to use on the builtin mac screen.
-(defconst prefs/font-size/macbook-external 18) ; font size to use when docked.
+(defconst prefs/font-size/macbook-external 16) ; font size to use when docked.
