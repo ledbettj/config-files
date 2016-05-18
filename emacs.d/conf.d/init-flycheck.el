@@ -1,5 +1,3 @@
-(require 'use-package)
-
 (use-package flycheck :ensure t :pin melpa
   :config
   (setq-default flycheck-indication-mode nil)

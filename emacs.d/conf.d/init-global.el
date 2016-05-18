@@ -1,5 +1,3 @@
-(require 'use-package)
-
 (global-set-key (kbd "M-g") 'goto-line)
 
 (unless (eq system-type 'darwin)
@@ -10,12 +8,6 @@
 (when (eq system-type 'darwin)
   (setq-default ns-function-modifier 'control) ; laptop keyboard has Fn where Control should be.
   (unbind-key (kbd "s-t"))) ; don't pop up font dialog.
-
-(use-package hungry-delete
-  :load-path "local/"
-  :bind (([remap backward-delete-char-untabify] . hungry-delete-backwards)
-         ([remap delete-backward-char] . hungry-delete-backwards)
-         ([remap c-electric-backspace] . hungry-delete-backwards)))
 
 (use-package sudo
   :load-path "local/"

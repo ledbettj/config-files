@@ -1,5 +1,3 @@
-(require 'use-package)
-
 (defun font-exists-p (font)
   "check if the specified font is present on the system"
   (if (null (x-list-fonts font)) nil t))
@@ -116,15 +114,6 @@
 (use-package fic-mode :ensure t :pin melpa
   :init
   (add-hook 'prog-mode-hook #'fic-mode))
-
-(use-package delight :ensure t :pin melpa
-  :config
-  (delight '((emacs-lisp-mode "Elisp" :major)
-             (js3-mode "JS+" :major)
-             (ruby-mode "Rb" :major)
-             (rspec-mode " Ⓡ")
-             (tern-mode  " Ⓣ" tern)
-             (smartparens-mode " Ⓢ" smartparens))))
 
 (use-package color
   :config

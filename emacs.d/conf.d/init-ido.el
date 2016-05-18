@@ -1,5 +1,3 @@
-(require 'use-package)
-
 (use-package ido-vertical-mode :ensure t :pin melpa
   :config
   (ido-vertical-mode 1))

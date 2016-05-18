@@ -1,5 +1,3 @@
-(require 'use-package)
-
 (use-package simple
   :init
   (savehist-mode 1)

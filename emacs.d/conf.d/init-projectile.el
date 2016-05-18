@@ -1,17 +1,9 @@
-(require 'use-package)
-
 (use-package projectile :ensure t :pin melpa
+  :diminish " Ⓟ"
   :init
   :config
   (projectile-global-mode)
   (setq projectile-mode-line " Ⓟ"))
-
-(use-package projectile-rails :ensure t :pin melpa
-  :diminish projectile-rails-mode
-  :init
-  (add-hook 'projectile-mode-hook 'projectile-rails-on)
-  :config
-  (setq projectile-rails-add-keywords nil))
 
 (use-package helm-projectile :ensure t :pin melpa
   :bind (("C-c f" . helm-projectile-find-file)

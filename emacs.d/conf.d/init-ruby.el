@@ -17,8 +17,14 @@
 ;; this is super slow and not very helpful in rails.
   ;; :config
   ;; (eval-after-load 'company
-  ;;   '(push 'company-robe company-backends)))
+;;   '(push 'company-robe company-backends)))
+
+(use-package :ruby-mode
+  :bind (
+         :map ruby-mode-map
+              ("C-c r" . convert-hash-rocket)))
 
 (use-package rspec-mode :ensure t :pin melpa
+  :diminish (rspec-mode . " Ⓡ")
   :init
   (add-hook 'ruby-mode-hook #'rspec-mode))

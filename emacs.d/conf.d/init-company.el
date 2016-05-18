@@ -1,5 +1,3 @@
-(require 'use-package)
-
 (use-package company-tern :ensure t :pin melpa)
 
 (use-package company-quickhelp :ensure t :pin melpa

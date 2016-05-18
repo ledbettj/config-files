@@ -1,5 +1,3 @@
-(require 'use-package)
-
 (use-package web-mode :ensure t :pin melpa
   :init
   (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))

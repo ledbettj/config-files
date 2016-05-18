@@ -4,6 +4,7 @@
 (defconst jl/init-dir    "~/.emacs.d/conf.d")
 (defconst jl/prefs       "~/.emacs.d/prefs.el")
 
+(setq load-prefer-newer         t)
 (setq custom-file               jl/custom-file)
 (setq package-enable-at-startup nil)
 (setq inhibit-splash-screen     t)
@@ -24,9 +25,10 @@
 (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/"))
 (package-initialize)
 
-(eval-when-compile (package-initialize))
+(eval-when-compile
+  (package-initialize)
 
-(if (null (require 'use-package nil t))
+  (if (null (require 'use-package nil t))
     (progn (let* ((ARCHIVES (if (null package-archive-contents)
                                 (progn (package-refresh-contents)
                                        package-archive-contents)
@@ -34,9 +36,14 @@
                   (AVAIL (assoc 'use-package ARCHIVES)))
              (if AVAIL
                  (package-install 'use-package)))
-           (require 'use-package)))
+           (require 'use-package))))
 
-(require 'use-package)
+(use-package auto-compile :ensure t
+  :config
+  (auto-compile-on-save-mode))
+
+(require 'diminish)
+(require 'bind-key)
 
 ;; quick global configuration ...
 (setq-default kill-whole-line  1)

@@ -1,6 +1,5 @@
-(require 'use-package)
-
 (use-package smartparens :ensure t :pin melpa
+  :diminish " Ⓢ"
   :init
   (add-hook 'prog-mode-hook #'smartparens-mode)
   :config

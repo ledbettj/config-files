@@ -1,5 +1,3 @@
-(require 'use-package)
-
 (use-package buffer-move :ensure t :pin melpa
   :bind (([M-s-up]    . buf-move-up)
          ([M-s-down]  . buf-move-down)

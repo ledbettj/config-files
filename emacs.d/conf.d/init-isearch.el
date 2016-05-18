@@ -1,5 +1,3 @@
-(require 'use-package)
-
 (defun endless/goto-match-beginning ()
   "Go to the start of current isearch match."
   (when (and isearch-forward
