@@ -1,4 +1,6 @@
 (use-package js
+  :init
+  (add-hook 'js-mode-hook '(lambda () (setq mode-name "Js")))
   :config
   (setq-default js-indent-level 2))
 

@@ -20,6 +20,8 @@
 ;;   '(push 'company-robe company-backends)))
 
 (use-package :ruby-mode
+  :init
+  (add-hook 'ruby-mode-hook '(lambda () (setq mode-name "Rb")))
   :bind (
          :map ruby-mode-map
               ("C-c r" . convert-hash-rocket)))
