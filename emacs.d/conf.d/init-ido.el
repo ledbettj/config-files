@@ -9,7 +9,7 @@
   (setq-default ido-max-prospects 6)
   (setq-default ido-enable-dot-prefix t)
   (setq-default ido-ignore-buffers
-  '("\\` " "^\*\\(Messages\\|Warning\\|Flycheck\\|Completions\\)"))
+  '("\\` " "^\*\\(|Warning\\|Flycheck\\|Completions\\|Compile-Log\\)"))
   (ido-mode 1))
 
 (use-package flx-ido :ensure t :pin melpa
