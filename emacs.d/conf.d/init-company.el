@@ -10,4 +10,5 @@
   (setq-default company-show-numbers          1)
   (setq-default company-idle-delay            0) ; start completion immediately
   (setq-default company-minimum-prefix-length 1) ; start completion after 1 character.
+  (setq-default company-tooltip-align-annotations t)
   (global-company-mode 1))
