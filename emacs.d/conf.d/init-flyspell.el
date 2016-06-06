@@ -1,7 +1,8 @@
 (use-package flyspell :ensure t :pin melpa
   :diminish " ⓕ"
   :init
-  (add-hook 'prog-mode-hook #'flyspell-prog-mode)
+  (add-hook 'text-mode-hook #'flyspell-mode)
+  (add-hook 'org-mode-hook  #'flyspell-mode)
   :config
   (when (executable-find "hunspell")
     (setq-default ispell-program-name "hunspell")
