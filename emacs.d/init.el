@@ -61,12 +61,12 @@
 
 (use-package load-dir
   :ensure t
-  :pin melpa
   :defer 1
   :init
   (setq force-load-messages nil)
   (setq load-dir-debug nil)
   (setq load-dir-recursive t)
   :config
-  (load-file jl/prefs)
-  (load-dir-one jl/init-dir))
+  (let ((gc-cons-threshold most-positive-fixnum))
+    (load-file jl/prefs)
+    (load-dir-one jl/init-dir)))
