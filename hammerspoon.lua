@@ -7,6 +7,19 @@ hs.geometry    = require "hs.geometry"
 hs.screen      = require "hs.screen"
 hs.grid        = require "hs.grid"
 
+hs.window.animationDuration = 0 -- animations are dumb. move my windows fast.
+hs.grid.setGrid('4x4')
+
+local TOP_LEFT   = "0,0,2,2"
+local TOP_FULL   = "0,0,4,2"
+local TOP_RIGHT  = "2,0,4,2"
+local FULL_LEFT  = "0,0,2,4"
+local FULL_FULL  = "0,0,4,4"
+local FULL_RIGHT = "2,0,4,4"
+local BOT_LEFT   = "0,2,2,4"
+local BOT_FULL   = "0,2,4,4"
+local BOT_RIGHT  = "2,2,4,4"
+
 -- find the main window belonging to the application with title 'title'
 function winFromTitle(title)
    local apps = hs.application.runningApplications()
@@ -17,6 +30,13 @@ function winFromTitle(title)
    end
 
    return nil
+end
+
+-- return a function that moves the focused window to a grid position.
+function moveToGrid(grid)
+   return function()
+      hs.grid.set(hs.window.focusedWindow(), grid)
+   end
 end
 
 -- move the given window to the given screen, keeping the same relative
@@ -45,128 +65,35 @@ function winToScreen(win, screen)
    win:setFrame(win_frame)
 end
 
--- move the given window to the position ('topleft', 'topright', etc),
--- also moving it to the provided screen if any.
-function move(win, where, screen)
-   if not win or not where then
-      return false
-   end
-   winToScreen(win, screen)
-   _G[where](win)
-end
-
-function topleft(win)
-   win:moveToUnit(hs.geometry.rect(0, 0, 0.5, 0.5))
-end
-
-function top(win)
-   win:moveToUnit(hs.geometry.rect(0, 0, 1, 0.5))
-end
-
-function topright(win)
-   win:moveToUnit(hs.geometry.rect(0.5, 0, 0.5, 0.5))
-end
-
-function left(win)
-   win:moveToUnit(hs.geometry.rect(0, 0, 0.5, 1))
-end
-
-function full(win)
-   win:moveToUnit(hs.geometry.rect(0, 0, 1, 1))
-end
-
-function right(win)
-   win:moveToUnit(hs.geometry.rect(0.5, 0, 0.5, 1))
-end
-
-function bottomleft(win)
-   win:moveToUnit(hs.geometry.rect(0, 0.5, 0.5, 0.5))
-end
-
-function bottom(win)
-   win:moveToUnit(hs.geometry.rect(0, 0.5, 1, 0.5))
-end
-
-function bottomright(win)
-   win:moveToUnit(hs.geometry.rect(0.5, 0.5, 0.5, 0.5))
-end
-
 hs.hotkey.bind({"ctrl", "alt"}, "pad*",
    function()
       local screens = hs.screen.allScreens()
       local apps = {
-         ["Google Chrome"] = {"topright", screens[1]},
-         ["Emacs"]         = {"left",     screens[1]},
-         ["iTerm2"]        = {"bottomright", screens[1]},
-         ["HipChat"]       = {"left", screens[2]},
-         ["Slack"]         = {"full", screens[2]},
-         ["Mail"]          = {"right",  screens[2]},
-         ["Mailbox (Beta)"]= {"right",  screens[2]}
+         ["Google Chrome"] = {TOP_RIGHT, screens[1]},
+         ["Emacs"]         = {FULL_LEFT, screens[1]},
+         ["iTerm2"]        = {BOT_RIGHT, screens[1]},
+         ["Slack"]         = {FULL_FULL, screens[2]}
       }
 
       for name, pos in pairs(apps) do
          local w = winFromTitle(name)
          if w then
-            move(w, pos[1], pos[2])
+            hs.grid.set(w, pos[1], pos[2])
          end
       end
    end
 )
 
-hs.hotkey.bind({"ctrl", "alt"}, "pad7",
-   function()
-      topleft(hs.window.focusedWindow())
-   end
-)
-
-hs.hotkey.bind({"ctrl", "alt"}, "pad8",
-   function()
-      top(hs.window.focusedWindow())
-   end
-)
-
-hs.hotkey.bind({"ctrl", "alt"}, "pad9",
-   function()
-      topright(hs.window.focusedWindow())
-   end
-)
-
-hs.hotkey.bind({"ctrl", "alt"}, "pad4",
-   function()
-      left(hs.window.focusedWindow())
-   end
-)
-
-hs.hotkey.bind({"ctrl", "alt"}, "pad5",
-   function()
-      full(hs.window.focusedWindow())
-   end
-)
-
-hs.hotkey.bind({"ctrl", "alt"}, "pad6",
-   function()
-      right(hs.window.focusedWindow())
-   end
-)
-
-hs.hotkey.bind({"ctrl", "alt"}, "pad1",
-   function()
-      bottomleft(hs.window.focusedWindow())
-   end
-)
-
-hs.hotkey.bind({"ctrl", "alt"}, "pad2",
-   function()
-      bottom(hs.window.focusedWindow())
-   end
-)
-
-hs.hotkey.bind({"ctrl", "alt"}, "pad3",
-   function()
-      bottomright(hs.window.focusedWindow())
-   end
-)
-
+hs.hotkey.bind({"ctrl", "alt"}, "pad7", moveToGrid(TOP_LEFT))
+hs.hotkey.bind({"ctrl", "alt"}, "pad8", moveToGrid(TOP_FULL))
+hs.hotkey.bind({"ctrl", "alt"}, "pad9", moveToGrid(TOP_RIGHT))
+hs.hotkey.bind({"ctrl", "alt"}, "pad4", moveToGrid(FULL_LEFT))
+hs.hotkey.bind({"ctrl", "alt"}, "pad5", moveToGrid(FULL_FULL))
+hs.hotkey.bind({"ctrl", "alt"}, "pad6", moveToGrid(FULL_RIGHT))
+hs.hotkey.bind({"ctrl", "alt"}, "pad1", moveToGrid(BOT_LEFT))
+hs.hotkey.bind({"ctrl", "alt"}, "pad2", moveToGrid(BOT_FULL))
+hs.hotkey.bind({"ctrl", "alt"}, "pad3", moveToGrid(BOT_RIGHT))
+hs.hotkey.bind({"ctrl", "alt"}, "pad+", hs.grid.show)
 hs.hotkey.bind({"ctrl", "alt"}, "padenter",
    function()
       local win = hs.window.focusedWindow()
@@ -174,31 +101,3 @@ hs.hotkey.bind({"ctrl", "alt"}, "padenter",
    end
 )
 
-hs.hotkey.bind({"ctrl", "alt"}, "left",
-   function()
-      left(hs.window.focusedWindow())
-   end
-)
-
-hs.hotkey.bind({"ctrl", "alt"}, "right",
-   function()
-      right(hs.window.focusedWindow())
-   end
-)
-
-hs.hotkey.bind({"ctrl", "alt"}, "up",
-   function()
-      top(hs.window.focusedWindow())
-   end
-)
-hs.hotkey.bind({"ctrl", "alt"}, "down",
-   function()
-      bottom(hs.window.focusedWindow())
-   end
-)
-
-hs.hotkey.bind({"ctrl", "alt"}, "return",
-   function()
-      full(hs.window.focusedWindow())
-   end
-)
