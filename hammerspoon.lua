@@ -32,10 +32,10 @@ function winFromTitle(title)
    return nil
 end
 
--- return a function that moves the focused window to a grid position.
+-- return a function that moves the front window to a grid position.
 function moveToGrid(grid)
    return function()
-      hs.grid.set(hs.window.focusedWindow(), grid)
+      hs.grid.set(hs.window.frontmostWindow(), grid)
    end
 end
 
@@ -96,7 +96,7 @@ hs.hotkey.bind({"ctrl", "alt"}, "pad3", moveToGrid(BOT_RIGHT))
 hs.hotkey.bind({"ctrl", "alt"}, "pad+", hs.grid.show)
 hs.hotkey.bind({"ctrl", "alt"}, "padenter",
    function()
-      local win = hs.window.focusedWindow()
+      local win = hs.window.frontmostWindow()
       winToScreen(win, win:screen():next())
    end
 )
