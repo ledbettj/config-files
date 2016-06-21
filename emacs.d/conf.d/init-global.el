@@ -18,6 +18,7 @@
   :bind (("C-c a" . magic-align)))
 
 (use-package move-dup :ensure t :pin melpa
+  :load-path "local/"
   :bind (([M-up] . md/move-lines-up)
          ([M-down] . md/move-lines-down)))
 
