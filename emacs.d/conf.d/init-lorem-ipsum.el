@@ -1,5 +1,9 @@
 (use-package lorem-ipsum :ensure t :pin melpa
-  :bind (
-         ("C-c l l" . lorem-ipsum-insert-lists)
-         ("C-c l p" . lorem-ipsum-insert-paragraphs)
-         ("C-c l s" . lorem-ipsum-insert-sentences)))
+  :init
+  (defhydra hydra-lorem-ipsum (global-map "C-c l")
+    "lorem ipsum"
+    ("l" lorem-ipsum-insert-list)
+    ("p" lorem-ipsum-insert-paragraphs)
+    ("s" lorem-ipsum-insert-sentences)
+    ("q" nil "quit" :color blue)
+    ))
