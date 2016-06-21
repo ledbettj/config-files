@@ -20,4 +20,13 @@
                                 (t 'success))))
                (propertize (if (or no-errors no-warnings) " ✘" " ✔") 'face face)))
             (`interrupted " ⚠")
-            (`suspicious '(propertize " ⚠" 'face 'warning))))))
+            (`suspicious '(propertize " ⚠" 'face 'warning)))))
+
+  (defhydra hydra-flycheck (global-map "C-c e")
+    "Errors"
+    ("n" flycheck-next-error                                       "Next")
+    ("p" flycheck-previous-error                                   "Previous")
+    ("f" flycheck-first-error                                      "First")
+    ("l" (progn (goto-char (point-max)) (flycheck-previous-error)) "Last")
+    ("q" nil))
+  )
