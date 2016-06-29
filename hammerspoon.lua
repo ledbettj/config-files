@@ -46,29 +46,30 @@ hs.hotkey.bind({"ctrl", "cmd"}, "pad*",
 -- pass in a function to change the currently focused window.
 -- after the focus is changed, we'll draw a brief rect around the window
 -- to highlight it.
-function setFocus(fn)
-   return function()
-      fn()
-      local win = hs.window.focusedWindow()
-      if win then
-         local rect = hs.drawing.rectangle(win:frame())
-         rect:setFill(false)
-         rect:setStroke(true)
-         rect:setStrokeWidth(5)
-         rect:setStrokeColor(hs.drawing.color.osx_red)
-         rect:setLevel(hs.drawing.windowLevels["floating"])
-         rect:setRoundedRectRadii(4, 4)
-         rect:show()
-         rect:hide(0.65)
-         hs.timer.doAfter(0.65, function() rect:delete() end)
-      end
+function highlightFocus()
+   local win = hs.window.focusedWindow()
+   if win then
+      local rect = hs.drawing.rectangle(win:frame())
+      rect:setFill(false)
+      rect:setStroke(true)
+      rect:setStrokeWidth(5)
+      rect:setStrokeColor(hs.drawing.color.osx_red)
+      rect:setLevel(hs.drawing.windowLevels["floating"])
+      rect:setRoundedRectRadii(4, 4)
+      rect:show()
+      rect:hide(0.65)
+      hs.timer.doAfter(0.65, function() rect:delete() end)
    end
 end
 
-hs.hotkey.bind({"ctrl", "cmd"}, "left",  setFocus(hs.window.filter.focusWest))
-hs.hotkey.bind({"ctrl", "cmd"}, "right", setFocus(hs.window.filter.focusEast))
-hs.hotkey.bind({"ctrl", "cmd"}, "up",    setFocus(hs.window.filter.focusNorth))
-hs.hotkey.bind({"ctrl", "cmd"}, "down",  setFocus(hs.window.filter.focusSouth))
+local wf = hs.window.filter.new()
+
+wf:subscribe(hs.window.filter.windowFocused, highlightFocus)
+
+hs.hotkey.bind({"ctrl", "cmd"}, "left",  hs.window.filter.focusWest)
+hs.hotkey.bind({"ctrl", "cmd"}, "right", hs.window.filter.focusEast)
+hs.hotkey.bind({"ctrl", "cmd"}, "up",    hs.window.filter.focusNorth)
+hs.hotkey.bind({"ctrl", "cmd"}, "down",  hs.window.filter.focusSouth)
 
 -- window movement
 hs.hotkey.bind({"ctrl", "cmd"}, "pad7", moveToGrid(TOP_LEFT))
@@ -88,4 +89,3 @@ hs.hotkey.bind({"ctrl", "cmd"}, "padenter",
       win:moveToScreen(screen)
    end
 )
-
