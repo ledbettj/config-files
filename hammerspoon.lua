@@ -37,23 +37,24 @@ hs.hotkey.bind({"ctrl", "cmd"}, "pad*",
          local app = hs.application.find(name)
          local win = nil
          if app then
+            app:unhide()
             hs.grid.set(app:mainWindow(), pos[1], pos[2])
          end
       end
    end
 )
 
--- pass in a function to change the currently focused window.
--- after the focus is changed, we'll draw a brief rect around the window
--- to highlight it.
+-- draw a brief highlight around the focused window.
+-- call after focus changes to emphasize.
 function highlightFocus()
    local win = hs.window.focusedWindow()
    if win then
+      local color = {["red"] = 0.0, ["green"] = 0.5, ["blue"] = 1.0, ["alpha"] = 0.8 }
       local rect = hs.drawing.rectangle(win:frame())
       rect:setFill(false)
       rect:setStroke(true)
       rect:setStrokeWidth(5)
-      rect:setStrokeColor(hs.drawing.color.osx_red)
+      rect:setStrokeColor(color)
       rect:setLevel(hs.drawing.windowLevels["floating"])
       rect:setRoundedRectRadii(4, 4)
       rect:show()
@@ -66,6 +67,7 @@ local wf = hs.window.filter.new()
 
 wf:subscribe(hs.window.filter.windowFocused, highlightFocus)
 
+-- focus movement
 hs.hotkey.bind({"ctrl", "cmd"}, "left",  hs.window.filter.focusWest)
 hs.hotkey.bind({"ctrl", "cmd"}, "right", hs.window.filter.focusEast)
 hs.hotkey.bind({"ctrl", "cmd"}, "up",    hs.window.filter.focusNorth)
@@ -82,6 +84,11 @@ hs.hotkey.bind({"ctrl", "cmd"}, "pad1", moveToGrid(BOT_LEFT))
 hs.hotkey.bind({"ctrl", "cmd"}, "pad2", moveToGrid(BOT_FULL))
 hs.hotkey.bind({"ctrl", "cmd"}, "pad3", moveToGrid(BOT_RIGHT))
 hs.hotkey.bind({"ctrl", "cmd"}, "pad+", hs.grid.show)
+hs.hotkey.bind({"ctrl", "cmd"}, "pad0",
+   function()
+      hs.application.frontmostApplication():hide()
+   end
+)
 hs.hotkey.bind({"ctrl", "cmd"}, "padenter",
    function()
       local win = hs.window.frontmostWindow()
