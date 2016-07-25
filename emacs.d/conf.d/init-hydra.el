@@ -1,6 +1,6 @@
 (use-package hydra :ensure t)
 
-(defhydra hydra-zoom (global-map "C-c z")
+(defhydra hydra-zoom ()
   "zoom"
   ("+" text-scale-increase "in")
     ("=" text-scale-increase "in")
@@ -8,3 +8,5 @@
     ("_" text-scale-decrease "out")
     ("0" (text-scale-adjust 0) "reset")
     ("q" nil "quit" :color blue))
+
+(global-set-key (kbd "C-c z") 'hydra-zoom/body)

@@ -22,11 +22,11 @@
             (`interrupted " ⚠")
             (`suspicious '(propertize " ⚠" 'face 'warning)))))
 
-  (defhydra hydra-flycheck (global-map "C-c e")
+  (defhydra hydra-flycheck ()
     "Errors"
     ("n" flycheck-next-error                                       "Next")
     ("p" flycheck-previous-error                                   "Previous")
     ("f" flycheck-first-error                                      "First")
     ("l" (progn (goto-char (point-max)) (flycheck-previous-error)) "Last")
     ("q" nil))
-  )
+  (global-set-key (kbd "C-c e") 'hydra-flycheck/body))
