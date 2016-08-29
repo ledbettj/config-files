@@ -22,7 +22,7 @@
   #'(lambda ()
       (message "emacs loaded in %s" (emacs-init-time))))
 
-(add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/"))
+(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
 (package-initialize)
 
 (eval-when-compile
