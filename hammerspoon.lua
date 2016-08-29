@@ -35,8 +35,7 @@ hs.hotkey.bind({"ctrl", "cmd"}, "pad*",
 
       for name, pos in pairs(apps) do
          local app = hs.application.find(name)
-         local win = nil
-         if app then
+         if app and app:mainWindow() then
             app:unhide()
             hs.grid.set(app:mainWindow(), pos[1], pos[2])
          end
