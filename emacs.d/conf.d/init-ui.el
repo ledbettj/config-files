@@ -56,6 +56,8 @@
 (use-package monokai-theme   :ensure t :pin melpa
   :if (is-selected-theme 'monokai))
 
+(use-package doom-themes     :ensure t :pin melpa
+  :if (is-selected-theme 'doom-molokai))
 
 (defadvice load-theme
   (before theme-dont-propagate activate)
@@ -128,6 +130,10 @@
       (set-face-background 'region               (color-lighten-name str 1))
       (set-face-background 'hl-line              (color-lighten-name bg  8.5))
       (set-face-foreground 'which-func           key)
+
+      (set-face-background 'diff-hl-insert "#679A01")
+      (set-face-background 'diff-hl-change "#1DB4D0")
+      (set-face-background 'diff-hl-delete "#F20055")
 
       (set-face-attribute 'linum nil
 			  :background (color-darken-name  bg 3)

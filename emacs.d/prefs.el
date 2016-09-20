@@ -5,13 +5,13 @@
 
 
 ;; See (custom-available-themes) for the list of available themes.
-(defconst prefs/theme          'monokai)
-(defconst prefs/theme/terminal 'monokai) ; use me when running in a terminal.
+(defconst prefs/theme          'doom-molokai)
+(defconst prefs/theme/terminal 'doom-molokai) ; use me when running in a terminal.
 
 ;; preferred fonts, in order. the first one found on the system will be used.
 (defconst prefs/font '(
-  "Hack"
   "Source Code Pro"
+  "Hack"
   "Ubuntu Mono"
   "Monaco"))
 
