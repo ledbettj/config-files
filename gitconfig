@@ -1,2 +1,4 @@
 [alias]
   cleanup = "!git branch --merged | grep  -v '\\*\\|master' | xargs -n 1 git branch -d"
+  amend = commit --amend
+  fixup = commit --amend --no-edit
