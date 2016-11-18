@@ -1,4 +1,5 @@
 (require 'use-package)
+(require 'all-the-icons)
 
 (defun convert-hash-rocket (BEG END)
   "Convert hash rocket syntax to JSON syntax"
@@ -21,7 +22,7 @@
 
 (use-package :ruby-mode
   :init
-  (add-hook 'ruby-mode-hook '(lambda () (setq mode-name "Rb")))
+  (add-hook 'ruby-mode-hook '(lambda () (setq mode-name (all-the-icons-icon-for-file "foo.rb"))))
   :bind (
          :map ruby-mode-map
               ("C-c r" . convert-hash-rocket)))

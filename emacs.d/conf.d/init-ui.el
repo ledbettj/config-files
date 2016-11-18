@@ -56,8 +56,14 @@
 (use-package monokai-theme   :ensure t :pin melpa
   :if (is-selected-theme 'monokai))
 
+(use-package molokai-theme   :ensure t :pin melpa
+  :if (is-selected-theme 'molokai))
+
 (use-package doom-themes     :ensure t :pin melpa
   :if (is-selected-theme 'doom-molokai))
+
+(use-package color-theme-sanityinc-tomorrow :ensure t :pin melpa
+  :if (is-selected-theme 'sanityinc-tomorrow-night))
 
 (defadvice load-theme
   (before theme-dont-propagate activate)

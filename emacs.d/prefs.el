@@ -5,8 +5,8 @@
 
 
 ;; See (custom-available-themes) for the list of available themes.
-(defconst prefs/theme          'doom-molokai)
-(defconst prefs/theme/terminal 'doom-molokai) ; use me when running in a terminal.
+(defconst prefs/theme          'sanityinc-tomorrow-night)
+(defconst prefs/theme/terminal 'sanityinc-tomorrow-night) ; use me when running in a terminal.
 
 ;; preferred fonts, in order. the first one found on the system will be used.
 (defconst prefs/font '(
