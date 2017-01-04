@@ -5,16 +5,16 @@
 
 
 ;; See (custom-available-themes) for the list of available themes.
-(defconst prefs/theme          'sanityinc-tomorrow-night)
+(defconst prefs/theme          'monokai)
 (defconst prefs/theme/terminal 'sanityinc-tomorrow-night) ; use me when running in a terminal.
 
 ;; preferred fonts, in order. the first one found on the system will be used.
 (defconst prefs/font '(
-  "Source Code Pro"
   "Hack"
+  "Source Code Pro"
   "Ubuntu Mono"
   "Monaco"))
 
-(defconst prefs/font-size                  12) ; default font size.
-(defconst prefs/font-size/macbook-builtin  14) ; font size to use on the builtin mac screen.
-(defconst prefs/font-size/macbook-external 16) ; font size to use when docked.
+(defconst prefs/font-size                  14) ; default font size.
+(defconst prefs/font-size/display-laptop   14) ; font size to use on the builtin screen.
+(defconst prefs/font-size/display-external 12) ; font size to use when docked.

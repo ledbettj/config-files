@@ -96,11 +96,12 @@
   ;; use 12px on Linux, 16px on Mac built in screen, 18x on Mac large screen.
   (add-to-list 'default-frame-alist
                `(font .
-                      ,(if (eq system-type 'darwin)
-                           (if (eq (display-pixel-width) 1280)
-                               (concat prefs/use-font "-" (number-to-string prefs/font-size/macbook-builtin))
-                               (concat prefs/use-font "-" (number-to-string prefs/font-size/macbook-external)))
-                               (concat prefs/use-font "-" (number-to-string prefs/font-size)))))
+                      ,(concat prefs/use-font "-"
+                               (number-to-string
+                                (case (display-pixel-width)
+                                   (7040 prefs/font-size/display-external)
+                                   (3200 prefs/font-size/display-laptop)
+                                   (otherwise prefs/font-size))))))
   ;; default window width is 84 columns.
   (add-to-list 'default-frame-alist '(width . 84)))
 
@@ -114,7 +115,7 @@
   (global-hl-line-mode 1) ; always highlight current line
   (setq-default hl-line-sticky-flag nil)) ; except in an inactive buffer
 
-(use-package rainbow-mode :ensure t :pin melpa
+(use-package rainbow-mode :ensure t
   :diminish rainbow-mode
   :init
   (add-hook 'prog-mode-hook #'rainbow-mode))
