@@ -92,16 +92,16 @@
 	 "@"
 	 (system-name)
 	 ": %b %+"))
-
   ;; use 12px on Linux, 16px on Mac built in screen, 18x on Mac large screen.
   (add-to-list 'default-frame-alist
                `(font .
                       ,(concat prefs/use-font "-"
                                (number-to-string
-                                (case (display-pixel-width)
-                                   (7040 prefs/font-size/display-external)
-                                   (3200 prefs/font-size/display-laptop)
-                                   (otherwise prefs/font-size))))))
+                                (let ((px (display-pixel-width)))
+                                  (cond
+                                   ((eq px 7040) prefs/font-size/display-external)
+                                   ((eq px 3200) prefs/font-size/display-laptop)
+                                   (t prefs/font-size)))))))
   ;; default window width is 84 columns.
   (add-to-list 'default-frame-alist '(width . 84)))
 
