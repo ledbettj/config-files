@@ -1,10 +1,5 @@
 (global-set-key (kbd "M-g") 'goto-line)
 
-(unless (eq system-type 'darwin)
-  (setq-default
-   browse-url-browser-function 'browse-url-generic
-   browse-url-generic-program  "google-chrome-stable"))
-
 (when (eq system-type 'darwin)
   (setq-default ns-function-modifier 'control) ; laptop keyboard has Fn where Control should be.
   (unbind-key (kbd "s-t"))) ; don't pop up font dialog.
