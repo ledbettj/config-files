@@ -50,9 +50,6 @@
 (use-package afternoon-theme :ensure t :pin melpa
   :if (is-selected-theme 'afternoon))
 
-(use-package zenburn-theme   :ensure t :pin melpa
-  :if (is-selected-theme 'zenburn))
-
 (use-package monokai-theme   :ensure t :pin melpa
   :if (is-selected-theme 'monokai))
 

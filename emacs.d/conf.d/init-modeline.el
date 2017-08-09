@@ -1,12 +1,4 @@
 (require 'all-the-icons)
-(require 'powerline)
-
-;; ("%e"
-;;  mode-line-front-space  mode-line-mule-info mode-line-client
-;;  mode-line-modified  mode-line-auto-compile mode-line-remote
-;;  mode-line-frame-identification  mode-line-buffer-identification
-;;  "   "  mode-line-position (vc-mode vc-mode) "  " mode-line-modes
-;;  mode-line-misc-info mode-line-end-spaces)
 
 (set-face-attribute 'mode-line nil :height 0.9 :box nil)
 

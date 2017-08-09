@@ -11,15 +11,6 @@
       (while (re-search-forward ":\\([^\s]+\\)\s*=>\s*\\([^\s]+\\)" END t)
         (replace-match "\\1: \\2")))))
 
-(use-package robe :ensure t :pin melpa
-  :diminish robe-mode
-  :init
-  (add-hook 'ruby-mode-hook 'robe-mode))
-;; this is super slow and not very helpful in rails.
-  ;; :config
-  ;; (eval-after-load 'company
-;;   '(push 'company-robe company-backends)))
-
 (use-package :ruby-mode
   :init
   (add-hook 'ruby-mode-hook '(lambda () (setq mode-name (all-the-icons-icon-for-file "foo.rb"))))

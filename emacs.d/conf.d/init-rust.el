@@ -6,7 +6,7 @@
   :init
   (add-hook 'rust-mode-hook #'cargo-minor-mode))
 
-(use-package racer :ensure t :pin melpa
+(use-package racer :ensure nil :pin melpa
   :init
   (add-hook 'rust-mode-hook #'racer-mode)
   (add-hook 'racer-mode-hook #'eldoc-mode)
