@@ -1,0 +1,72 @@
+#!/usr/bin/env ruby
+require 'date'
+
+class Quicksave
+  def snapshot(target)
+    mount = snapshot_mount(target.to_sym)
+    count = 0
+    path  = nil
+
+    loop do
+      path = Date.today.strftime("/.snapshots/#{target}-%Y-%m-%d.#{count}")
+      break unless Dir.exist?(path)
+      count +=1
+    end
+    exec "btrfs subvolume snapshot -r #{mount} #{path}"
+  end
+
+  def cleanup(target)
+    snapshots = Dir["/.snapshots/#{target}-*"].sort_by do |snap|
+      parts = snap.split('/').last.split('.')
+      # date, count
+      [parts.first, parts.last.to_i]
+    end.reverse
+
+    # snapshots are now sorted, newest first
+    today = Date.today.strftime("#{target}-%Y-%m-%d")
+    seen  = []
+    today_count = 0
+    days_count  = 0
+    del_count   = 0
+
+    snapshots.each do |snap|
+      date = snap.split('/').last.split('.').first
+      if snap.include?(today)
+        today_count += 1
+      elsif seen.include?(date)
+        del_count += 1
+        `btrfs subvolume delete #{snap}`
+      else
+        seen.push(date)
+        days_count += 1
+      end
+    end
+
+    puts "cleanup complete"
+    puts "snapshots retained: #{today_count} from today, #{days_count + today_count} total"
+    puts "snapshots deleted: #{del_count}"
+  end
+
+  private
+
+  def snapshot_mount(target)
+    case target
+    when :home then '/home'
+    when :root then '/'
+    else raise ArgumentError
+    end
+  end
+end
+
+def usage
+  puts 'Usage: sudo quicksave <snapshot|cleanup> <root|home>'
+  exit(1)
+end
+
+usage unless ARGV.length >= 2
+action = ARGV.shift.downcase.to_sym
+
+usage unless [:snapshot, :cleanup].include?(action)
+usage unless Process.uid.zero?
+
+Quicksave.new.send(action, *ARGV)
