@@ -10,12 +10,8 @@
 (setq inhibit-splash-screen     t)
 (setq backup-directory-alist         `((".*" . ,temporary-file-directory)))
 (setq auto-save-file-name-transforms `((".*" ,temporary-file-directory t)))
-(setq initial-scratch-message
-";;   ___ _ __ ___   __ _  ___ ___ _
-;;  / _ \\ '_ ` _ \\ / _` |/ __/ __| |
-;; |  __/ | | | | | (_| | (__\\__ \\_|
-;;  \\___|_| |_| |_|\\__,_|\\___|___(_)
-")
+(setq initial-scratch-message "")
+
 (load jl/custom-file t)
 
 (fset 'startup-echo-area-message

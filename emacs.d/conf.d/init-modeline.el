@@ -1,5 +1,59 @@
 (require 'all-the-icons)
 
+; start stolen powerline code
+(defun pl/make-xpm (name color1 color2 data)
+  "Return an XPM image with NAME using COLOR1 for enabled and COLOR2 for disabled bits specified in DATA."
+  (create-image
+   (concat
+    (format "/* XPM */
+static char * %s[] = {
+\"%i %i 2 1\",
+\". c %s\",
+\"  c %s\",
+"
+            (downcase (replace-regexp-in-string " " "_" name))
+            (length (car data))
+            (length data)
+            (or color1 "None")
+            (or color2 "None"))
+    (let ((len  (length data))
+          (idx  0))
+      (apply 'concat
+             (mapcar '(lambda (dl)
+                        (setq idx (+ idx 1))
+                        (concat
+                         "\""
+                         (concat
+                          (mapcar '(lambda (d)
+                                     (if (eq d 0)
+                                         (string-to-char " ")
+                                       (string-to-char ".")))
+                                  dl))
+                         (if (eq idx len)
+                             "\"};"
+                           "\",\n")))
+                     data))))
+   'xpm t :ascent 'center))
+
+(defun pl/percent-xpm
+    (height pmax pmin winend winstart width color1 color2)
+  "Generate percentage xpm."
+  (let* ((height- (1- height))
+         (fillstart (round (* height- (/ (float winstart) (float pmax)))))
+         (fillend (round (* height- (/ (float winend) (float pmax)))))
+         (data nil)
+         (i 0))
+    (while (< i height)
+      (setq data (cons
+                  (if (and (<= fillstart i)
+                           (<= i fillend))
+                      (append (make-list width 1))
+                    (append (make-list width 0)))
+                  data))
+      (setq i (+ i 1)))
+    (pl/make-xpm "percent" color1 color2 (reverse data))))
+; end stolen powerline code
+
 (set-face-attribute 'mode-line nil :height 0.9 :box nil)
 
 (defface jl/not-modified-face

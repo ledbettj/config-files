@@ -53,6 +53,9 @@
 (use-package monokai-theme   :ensure t :pin melpa
   :if (is-selected-theme 'monokai))
 
+(use-package zerodark-theme :ensure t :pin melpa
+  :if (is-selected-theme 'zerodark))
+
 (use-package molokai-theme   :ensure t :pin melpa
   :if (is-selected-theme 'molokai))
 
@@ -143,19 +146,20 @@
 			  :background (color-darken-name  bg 3)
 			  :foreground (color-lighten-name fg 2))
 
-      (set-face-attribute 'mode-line nil
-			  :height     1.0
-			  :background (color-darken-name bg 10)
-			  :foreground (color-darken-name fg 2)
-			  :box        nil
-			  :underline  nil)
+      (unless (is-selected-theme 'zerodark)
+        (set-face-attribute 'mode-line nil
+                            :height     1.0
+                            :background (color-darken-name bg 10)
+                            :foreground (color-darken-name fg 2)
+                            :box        nil
+                            :underline  nil)
 
-      (set-face-attribute 'mode-line-inactive nil
-			  :height     1.0
-			  :background (color-darken-name bg 25)
-			  :foreground (color-darken-name fg 35)
-			  :box        nil
-			  :underline  nil)
+        (set-face-attribute 'mode-line-inactive nil
+                            :height     1.0
+                            :background (color-darken-name bg 25)
+                            :foreground (color-darken-name fg 35)
+                            :box        nil
+                            :underline  nil))
 
       (set-face-attribute 'flycheck-error nil
                           :underline '(:color "Red1" :style line))
