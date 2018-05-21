@@ -2,52 +2,89 @@
 require 'date'
 
 class Quicksave
-  def snapshot(target)
-    mount = snapshot_mount(target.to_sym)
-    count = 0
-    path  = nil
+  BASE_DIR = '/.snapshots'.freeze
 
-    loop do
-      path = Date.today.strftime("/.snapshots/#{target}-%Y-%m-%d.#{count}")
-      break unless Dir.exist?(path)
-      count +=1
+  class Snapshot
+    attr_reader :partition, :date, :count
+
+    def initialize(partition, date, count)
+      @partition = partition
+      @date      = date
+      @count     = count
     end
-    exec "btrfs subvolume snapshot -r #{mount} #{path}"
+
+    def to_s
+      to_path
+    end
+
+    def to_path
+      @to_path ||= "#{Quicksave::BASE_DIR}/#{partition}-#{date}.#{count}"
+    end
+
+    def self.from_path(path)
+      regex = /^(?<partition>[a-z_]+)-(?<date>\d{4}-\d{2}-\d{2})\.(?<count>\d+)$/
+      m = path.split('/').last.match(regex)
+
+      new(m[:partition].to_sym, Date.parse(m[:date]), m[:count].to_i)
+    end
+  end
+
+  def snapshot(target)
+    target = target.to_sym
+    mount  = snapshot_mount(target)
+    count  = 0
+    today  = Date.today
+
+    previous = snapshots.find { |snap| snap.date == today && snap.partition == target }
+    count    = previous.count + 1 if previous
+    current  = Snapshot.new(target, today, count)
+
+    exec "btrfs subvolume snapshot -r #{mount} #{current}"
   end
 
   def cleanup(target)
-    snapshots = Dir["/.snapshots/#{target}-*"].sort_by do |snap|
-      parts = snap.split('/').last.split('.')
-      # date, count
-      [parts.first, parts.last.to_i]
-    end.reverse
+    target = target.to_sym
+    deleted = 0
+
+    deleted += cleanup_old(target)
+
+    puts 'cleanup complete'
+    puts "snapshots deleted: #{deleted}"
+  end
+
+  private
+
+  def snapshots
+    Dir["#{BASE_DIR}/*"]
+      .map { |path| Snapshot.from_path(path) }
+      .sort_by { |snap| [snap.partition, snap.date, snap.count] }
+      .reverse
+  end
+
+  def cleanup_old(target)
+    snaps = snapshots.select { |snap| snap.partition == target }
 
     # snapshots are now sorted, newest first
-    today = Date.today.strftime("#{target}-%Y-%m-%d")
+    today = Date.today
     seen  = []
     today_count = 0
     days_count  = 0
     del_count   = 0
 
-    snapshots.each do |snap|
-      date = snap.split('/').last.split('.').first
-      if snap.include?(today)
+    snaps.each do |snap|
+      if snap.date == today
         today_count += 1
-      elsif seen.include?(date)
+      elsif seen.include?(snap.date)
         del_count += 1
         `btrfs subvolume delete #{snap}`
       else
-        seen.push(date)
+        seen.push(snap.date)
         days_count += 1
       end
     end
 
-    puts "cleanup complete"
-    puts "snapshots retained: #{today_count} from today, #{days_count + today_count} total"
-    puts "snapshots deleted: #{del_count}"
+    del_count
   end
-
-  private
 
   def snapshot_mount(target)
     case target
