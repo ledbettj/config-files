@@ -3,6 +3,7 @@ require 'date'
 
 class Quicksave
   BASE_DIR = '/.snapshots'.freeze
+  MAX_AGE  = 90 # days
 
   class Snapshot
     attr_reader :partition, :date, :count
@@ -11,6 +12,10 @@ class Quicksave
       @partition = partition
       @date      = date
       @count     = count
+    end
+
+    def expired?
+      date < Date.today - Quicksave::MAX_AGE
     end
 
     def to_s
@@ -30,14 +35,9 @@ class Quicksave
   end
 
   def snapshot(target)
-    target = target.to_sym
-    mount  = snapshot_mount(target)
-    count  = 0
-    today  = Date.today
-
-    previous = snapshots.find { |snap| snap.date == today && snap.partition == target }
-    count    = previous.count + 1 if previous
-    current  = Snapshot.new(target, today, count)
+    target  = target.to_sym
+    mount   = snapshot_mount(target)
+    current = next_snapshot(target)
 
     exec "btrfs subvolume snapshot -r #{mount} #{current}"
   end
@@ -46,6 +46,7 @@ class Quicksave
     target = target.to_sym
     deleted = 0
 
+    deleted += cleanup_dupes(target)
     deleted += cleanup_old(target)
 
     puts 'cleanup complete'
@@ -54,6 +55,16 @@ class Quicksave
 
   private
 
+  def next_snapshot(target)
+    count  = 0
+    today  = Date.today
+
+    previous = snapshots.find { |snap| snap.date == today && snap.partition == target }
+    count    = previous.count + 1 if previous
+
+    Snapshot.new(target, today, count)
+  end
+
   def snapshots
     Dir["#{BASE_DIR}/*"]
       .map { |path| Snapshot.from_path(path) }
@@ -61,7 +72,7 @@ class Quicksave
       .reverse
   end
 
-  def cleanup_old(target)
+  def cleanup_dupes(target)
     snaps = snapshots.select { |snap| snap.partition == target }
 
     # snapshots are now sorted, newest first
@@ -84,6 +95,13 @@ class Quicksave
     end
 
     del_count
+  end
+
+  def cleanup_old(target)
+    snapshots
+      .select { |snap| snap.partition == target && snap.expired? }
+      .each { |snap| `btrfs subvolume delete #{snap}` }
+      .count
   end
 
   def snapshot_mount(target)
