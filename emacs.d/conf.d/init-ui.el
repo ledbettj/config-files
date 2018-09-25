@@ -8,10 +8,14 @@
     (car prefs/font)))
 
 (defun is-selected-theme (theme)
-  (or (eq prefs/theme theme)
-      (and
-       (eq prefs/theme/terminal theme)
-       (display-graphic-p))))
+  (let (
+        (cur-theme (symbol-name prefs/theme))
+        (cur-term-theme (symbol-name prefs/theme/terminal))
+        (theme-name (symbol-name theme)))
+    (or (string-prefix-p theme-name cur-theme)
+        (and
+         (string-prefix-p theme-name cur-term-theme)
+         (display-graphic-p)))))
 
 (when (eq system-type 'darwin)
   (setq ns-use-srgb-colorspace   t)
@@ -60,7 +64,7 @@
   :if (is-selected-theme 'molokai))
 
 (use-package doom-themes     :ensure t :pin melpa
-  :if (is-selected-theme 'doom-molokai))
+  :if (is-selected-theme 'doom-))
 
 (use-package color-theme-sanityinc-tomorrow :ensure t :pin melpa
   :if (is-selected-theme 'sanityinc-tomorrow-night))
