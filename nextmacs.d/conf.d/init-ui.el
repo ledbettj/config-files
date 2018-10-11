@@ -1,4 +1,6 @@
-(load-theme 'wombat)
+(defvar jl/theme-initialized nil)
+
+(use-package doom-themes :ensure t)
 
 ;; setup a frame with the appropriate UI settings.
 ;; this is either initial-frame-alist to apply to the already created initial frame,
@@ -20,8 +22,11 @@
   (add-to-list frame-alist '(horizontal-scroll-bars . nil))
   ;; no menu bar or toolbar
   (add-to-list frame-alist '(menu-bar-lines . 0))
-  (add-to-list frame-alist '(tool-bar-lines . 0)))
+  (add-to-list frame-alist '(tool-bar-lines . 0))
 
+  (unless jl/theme-initialized
+    (setq jl/theme-initialized t)
+    (load-theme prefs/use-theme)))
 
 
 (jl/set-frame-params 'initial-frame-alist) ; configure initial frame

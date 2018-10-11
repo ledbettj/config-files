@@ -31,3 +31,8 @@
   (if (display-graphic-p)
       (cl-find-if 'font-exists-p prefs/font)
     (car prefs/font)))
+
+(defconst prefs/use-theme
+  (if (display-graphic-p)
+      prefs/theme
+    prefs/theme/terminal))
