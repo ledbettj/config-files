@@ -9,12 +9,7 @@
   (add-to-list frame-alist
                `(font .
                       ,(concat prefs/use-font "-"
-                               (number-to-string
-                                (let ((px (display-pixel-width)))
-                                  (cond
-                                   ((eq px 7040) prefs/font-size/display-external)
-                                   ((eq px 3200) prefs/font-size/display-laptop)
-                                   (t prefs/font-size)))))))
+                               (number-to-string (prefs/use-font-size)))))
   ;; default window width is 84 columns.
   (add-to-list frame-alist '(width . 84))
   ;; no scrolly

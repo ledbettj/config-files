@@ -54,7 +54,6 @@
 
 (use-package load-dir
   :ensure t
-  :defer 1
   :init
   (setq force-load-messages nil)
   (setq load-dir-debug nil)

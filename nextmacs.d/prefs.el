@@ -15,11 +15,13 @@
   "Ubuntu Mono"
   "Monaco"))
 
-(defconst prefs/font-size                  14) ; default font size.
-(defconst prefs/font-size/display-laptop   12) ; font size to use on the builtin screen.
-(defconst prefs/font-size/display-external 18) ; font size to use when docked.
+;; display pixel width and corresponding font size.
+(defconst prefs/font-size
+  '(( 7040 . 18 )
+    ( 3200 . 12 )
+    ( 2560 . 12 )))
 
-
+(defconst prefs/default-font-size 14)
 
 ;; helper functions go down here, prefs go up there.
 
@@ -36,3 +38,9 @@
   (if (display-graphic-p)
       prefs/theme
     prefs/theme/terminal))
+
+(defun prefs/use-font-size ()
+  (let ((px (x-display-pixel-width ":0")))
+    (or
+     (cdr (assoc px prefs/font-size))
+     prefs/default-font-size)))
