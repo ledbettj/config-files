@@ -1,3 +1,6 @@
 (use-package magit :ensure t :defer t
   :bind
-  (("C-x g" . magit-status)))
+  (("C-c g" . magit-status)
+   ("C-c b" . magit-blame)))
+
+(use-package diff-hl :ensure t :defer t)
