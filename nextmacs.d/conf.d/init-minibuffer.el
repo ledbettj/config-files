@@ -14,9 +14,16 @@
         ("C-j" . 'ivy-immediate-done))
   :config
   (setq ivy-extra-directories nil)
+  (setq ivy-height 16)
+  (add-to-list 'ivy-ignore-buffers "\\*Messages\\*")
   :init
   (ivy-mode t))
 
 (use-package counsel :ensure t :defer t
+  :config
+  (setq counsel-find-file-ignore-regexp
+        "\\(?:\\`[#.]\\)")
   :bind
-  (("C-c s" . counsel-git-grep)))
+  (("C-c s" . counsel-git-grep)
+   ("M-x" . counsel-M-x)
+   ("C-x C-f" . counsel-find-file)))
