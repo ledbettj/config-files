@@ -27,3 +27,8 @@
   (("C-c s" . counsel-git-grep)
    ("M-x" . counsel-M-x)
    ("C-x C-f" . counsel-find-file)))
+
+(use-package counsel-projectile :ensure t :defer t
+  :config
+  (counsel-projectile-mode)
+  :bind-keymap ("C-c p" . projectile-command-map))
