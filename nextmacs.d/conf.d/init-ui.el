@@ -2,6 +2,10 @@
 
 (use-package doom-themes :ensure t)
 
+(setq-default show-trailing-whitespace 1)
+
+
+
 ;; setup a frame with the appropriate UI settings.
 ;; this is either initial-frame-alist to apply to the already created initial frame,
 ;; or default-frame-alist to setup new frames.
@@ -21,7 +25,8 @@
 
   (unless jl/theme-initialized
     (setq jl/theme-initialized t)
-    (load-theme prefs/use-theme)))
+    (load-theme prefs/use-theme))
+  (set-face-background 'trailing-whitespace "#141700"))
 
 
 (jl/set-frame-params 'initial-frame-alist) ; configure initial frame
