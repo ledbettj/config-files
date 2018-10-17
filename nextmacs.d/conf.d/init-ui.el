@@ -33,3 +33,18 @@
 (add-hook 'before-make-frame-hook ; configure new frames
           #'(lambda ()
               (jl/set-frame-params 'default-frame-alist)))
+
+
+(use-package fringe
+  :config
+  (set-fringe-mode '(8 . 8)))
+
+(use-package linum
+  :config
+  (global-linum-mode 1)
+  (setq-default linum-format "%02d "))
+
+(use-package hl-line
+  :config
+  (global-hl-line-mode 1) ; always highlight current line
+  (setq-default hl-line-sticky-flag nil)) ; except in an inactive buffer
