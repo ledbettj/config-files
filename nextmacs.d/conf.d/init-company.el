@@ -6,4 +6,3 @@
   (setq-default company-minimum-prefix-length     2)
   (setq-default company-show-numbers              1)
   (setq-default company-tooltip-align-annotations t))
-
