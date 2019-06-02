@@ -8,4 +8,4 @@
   (setq-default company-show-numbers              1)
   (setq-default company-tooltip-align-annotations t))
 
-(use-package company-lsp :ensure t)
+(use-package company-lsp :ensure t :commands company-lsp)

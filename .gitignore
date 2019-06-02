@@ -1,3 +1,6 @@
 .DS_Store
-emacs.d/abbrev_defs
-emacs.d/recentf
+nextmacs.d/abbrev_defs
+nextmacs.d/recentf
+nextmacs.d/ido.last
+nextmacs.d/transient
+nextmacs.d/%backup%~
