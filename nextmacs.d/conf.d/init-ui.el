@@ -3,7 +3,7 @@
 (use-package doom-themes :ensure t)
 
 (setq-default show-trailing-whitespace 1)
-
+(column-number-mode t)
 
 
 ;; setup a frame with the appropriate UI settings.

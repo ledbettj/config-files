@@ -25,8 +25,9 @@
 ;; display pixel width and corresponding font size.
 (defconst prefs/font-size
   '(( 7040 . 18 )
-    ( 3200 . 12 )
-    ( 2560 . 12 )))
+    ( 6400 . 18 )
+    ( 3200 . 16 )
+    ( 2128 . 16 )))
 
 (defconst prefs/default-font-size 14)
 

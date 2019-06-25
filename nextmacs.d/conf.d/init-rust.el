@@ -2,7 +2,6 @@
   :hook (rust-mode . (lambda ()
                        (lsp)
                        (lsp-ui-mode)
-                       (lsp-ui-sideline-mode)
-                       (lsp-ui-doc-mode))))
+                       (lsp-ui-sideline-mode))))
 
 (use-package toml-mode :ensure t :defer t)

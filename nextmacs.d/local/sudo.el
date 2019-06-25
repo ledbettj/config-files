@@ -3,10 +3,18 @@
   (interactive)
   (if (buffer-file-name)
       (let ((file-name (buffer-file-name))
-            (offset (point)))
-        (kill-buffer (current-buffer))
+            (offset (point))
+            (old-buffer (current-buffer)))
         (find-file (concat "/sudo::" file-name))
         (goto-char offset)
-        (message "now editing %s as root" file-name))))
+        (message "now editing %s as root" file-name)
+        (kill-buffer old-buffer))))
 
 (provide 'sudo)
+
+
+
+;; (get-buffer-process (current-buffer))
+
+
+;; (eq (process-buffer) (current-buffer))
