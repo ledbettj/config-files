@@ -10,6 +10,7 @@
 
 ;; preferred fonts, in order. the first one found on the system will be used.
 (defconst prefs/font '(
+  "Roboto Mono"
   "Source Code Pro"
   "Hack"
   "Ubuntu Mono"
