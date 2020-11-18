@@ -1,8 +1,9 @@
 (use-package lsp-mode :ensure t
   :commands lsp
-  :init
-  (setq lsp-rust-rls-command '("rustup" "run" "nightly" "rls")))
-
+  :config
+  (setq lsp-prefer-flymake nil)
+  (setq lsp-enable-snippet nil)
+  (setq lsp-rust-server 'rust-analyzer))
 (use-package lsp-ui :ensure t :commands lsp-ui-mode
   :init
   (setq-default lsp-ui-flycheck-enable nil)

@@ -2,7 +2,6 @@
 (use-package company :ensure t :defer t
   :init (global-company-mode)
   :config
-  (push 'company-lsp company-backends)
   (setq-default company-idle-delay                0.25)
   (setq-default company-minimum-prefix-length     2)
   (setq-default company-show-numbers              1)

@@ -19,7 +19,7 @@
       (message "emacs loaded in %s" (emacs-init-time))))
 
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
-(package-initialize)
+;(package-initialize)
 
 (eval-when-compile
   (package-initialize)

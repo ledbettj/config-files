@@ -5,8 +5,8 @@
 
 
 ;; See (custom-available-themes) for the list of available themes.
-(defconst prefs/theme          'doom-vibrant)
-(defconst prefs/theme/terminal 'doom-vibrant) ; use me when running in a terminal.
+(defconst prefs/theme          'doom-gruvbox)
+(defconst prefs/theme/terminal 'doom-gruvbox) ; use me when running in a terminal.
 
 ;; preferred fonts, in order. the first one found on the system will be used.
 (defconst prefs/font '(
