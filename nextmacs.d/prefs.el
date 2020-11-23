@@ -5,8 +5,8 @@
 
 
 ;; See (custom-available-themes) for the list of available themes.
-(defconst prefs/theme          'doom-gruvbox)
-(defconst prefs/theme/terminal 'doom-gruvbox) ; use me when running in a terminal.
+(defconst prefs/theme          'doom-nord)
+(defconst prefs/theme/terminal 'doom-nord) ; use me when running in a terminal.
 
 ;; preferred fonts, in order. the first one found on the system will be used.
 (defconst prefs/font '(
@@ -17,7 +17,7 @@
 
 (defconst prefs/ensure-paths
   `(
-    (prepend . ,(expand-file-name "~/.gem/ruby/2.6.0/bin"))
+    (prepend . ,(expand-file-name "~/.gem/ruby/2.7.0/bin"))
     (prepend . ,(expand-file-name "~/.rbenv/bin"))
     (prepend . ,(expand-file-name "~/.rbenv/shims"))
     (append .  "/usr/local/bin")))
@@ -27,6 +27,7 @@
   '(( 7040 . 18 )
     ( 6400 . 18 )
     ( 3200 . 16 )
+    ( 2560 . 14 )
     ( 2128 . 16 )))
 
 (defconst prefs/default-font-size 14)
