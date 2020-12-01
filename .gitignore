@@ -4,3 +4,6 @@ nextmacs.d/recentf
 nextmacs.d/ido.last
 nextmacs.d/transient
 nextmacs.d/%backup%~
+nextmacs.d/session.*
+nextmacs.d/eshell
+nextmacs.d/.dap-breakpoints

@@ -20,6 +20,7 @@
     (prepend . ,(expand-file-name "~/.gem/ruby/2.7.0/bin"))
     (prepend . ,(expand-file-name "~/.rbenv/bin"))
     (prepend . ,(expand-file-name "~/.rbenv/shims"))
+    (prepend . ,(expand-file-name "~/Local/bin"))
     (append .  "/usr/local/bin")))
 
 ;; display pixel width and corresponding font size.
