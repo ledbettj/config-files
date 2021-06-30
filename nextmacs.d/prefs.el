@@ -19,7 +19,7 @@
 
 (defconst prefs/ensure-paths
   `(
-    (prepend . ,(expand-file-name "~/.gem/ruby/2.7.0/bin"))
+    (prepend . ,(expand-file-name "~/.gem/ruby/3.0.0/bin"))
     (prepend . ,(expand-file-name "~/.rbenv/bin"))
     (prepend . ,(expand-file-name "~/.rbenv/shims"))
     (prepend . ,(expand-file-name "~/Local/bin"))
