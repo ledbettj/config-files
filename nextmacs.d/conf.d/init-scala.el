@@ -1,6 +1,6 @@
-(use-package lsp-metals :ensure t
-  :config
-  (setq lsp-metals-treeview-show-when-views-received nil))
+;; (use-package lsp-metals :ensure t
+;;   :config
+;;   (setq lsp-metals-treeview-show-when-views-received nil))
 
 (use-package scala-mode :ensure t
   :config
