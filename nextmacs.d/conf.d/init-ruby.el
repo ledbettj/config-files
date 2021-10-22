@@ -1,3 +1,5 @@
+(use-package ruby-mode :ensure t
+  :mode ("\\.rb\\'" "\\.rbs\\'" "Steepfile"))
 (use-package rspec-mode :ensure t)
 (use-package yard-mode :ensure t
   :hook ruby-mode)

@@ -8,3 +8,4 @@
   (setq-default company-tooltip-align-annotations t))
 
 (use-package company-lsp :ensure t :commands company-lsp)
+(use-package company-terraform :ensure t)
