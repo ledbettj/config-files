@@ -9,4 +9,3 @@
   (setq-default lsp-ui-flycheck-enable nil)
   (setq-default lsp-prefer-flymake t)
   (setq-default lsp-ui-doc-max-height 5))
-(use-package company-lsp :ensure t :commands company-lsp)
