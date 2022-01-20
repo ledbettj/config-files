@@ -5,15 +5,18 @@
 (setq-default show-trailing-whitespace 1)
 (column-number-mode t)
 
+(set-face-attribute 'default nil :height (* 10 (prefs/use-font-size)))
 
 ;; setup a frame with the appropriate UI settings.
 ;; this is either initial-frame-alist to apply to the already created initial frame,
 ;; or default-frame-alist to setup new frames.
 (defun jl/set-frame-params (frame-alist)
+  ;; (add-to-list frame-alist
+  ;;              `(font .
+  ;;                     ,(concat prefs/use-font "-"
+  ;;                              (number-to-string (prefs/use-font-size)))))
   (add-to-list frame-alist
-               `(font .
-                      ,(concat prefs/use-font "-"
-                               (number-to-string (prefs/use-font-size)))))
+               `(font . ,prefs/use-font))
   ;; default window width is 84 columns.
   (add-to-list frame-alist '(width . 84))
   ;; no scrolly

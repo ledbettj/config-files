@@ -8,4 +8,10 @@
   :init
   (setq-default lsp-ui-flycheck-enable nil)
   (setq-default lsp-prefer-flymake t)
-  (setq-default lsp-ui-doc-max-height 5))
+  (setq-default lsp-ui-doc-max-height 10)
+  :config
+  (add-hook 'lsp-ui-doc-frame-hook
+            (lambda (frame _w)
+              (set-face-attribute 'default frame :height 100))))
+
+(use-package company-lsp :ensure t :commands company-lsp)

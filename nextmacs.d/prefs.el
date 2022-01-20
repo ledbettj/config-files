@@ -11,7 +11,8 @@
 ;; preferred fonts, in order. the first one found on the system will be used.
 (defconst prefs/font '(
 ;  "Fira Code Retina"
-  "Roboto Mono"
+                                        ;  "Roboto Mono"
+  "JetBrains Mono"
   "Source Code Pro"
   "Hack"
   "Ubuntu Mono"
@@ -31,6 +32,7 @@
     ( 6400 . 18 )
     ( 5968 . 18 )
     ( 3200 . 18 )
+    ( 2560 . 14 )
     ( 2128 . 18 )))
 
 (defconst prefs/default-font-size 16)
