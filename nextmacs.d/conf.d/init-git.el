@@ -1,4 +1,5 @@
 (use-package magit :ensure t :defer t
+  :mode (("COMMIT_EDITMSG" . git-commit-mode))
   :bind
   (("C-c g" . magit-status)
    ("C-c b" . magit-blame)))
