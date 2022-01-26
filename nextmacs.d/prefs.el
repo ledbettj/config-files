@@ -24,7 +24,15 @@
     (prepend . ,(expand-file-name "~/.rbenv/bin"))
     (prepend . ,(expand-file-name "~/.rbenv/shims"))
     (prepend . ,(expand-file-name "~/Local/bin"))
-    (append .  "/usr/local/bin")))
+    (prepend . ,(expand-file-name "~/.nvm/versions/node/v14.18.3/bin"))
+    (append .  "/usr/local/bin")
+    (append . ,(expand-file-name "~/.yarn/bin"))
+    (append . ,(expand-file-name "~/.cargo/bin"))
+    (append . ,(expand-file-name "~/go/bin"))
+    (append . ,(expand-file-name "~/Projects/Android/emulator"))
+    (append . ,(expand-file-name "~/Projects/Android/tools"))
+    (append . ,(expand-file-name "~/Projects/Android/tools/bin"))
+    (append . ,(expand-file-name "~/Projects/Android/platform-tools"))))
 
 ;; display pixel width and corresponding font size.
 (defconst prefs/font-size
