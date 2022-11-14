@@ -62,7 +62,7 @@
     prefs/theme/terminal))
 
 (defun prefs/use-font-size ()
-  (let ((px (x-display-pixel-width ":0")))
+  (let ((px (display-pixel-width)))
     (or
      (cdr (assoc px prefs/font-size))
      prefs/default-font-size)))
