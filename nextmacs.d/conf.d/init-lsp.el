@@ -14,4 +14,4 @@
             (lambda (frame _w)
               (set-face-attribute 'default frame :height 100))))
 
-(use-package company-lsp :ensure t :commands company-lsp)
+;(use-package company-lsp :ensure t :commands company-lsp)

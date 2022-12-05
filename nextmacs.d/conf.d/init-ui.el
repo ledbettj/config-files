@@ -11,12 +11,12 @@
 ;; this is either initial-frame-alist to apply to the already created initial frame,
 ;; or default-frame-alist to setup new frames.
 (defun jl/set-frame-params (frame-alist)
-  ;; (add-to-list frame-alist
-  ;;              `(font .
-  ;;                     ,(concat prefs/use-font "-"
-  ;;                              (number-to-string (prefs/use-font-size)))))
   (add-to-list frame-alist
-               `(font . ,prefs/use-font))
+               `(font .
+                      ,(concat prefs/use-font "-"
+                               (number-to-string (prefs/use-font-size)))))
+  ;; (add-to-list frame-alist
+  ;;              `(font . ,prefs/use-font))
   ;; default window width is 84 columns.
   (add-to-list frame-alist '(width . 84))
   ;; no scrolly
@@ -33,10 +33,9 @@
 
 
 (jl/set-frame-params 'initial-frame-alist) ; configure initial frame
-(add-hook 'before-make-frame-hook ; configure new frames
-          #'(lambda ()
+(add-hook 'after-make-frame-functions ; configure new frames
+          #'(lambda (frame)
               (jl/set-frame-params 'default-frame-alist)))
-
 
 (use-package fringe
   :config
