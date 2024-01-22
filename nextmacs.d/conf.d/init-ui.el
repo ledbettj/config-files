@@ -36,6 +36,9 @@
 (add-hook 'after-make-frame-functions ; configure new frames
           #'(lambda (frame)
               (jl/set-frame-params 'default-frame-alist)))
+(add-to-list 'after-make-frame-functions
+          #'(lambda (frame)
+              (jl/set-frame-params 'default-frame-alist)))
 
 (use-package fringe
   :config

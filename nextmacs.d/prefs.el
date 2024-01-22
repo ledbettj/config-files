@@ -43,7 +43,7 @@
     ( 2560 . 14 )
     ( 2128 . 18 )))
 
-(defconst prefs/default-font-size 16)
+(defconst prefs/default-font-size 14)
 
 ;; helper functions go down here, prefs go up there.
 
