@@ -40,14 +40,11 @@
           #'(lambda (frame)
               (jl/set-frame-params 'default-frame-alist)))
 
+(global-display-line-numbers-mode 1)
+
 (use-package fringe
   :config
   (set-fringe-mode '(8 . 8)))
-
-(use-package linum
-  :config
-  (global-linum-mode 1)
-  (setq-default linum-format "%02d "))
 
 (use-package hl-line
   :config

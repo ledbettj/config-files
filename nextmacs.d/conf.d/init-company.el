@@ -1,4 +1,6 @@
 
+(use-package company-box :ensure t
+  :hook (company-mode . company-box-mode))
 (use-package company :ensure t :defer t
   :init (global-company-mode)
   :config

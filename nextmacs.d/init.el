@@ -50,8 +50,11 @@
 (put 'upcase-region   'disabled nil)
 (delete-selection-mode 1)
 (defalias 'yes-or-no-p 'y-or-n-p)
-
 ;; then let's load everything else.
+
+;; lsp performance configurations
+(setq gc-cons-threshold 100000000)
+(setq read-process-output-max (* 3 1024 1024)) ;; 3mb
 
 (use-package load-dir
   :ensure t
