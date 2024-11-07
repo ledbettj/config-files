@@ -73,14 +73,20 @@
 ;;
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
+
+(setq tab-always-indent t)
+(+global-word-wrap-mode +1)
+
 (use-package! copilot
   :hook (prog-mode . copilot-mode)
   :bind (:map copilot-completion-map
               ("<tab>" . 'copilot-accept-completion)
               ("C-<tab>" . 'copilot-accept-completion-by-word))
   :config
-  (add-to-list 'copilot-indentation-alist '(emacs-lisp-mode . 2))
-  )
+  (add-to-list 'copilot-indentation-alist '(prog-mode 2))
+  (add-to-list 'copilot-indentation-alist '(org-mode 2))
+  (add-to-list 'copilot-indentation-alist '(text-mode 2))
+  (add-to-list 'copilot-indentation-alist '(emacs-lisp-mode 2)))
 
 (use-package! company
   :config
@@ -89,7 +95,3 @@
   (setq-default company-minimum-prefix-length     2)
   (setq-default company-show-numbers              1)
   (setq-default company-tooltip-align-annotations t))
-
-;; (custom-set-faces!
-;;   '(flycheck-error :underline (:style line))
-;;   '(flycheck-warning :underline (:style line)))
