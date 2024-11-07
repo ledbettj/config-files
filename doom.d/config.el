@@ -75,13 +75,15 @@
 ;; they are implemented.
 
 (setq tab-always-indent t)
+(setq kill-whole-line t)
+(setq confirm-kill-emacs nil)
 (+global-word-wrap-mode +1)
 
 (use-package! copilot
   :hook (prog-mode . copilot-mode)
   :bind (:map copilot-completion-map
-              ("<tab>" . 'copilot-accept-completion)
-              ("C-<tab>" . 'copilot-accept-completion-by-word))
+              ("C-<tab>" . 'copilot-accept-completion))
+
   :config
   (add-to-list 'copilot-indentation-alist '(prog-mode 2))
   (add-to-list 'copilot-indentation-alist '(org-mode 2))
@@ -91,7 +93,16 @@
 (use-package! company
   :config
   (setq-default lsp-completion-provider           :capf)
-  (setq-default company-idle-delay                0.25)
+  (setq-default company-idle-delay                0.5)
   (setq-default company-minimum-prefix-length     2)
   (setq-default company-show-numbers              1)
   (setq-default company-tooltip-align-annotations t))
+
+(use-package! iedit
+  :defer
+  :bind ("C-;" . iedit-mode))
+
+(use-package! hungry-delete
+  :config
+  (setq-default hungry-delete-join-reluctantly t)
+  :hook (prog-mode . hungry-delete-mode))
