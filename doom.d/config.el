@@ -31,7 +31,7 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-monokai-pro)
+(setq doom-theme 'doom-one)
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
@@ -77,6 +77,9 @@
 (setq tab-always-indent t)
 (setq kill-whole-line t)
 (setq confirm-kill-emacs nil)
+(setq-hook! 'ruby-mode-hook +format-with 'rubocop)
+(setq +format-on-save-enabled-modes
+      '(rust-mode))
 (+global-word-wrap-mode +1)
 
 (use-package! copilot
@@ -106,3 +109,6 @@
   :config
   (setq-default hungry-delete-join-reluctantly t)
   :hook (prog-mode . hungry-delete-mode))
+
+(use-package! protobuf-mode
+  :defer-incrementally t)
