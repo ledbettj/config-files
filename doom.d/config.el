@@ -112,3 +112,7 @@
 
 (use-package! protobuf-mode
   :defer-incrementally t)
+
+(use-package! sudo
+  :defer
+  :bind (("C-c C-s" . reopen-file-with-sudo)))
