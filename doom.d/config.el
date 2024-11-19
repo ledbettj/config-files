@@ -116,3 +116,7 @@
 (use-package! sudo
   :defer
   :bind (("C-c C-s" . reopen-file-with-sudo)))
+
+(use-package toggle-quotes
+  :defer
+  :bind (("C-c t q" . toggle-quotes)))
