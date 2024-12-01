@@ -79,7 +79,7 @@
 (setq confirm-kill-emacs nil)
 (setq-hook! 'ruby-mode-hook +format-with 'rubocop)
 (setq +format-on-save-enabled-modes
-      '(rust-mode))
+      '(rust-mode elixir-mode))
 (+global-word-wrap-mode +1)
 
 (use-package! copilot
