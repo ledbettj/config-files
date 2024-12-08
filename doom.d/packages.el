@@ -58,4 +58,3 @@
            :files ("editors/protobuf-mode.el")))
 (package! sudo
   :recipe (:local-repo "local" :files ("sudo.el")))
-(package! toggle-quotes)
