@@ -60,11 +60,13 @@ truncation_length=5
 show_always=true
 style_user="bold blue"
 format="[$user@]($style)"
+aliases = { "johnledbetter" = "john" }
 
 [hostname]
 style="bold blue"
 ssh_only=false
 format="[$hostname:]($style)"
+aliases = { "JohnLedbetter" = "mbp" }
 
 [jobs]
 disabled=true
