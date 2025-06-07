@@ -123,10 +123,11 @@
 (let* ((geometry (alist-get 'geometry (car (display-monitor-attributes-list))))
        (w (nth 2 geometry))
        (h (nth 3 geometry)))
+                                        ;(message "Monitor size: %d x %d" w h))
   (set-face-attribute 'default nil
                       :font "Iosevka"
                       :height (cond
-                               ((and (eq w 1512) (eq h 982)) 190) ; built in display
-                               ;((and (eq w ...) (eq h ...)) ...) ; more
+                               ((and (eq w 1512) (eq h 982)) 190) ; built in MBP display
+                               ((and (eq w 3606) (eq h 2404)) 180) ; Framework display
                                (t 170)) ; fallback
                       :weight 'regular))
