@@ -117,6 +117,9 @@
   :defer
   :bind (("C-c C-s" . reopen-file-with-sudo)))
 
+(use-package! sh-script
+  :mode ("\\.env" . bash-ts-mode)) ; note this doesn't include a trailing ' so it also matches '.env.local' etc
+
 
 
 ;; set the font size based on monitor size
