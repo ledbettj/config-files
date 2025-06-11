@@ -91,6 +91,10 @@
   (add-to-list 'copilot-indentation-alist '(prog-mode 2))
   (add-to-list 'copilot-indentation-alist '(org-mode 2))
   (add-to-list 'copilot-indentation-alist '(text-mode 2))
+  (add-to-list 'copilot-indentation-alist '(rust-mode 2))
+  (add-to-list 'copilot-indentation-alist '(python-mode 2))
+  (add-to-list 'copilot-indentation-alist '(typescript-mode 2))
+  (add-to-list 'copilot-indentation-alist '(ruby-mode 2))
   (add-to-list 'copilot-indentation-alist '(emacs-lisp-mode 2)))
 
 (use-package! company
@@ -120,6 +124,11 @@
 (use-package! sh-script
   :mode ("\\.env" . bash-ts-mode)) ; note this doesn't include a trailing ' so it also matches '.env.local' etc
 
+(use-package! rust-mode
+  :config
+  (setq rust-format-on-save t)
+  (setq rust-indent-offset 2)
+  )
 
 
 ;; set the font size based on monitor size

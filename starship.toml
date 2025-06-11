@@ -49,7 +49,7 @@ disabled=true
 disabled=true
 
 [character]
-success_symbol="[❯](bold dimmed gray)"
+#success_symbol="[❯](bold dimmed gray)"
 
 [directory]
 style="gray"
