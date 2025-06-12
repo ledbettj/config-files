@@ -130,6 +130,11 @@
   (setq rust-indent-offset 2)
   )
 
+(use-package! claude-code
+  :vc (:url "https://github.com/stevemolitor/claude-code.el" :rev :newest)
+  :config (claude-code-mode)
+  :bind-keymap ("C-c z" . claude-code-command-map))
+
 
 ;; set the font size based on monitor size
 (let* ((geometry (alist-get 'geometry (car (display-monitor-attributes-list))))
