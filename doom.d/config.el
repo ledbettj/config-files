@@ -77,7 +77,7 @@
 (setq tab-always-indent t)
 (setq kill-whole-line t)
 (setq confirm-kill-emacs nil)
-(setq-hook! 'ruby-mode-hook +format-with 'rubocop)
+(setq-hook! 'ruby-mode-hook +format-with 'ruby-standard)
 (setq +format-on-save-enabled-modes
       '(rust-mode elixir-mode))
 (+global-word-wrap-mode +1)
@@ -121,6 +121,12 @@
   :defer
   :bind (("C-c C-s" . reopen-file-with-sudo)))
 
+(use-package! flycheck
+  :config
+  ;; use flycheck-standardrb for ruby files
+  (setq-default flycheck-disabled-checkers
+                '(ruby-rubocop)))
+
 (use-package! sh-script
   :mode ("\\.env" . bash-ts-mode)) ; note this doesn't include a trailing ' so it also matches '.env.local' etc
 
@@ -134,6 +140,20 @@
   :vc (:url "https://github.com/stevemolitor/claude-code.el" :rev :newest)
   :config (claude-code-mode)
   :bind-keymap ("C-c z" . claude-code-command-map))
+
+(use-package! rubocop
+  :config
+  (setq rubocop-autocorrect-command "standardb -a --format emacs")
+  (setq rubocop-format-command "standardrb -x --format emacs")
+  (setq rubocop-check-command "standardrb --format emacs"))
+
+(use-package! apheleia
+  :config
+  (setf (alist-get 'rubocop apheleia-formatters)
+        (alist-get 'ruby-standard apheleia-formatters))
+  (setf
+   (alist-get 'ruby-mode apheleia-mode-alist) '(ruby-standard)))
+
 
 
 ;; set the font size based on monitor size
