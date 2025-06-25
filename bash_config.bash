@@ -11,8 +11,10 @@ __x_exists() {
 }
 
 if __x_exists "emacs" ; then
+  alias ec="emacsclient -c -a 'emacs'"
+  alias et="emacsclient -t -a 'emacs -nw'"
   export EDITOR="emacs -nw"
-  export VISUAL="emacs"
+  export VISUAL="emacsclient -c -a 'emacs'"
 fi
 
 if __x_exists "starship" ; then
@@ -26,3 +28,5 @@ fi
 # FZF configuration
 [[ -r /usr/share/fzf/completion.bash ]] && . /usr/share/fzf/completion.bash
 [[ -r /usr/share/fzf/key-bindings.bash ]] && . /usr/share/fzf/key-bindings.bash
+
+ export FZF_DEFAULT_OPTS="--color=bg+:#303030,fg+:#f9da9d,pointer:#f4a912"

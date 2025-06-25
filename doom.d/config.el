@@ -77,10 +77,15 @@
 (setq tab-always-indent t)
 (setq kill-whole-line t)
 (setq confirm-kill-emacs nil)
+(setq read-process-output-max (* 1024 1024)) ; 1MB
+(setq lsp-log-io nil) ; if set to true can cause a performance hit
 (setq-hook! 'ruby-mode-hook +format-with 'ruby-standard)
 (setq +format-on-save-enabled-modes
       '(rust-mode elixir-mode))
 (+global-word-wrap-mode +1)
+;; stop accidentally zooming like mad
+(global-unset-key (kbd "C-<wheel-up>"))
+(global-unset-key (kbd "C-<wheel-down>"))
 
 (use-package! copilot
   :hook (prog-mode . copilot-mode)
@@ -155,6 +160,8 @@
    (alist-get 'ruby-mode apheleia-mode-alist) '(ruby-standard)))
 
 
+(if (eq (window-system) 'ns)
+    (global-set-key (kbd "s-<up>") 'toggle-frame-maximized))
 
 ;; set the font size based on monitor size
 (let* ((geometry (alist-get 'geometry (car (display-monitor-attributes-list))))
