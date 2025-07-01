@@ -1,4 +1,4 @@
 [alias]
-  cleanup = "!git branch --merged | grep  -v '\\*\\|master' | xargs -n 1 git branch -d"
+  cleanup = "!git branch --merged | grep  -v '\\*\\|master' | xargs -n 1 git branch -d && git remote prune origin"
   amend = commit --amend
   fixup = commit --amend --no-edit
