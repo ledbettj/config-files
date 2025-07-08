@@ -146,11 +146,6 @@
   :config (claude-code-mode)
   :bind-keymap ("C-c z" . claude-code-command-map))
 
-(use-package! rubocop
-  :config
-  (setq rubocop-autocorrect-command "standardb -a --format emacs")
-  (setq rubocop-format-command "standardrb -x --format emacs")
-  (setq rubocop-check-command "standardrb --format emacs"))
 
 (use-package! apheleia
   :config
