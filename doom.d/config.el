@@ -3,6 +3,13 @@
 ;; Place your private configuration here! Remember, you do not need to run 'doom
 ;; sync' after modifying this file!
 
+(defvar jl/theme 'doom-dracula)
+(defvar jl/font "Ubuntu Mono")
+(defvar jl/font-size 170)
+
+;; can configure above variables in local.el which is git ignored.
+(when (file-exists-p! "local.el" doom-user-dir)
+  (load! "local.el" doom-user-dir))
 
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets. It is optional.
@@ -31,8 +38,7 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-one)
-
+(setq doom-theme jl/theme)
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type t)
@@ -158,15 +164,4 @@
 (if (eq (window-system) 'ns)
     (global-set-key (kbd "s-<up>") 'toggle-frame-maximized))
 
-;; set the font size based on monitor size
-(let* ((geometry (alist-get 'geometry (car (display-monitor-attributes-list))))
-       (w (nth 2 geometry))
-       (h (nth 3 geometry)))
-                                        ;(message "Monitor size: %d x %d" w h))
-  (set-face-attribute 'default nil
-                      :font "Iosevka"
-                      :height (cond
-                               ((and (eq w 1512) (eq h 982)) 190) ; built in MBP display
-                               ((and (eq w 3606) (eq h 2404)) 180) ; Framework display
-                               (t 170)) ; fallback
-                      :weight 'regular))
+(set-face-attribute 'default nil :font jl/font :height jl/font-size :weight 'regular)
