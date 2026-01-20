@@ -138,13 +138,24 @@
   (setq-default flycheck-disabled-checkers
                 '(ruby-rubocop)))
 
+(use-package! typescript-mode
+  :config
+  (setq typescript-indent-level 2))
+
 (use-package! sh-script
   :mode ("\\.env" . bash-ts-mode)) ; note this doesn't include a trailing ' so it also matches '.env.local' etc
 
-(use-package! rust-mode
+(use-package! rustic
   :config
   (setq rust-format-on-save t)
   (setq rust-indent-offset 2)
+  )
+
+(use-package! web-mode
+  :config
+  (setq web-mode-markup-indent-offset 2)
+  (setq web-mode-css-indent-offset 2)
+  (setq web-mode-code-indent-offset 2)
   )
 
 (use-package! claude-code
