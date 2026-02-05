@@ -158,6 +158,14 @@
   (setq web-mode-code-indent-offset 2)
   )
 
+(use-package! python
+  :config
+  (setq python-indent-offset 2))
+
+(use-package! js
+  :config
+  (setq js-indent-level 2))
+
 (use-package! claude-code
   :vc (:url "https://github.com/stevemolitor/claude-code.el" :rev :newest)
   :config (claude-code-mode)
