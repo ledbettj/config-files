@@ -44,3 +44,4 @@
  '(flycheck-error ((t (:underline "#CC6666"))))
  '(flycheck-info ((t (:underline "#A9DC76"))))
  '(flycheck-warning ((t (:underline "#FFD866")))))
+(put 'downcase-region 'disabled nil)
