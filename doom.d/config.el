@@ -108,13 +108,13 @@
   (add-to-list 'copilot-indentation-alist '(ruby-mode 2))
   (add-to-list 'copilot-indentation-alist '(emacs-lisp-mode 2)))
 
-(use-package! company
-  :config
-  (setq-default lsp-completion-provider           :capf)
-  (setq-default company-idle-delay                0.5)
-  (setq-default company-minimum-prefix-length     2)
-  (setq-default company-show-numbers              1)
-  (setq-default company-tooltip-align-annotations t))
+;; (use-package! company
+;;   :config
+;;   (setq-default lsp-completion-provider           :capf)
+;;   (setq-default company-idle-delay                0.5)
+;;   (setq-default company-minimum-prefix-length     2)
+;;   (setq-default company-show-numbers              1)
+;;   (setq-default company-tooltip-align-annotations t))
 
 (use-package! iedit
   :defer
