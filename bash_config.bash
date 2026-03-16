@@ -29,4 +29,10 @@ fi
 [[ -r /usr/share/fzf/completion.bash ]] && . /usr/share/fzf/completion.bash
 [[ -r /usr/share/fzf/key-bindings.bash ]] && . /usr/share/fzf/key-bindings.bash
 
- export FZF_DEFAULT_OPTS="--color=bg+:#303030,fg+:#f9da9d,pointer:#f4a912"
+export FZF_DEFAULT_OPTS="--color=bg+:#303030,fg+:#f9da9d,pointer:#f4a912"
+export PATH="$PATH:$HOME/.config/emacs/bin"
+export PATH="$PATH:$HOME/.local/bin"
+
+source /usr/share/nvm/init-nvm.sh
+
+alias cr-claude="CLAUDE_CONFIG_DIR=~/.claude-callrail claude"

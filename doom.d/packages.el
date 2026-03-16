@@ -59,3 +59,4 @@
 (package! sudo
   :recipe (:local-repo "local" :files ("sudo.el")))
 (package! rbs-mode)
+(package! eca :recipe (:host github :repo "editor-code-assistant/eca-emacs" :files ("*.el")))

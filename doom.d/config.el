@@ -148,15 +148,21 @@
 (use-package! rustic
   :config
   (setq rust-format-on-save t)
-  (setq rust-indent-offset 2)
-  )
+  (setq rust-indent-offset 2))
 
 (use-package! web-mode
   :config
   (setq web-mode-markup-indent-offset 2)
   (setq web-mode-css-indent-offset 2)
-  (setq web-mode-code-indent-offset 2)
-  )
+  (setq web-mode-code-indent-offset 2))
+
+(use-package! css-mode
+  :config
+  (setq css-indent-offset 2))
+
+(use-package! python
+  :config
+  (setq python-indent-offset 2))
 
 (use-package! python
   :config
@@ -180,7 +186,13 @@
    (alist-get 'ruby-mode apheleia-mode-alist) '(ruby-standard)))
 
 
-(if (eq (window-system) 'ns)
-    (global-set-key (kbd "s-<up>") 'toggle-frame-maximized))
+;; (if (eq (window-system) 'ns)
+;;     (global-set-key (kbd "s-<up>") 'toggle-frame-maximized))
 
 (set-face-attribute 'default nil :font jl/font :height jl/font-size :weight 'regular)
+
+(defun doom/ediff-init-and-example ()
+  "ediff the current `init.el' with the example in doom-emacs-dir"
+  (interactive)
+  (ediff-files (concat doom-user-dir "init.el")
+               (concat doom-emacs-dir "static/init.example.el")))

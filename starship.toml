@@ -58,12 +58,12 @@ truncation_length=5
 
 [username]
 show_always=true
-style_user="bold blue"
+style_user="bold purple"
 format="[$user@]($style)"
 aliases = { "johnledbetter" = "john" }
 
 [hostname]
-style="bold blue"
+style="bold purple"
 ssh_only=false
 format="[$hostname:]($style)"
 aliases = { "JohnLedbetter" = "callrail" }
