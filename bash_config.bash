@@ -13,6 +13,7 @@ __x_exists() {
 if __x_exists "emacs" ; then
   alias ec="emacsclient -c -a 'emacs'"
   alias et="emacsclient -t -a 'emacs -nw'"
+  alias ek="emacsclient -e '(kill-emacs)'"
   export EDITOR="emacs -nw"
   export VISUAL="emacsclient -c -a 'emacs'"
 fi
@@ -33,6 +34,6 @@ export FZF_DEFAULT_OPTS="--color=bg+:#303030,fg+:#f9da9d,pointer:#f4a912"
 export PATH="$PATH:$HOME/.config/emacs/bin"
 export PATH="$PATH:$HOME/.local/bin"
 
-source /usr/share/nvm/init-nvm.sh
+[[ -r /usr/share/nvm/init-nvm.sh ]] && source /usr/share/nvm/init-nvm.sh
 
 alias cr-claude="CLAUDE_CONFIG_DIR=~/.claude-callrail claude"

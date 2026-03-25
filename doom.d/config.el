@@ -39,6 +39,14 @@
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
 (setq doom-theme jl/theme)
+
+;; Fix gnus face inheritance cycle: doom-themes sets gnus-group-news-low-empty
+;; to inherit from gnus-group-news-low, but Emacs 31+ has the reverse, creating
+;; a cycle. Patch the doom-themes definition to break it.
+;; See: https://github.com/doomemacs/themes/issues/875
+(after! doom-themes
+  (setcdr (assoc 'gnus-group-news-low-empty doom-themes-base-faces)
+          '(:inherit 'gnus-group-mail-1-empty :weight 'normal)))
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type t)
