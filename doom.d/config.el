@@ -185,6 +185,9 @@
   :config (claude-code-mode)
   :bind-keymap ("C-c z" . claude-code-command-map))
 
+(use-package! eglot
+  :config
+  (add-to-list 'eglot-ignored-server-capabilities :inlayHintProvider))
 
 (use-package! apheleia
   :config
