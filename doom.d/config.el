@@ -100,22 +100,6 @@
 ;; stop accidentally zooming like mad
 (global-unset-key (kbd "C-<wheel-up>"))
 (global-unset-key (kbd "C-<wheel-down>"))
-
-(use-package! copilot
-  :hook (prog-mode . copilot-mode)
-  :bind (:map copilot-completion-map
-              ("C-<tab>" . 'copilot-accept-completion))
-
-  :config
-  (add-to-list 'copilot-indentation-alist '(prog-mode 2))
-  (add-to-list 'copilot-indentation-alist '(org-mode 2))
-  (add-to-list 'copilot-indentation-alist '(text-mode 2))
-  (add-to-list 'copilot-indentation-alist '(rust-mode 2))
-  (add-to-list 'copilot-indentation-alist '(python-mode 2))
-  (add-to-list 'copilot-indentation-alist '(typescript-mode 2))
-  (add-to-list 'copilot-indentation-alist '(ruby-mode 2))
-  (add-to-list 'copilot-indentation-alist '(emacs-lisp-mode 2)))
-
 ;; (use-package! company
 ;;   :config
 ;;   (setq-default lsp-completion-provider           :capf)
