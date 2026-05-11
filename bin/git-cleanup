@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+# Deletes local branches that have been merged or squash-merged into main/master,
+# then prunes stale remote-tracking refs.
+set -euo pipefail
+
+main=$(git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed 's|refs/remotes/origin/||')
+main=${main:-main}
+
+delete_if_squash_merged() {
+  local branch="$1"
+  local ancestor
+  ancestor=$(git merge-base "$main" "$branch" 2>/dev/null) || return
+  local squash
+  squash=$(git commit-tree "$branch^{tree}" -p "$ancestor" -m "squash check")
+  if git cherry "$main" "$squash" | grep -q "^-"; then
+    echo "Deleting squash-merged branch: $branch"
+    git branch -D "$branch"
+  fi
+}
+
+# Regular merged branches
+git branch --merged "$main" \
+  | { grep -v "^\*\|$main\|master" || true; } \
+  | xargs -r -n 1 git branch -d
+
+# Squash-merged branches
+while IFS= read -r branch; do
+  branch="${branch#"${branch%%[![:space:]]*}"}"  # ltrim
+  delete_if_squash_merged "$branch"
+done < <(git branch | grep -v "^\*\|$main\|master" || true)
+
+git remote prune origin
