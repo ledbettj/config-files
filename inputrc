@@ -1,0 +1,10 @@
+set editing-mode emacs
+set bell-style none
+set show-all-if-ambiguous on
+set show-all-if-unmodified on
+set completion-ignore-case on
+set colored-stats on
+set colored-completion-prefix on
+set mark-directories on
+set mark-symlinked-directories on
+set skip-completed-text on

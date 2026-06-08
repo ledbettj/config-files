@@ -5,3 +5,7 @@
 
 [push]
   autoSetupRemote = true
+
+[user]
+  name = John Ledbetter
+  email = john@weirdhorse.party
