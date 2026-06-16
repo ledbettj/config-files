@@ -1,3 +1,5 @@
+UNAME=$(uname -s)
+
 cdls() {
   builtin cd "$*" && ls --color=auto
 }
@@ -27,8 +29,14 @@ if __x_exists "rbenv" ; then
 fi
 
 # FZF configuration
-[[ -r /usr/share/fzf/completion.bash ]] && . /usr/share/fzf/completion.bash
-[[ -r /usr/share/fzf/key-bindings.bash ]] && . /usr/share/fzf/key-bindings.bash
+if [[ "$UNAME" -eq "Darwin" ]]; then
+  FZF_DIR=/opt/homebrew/opt/fzf/shell
+else
+  FZF_DIR=/usr/share/fzf
+fi
+
+[[ -r $FZF_DIR/completion.bash ]] && . $FZF_DIR/completion.bash
+[[ -r $FZF_DIR/key-bindings.bash ]] && . $FZF_DIR/key-bindings.bash
 
 export FZF_DEFAULT_OPTS="--color=bg+:#303030,fg+:#f9da9d,pointer:#f4a912"
 export PATH="$PATH:$HOME/.config/emacs/bin"
