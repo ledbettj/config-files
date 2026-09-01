@@ -1,0 +1,26 @@
+FROM node:24-bookworm-slim
+
+RUN apt-get update \
+  && apt-get install -y --no-install-recommends \
+       bash ca-certificates git ripgrep \
+       curl jq less file tree \
+       diffutils patch \
+       procps psmisc \
+       unzip xz-utils \
+       openssh-client \
+       python3 \
+  && rm -rf /var/lib/apt/lists/*
+# No --ignore-scripts here (unlike Dockerfile.pi): it also drops the
+# platform-native optional dep, and `claude` then refuses to start
+RUN npm install -g @anthropic-ai/claude-code
+
+# Puts .claude.json + credentials + history under one dir, so a single volume persists them
+ENV CLAUDE_CONFIG_DIR=/root/.claude
+# The image is the update mechanism: rebuild rather than self-update in place
+ENV DISABLE_AUTOUPDATER=1
+# The container IS the sandbox; without this, --dangerously-skip-permissions
+# is refused because we run as root
+ENV IS_SANDBOX=1
+
+WORKDIR /workspace
+ENTRYPOINT ["claude"]

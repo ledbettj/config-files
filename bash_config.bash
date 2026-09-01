@@ -1,4 +1,14 @@
 UNAME=$(uname -s)
+if [[ "$UNAME" -eq "Darwin" ]]; then
+  FZF_DIR=/opt/homebrew/opt/fzf/shell
+  NVM_DIR=/opt/homebrew/opt/nvm
+  NVM_SH=nvm.sh
+else
+  FZF_DIR=/usr/share/fzf
+  NVM_DIR=/usr/share/nvm
+  NVM_SH=init-nvm.sh
+fi
+
 
 cdls() {
   builtin cd "$*" && ls --color=auto
@@ -29,12 +39,6 @@ if __x_exists "rbenv" ; then
 fi
 
 # FZF configuration
-if [[ "$UNAME" -eq "Darwin" ]]; then
-  FZF_DIR=/opt/homebrew/opt/fzf/shell
-else
-  FZF_DIR=/usr/share/fzf
-fi
-
 [[ -r $FZF_DIR/completion.bash ]] && . $FZF_DIR/completion.bash
 [[ -r $FZF_DIR/key-bindings.bash ]] && . $FZF_DIR/key-bindings.bash
 
@@ -43,6 +47,18 @@ export PATH="$PATH:$HOME/.config/emacs/bin"
 export PATH="$PATH:$HOME/.local/bin"
 export GPG_TTY=$(tty)
 
-[[ -r /usr/share/nvm/init-nvm.sh ]] && source /usr/share/nvm/init-nvm.sh
+[[ -r "$NVM_DIR/$NVM_SH" ]] && source "$NVM_DIR/$NVM_SH"
 
-alias cr-claude="CLAUDE_CONFIG_DIR=~/.claude-callrail claude"
+dpi() {
+    docker run --rm -it \
+        -v "$PWD:/workspace" \
+        -v pi-agent-home:/root/.pi/agent pi-sandbox "$@"
+}
+
+
+dclod() {
+    docker run --rm -it \
+        -v "$PWD:/workspace" \
+        -v claude-agent-home:/root/.claude \
+        claude-sandbox "$@"
+}

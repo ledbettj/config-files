@@ -2,6 +2,10 @@
 
 ;; Place your private configuration here! Remember, you do not need to run 'doom
 ;; sync' after modifying this file!
+(autoload 'markdown-ts-mode "markdown-ts-mode" "Tree-sitter Markdown mode." t)
+
+(add-to-list 'major-mode-remap-alist '(markdown-mode . markdown-ts-mode))
+(add-to-list 'major-mode-remap-alist '(gfm-mode      . markdown-ts-mode))
 
 (defvar jl/theme 'doom-dracula)
 (defvar jl/font "Ubuntu Mono")
@@ -130,9 +134,9 @@
   (setq-default flycheck-disabled-checkers
                 '(ruby-rubocop)))
 
-(use-package! typescript-mode
-  :config
-  (setq typescript-indent-level 2))
+;; (use-package! typescript-mode
+;;   :config
+;;   (setq typescript-indent-level 2))
 
 (use-package! sh-script
   :mode ("\\.env" . bash-ts-mode)) ; note this doesn't include a trailing ' so it also matches '.env.local' etc
