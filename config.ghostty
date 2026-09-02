@@ -1,2 +1,3 @@
 shell-integration-features = no-cursor
 cursor-style = block
+theme = Operator Mono Dark

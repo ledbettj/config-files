@@ -46,6 +46,7 @@ export FZF_DEFAULT_OPTS="--color=bg+:#303030,fg+:#f9da9d,pointer:#f4a912"
 export PATH="$PATH:$HOME/.config/emacs/bin"
 export PATH="$PATH:$HOME/.local/bin"
 export GPG_TTY=$(tty)
+export GGML_VK_VISIBLE_DEVICES=0
 
 [[ -r "$NVM_DIR/$NVM_SH" ]] && source "$NVM_DIR/$NVM_SH"
 
